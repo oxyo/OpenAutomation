@@ -35,6 +35,9 @@ All documentation and tutorials are awailable here.
 
 
 
+## Changelog
+
+
 ## Credits
 
 HTML5 Canvas gauges - https://github.com/Mikhus/canv-gauge
