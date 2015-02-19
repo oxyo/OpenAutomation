@@ -1,0 +1,5 @@
+#eclude db files
+*.db
+serverID.txt
+settings.txt
+.idea
