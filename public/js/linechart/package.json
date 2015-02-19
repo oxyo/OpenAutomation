@@ -1,0 +1,24 @@
+{
+  "name": "canvas-linechart",
+  "version": "1.3.0",
+  "description": "simple, dependency-free canvas chart",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mapbox/canvas-linechart.git"
+  },
+  "keywords": [
+    "canvas",
+    "line",
+    "chart"
+  ],
+  "author": "Tom MacWright",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mapbox/canvas-linechart/issues"
+  },
+  "homepage": "https://github.com/mapbox/canvas-linechart"
+}
