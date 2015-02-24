@@ -4,17 +4,14 @@
  */
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Main parameters
-//
+//######################################################################################################################
+//Program parameters
 var notokenMode = false;
 var programVersion = '0.0.1';
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Initial Configuration Set-Up
-//
+
+//Application Set-Up
 var oaSetup = {
     id: 'OpenAutomation.center',
     sensors: ['T0', 'T1', 'T2', 'T3', 'H0', 'E1', 'P1'],
@@ -60,17 +57,10 @@ var oaSetup = {
     ]
 
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//######################################################################################################################
+//Application Code
 
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Application Code
-//
-
-//var SegfaultHandler = require('segfault-handler');
-//    SegfaultHandler.registerHandler();
+var fs = require('fs');
 var program = require('commander');
 var fecha = require('fecha');
 var crypto = require('crypto');
@@ -93,16 +83,19 @@ var nodeVersion = process.version;
 var major = nodeVersion.split('.')[0];
 major = major.split('v')[1];
 var minor = nodeVersion.split('.')[1];
-if ((major == 0) && (minor < 10)){
-    console.log('Error: Please update to the latest version of node! Open Automation Center requires 0.10.x or later');
+if ((major == 0) && (minor < 8)){
+    console.log('Error: Please update to the latest version of node! Open Automation Center requires 0.8.x or later');
     process.exit(0);
 }
 
 
-var led = new mraa.Gpio(13);
-led.dir(mraa.DIR_OUT); //tell pin 13 that it should act as an output pin for now
-led.write(1); //turn the LED on
-led.write(0); //turn the LED off
+
+//var led = new mraa.Gpio(13);
+//led.dir(mraa.DIR_OUT); //tell pin 13 that it should act as an output pin for now
+//led.write(1); //turn the LED on
+//led.write(0); //turn the LED off
+
+
 
 
 var sys = require('sys');
@@ -112,16 +105,24 @@ console.log(' ');
 console.log('Loading Open Automation...'.cyan);
 //exec('ls -lh *.txt *.db', puts);
 
-//var currentDIR = path.dirname(fs.realpathSync(__filename));
-//var dbOA = new Datastore({ filename: path.join(currentDIR, 'settings.txt'), autoload: true });
+var currentDIR = path.dirname(fs.realpathSync(__filename));
+var dbOA = new Datastore({ filename: path.join(currentDIR, 'settings.txt'), autoload: true });
+//var dbOA = new Datastore({ filename: 'settings.txt', autoload: true });
 
-var dbOA = new Datastore({ filename: 'settings.txt', autoload: true });
-var dbCID = new Datastore({ filename: 'serverID.txt', autoload: true });
+var dbCID = new Datastore({ filename: path.join(currentDIR, 'serverID.txt'), autoload: true });
+//var dbCID = new Datastore({ filename: 'serverID.txt', autoload: true });
+
 var dbH = new Datastore({ filename: 'sensorsH.db', autoload: true });
+//dbH.persistence.compactDatafile();
 var dbC = new Datastore({ filename: 'sensorsC.db', autoload: true });
+//dbC.persistence.compactDatafile();
 var dbE = new Datastore({ filename: 'sensorsE.db', autoload: true });
+//dbE.persistence.compactDatafile();
 var dbP = new Datastore({ filename: 'sensorsP.db', autoload: true });
+//dbP.persistence.compactDatafile();
 var dbT = new Datastore({ filename: 'sensorsT.db', autoload: true });
+//dbT.persistence.compactDatafile();
+
 
 
 process.on('uncaughtException', function (err) {
@@ -137,24 +138,17 @@ process.on('uncaughtException', function (err) {
 //process.stdin.resume();
 process.on('SIGINT', function() {
     console.log('');
-    console.log('OA > Terminating...');
+    console.log('OA > Terminated...');
+
     console.log('OA > For more info please visit https://openautomation.center');
     console.log('OA > Compacting database...'.cyan);
-
     dbT.persistence.compactDatafile();
     dbH.persistence.compactDatafile();
-    dbC.persistence.compactDatafile();
-    dbE.persistence.compactDatafile();
-    dbP.persistence.compactDatafile();
-    dbCID.persistence.compactDatafile();
     dbOA.persistence.compactDatafile();
 
     setTimeout(function(){
-    //setImmediate(function() {
-        console.log('OA > Terminated.'.cyan);
         process.kill();
-    //});
-    }, 2000);
+    }, 4000);
 });
 
 
@@ -172,7 +166,6 @@ if (program.notoken) notokenMode = true;
 // STEP-00 Configure Radio communication port
 var port = "/dev/ttyMFD1";
 if (program.serial) port = program.serial;
-
 
 var oaPort = new SerialPort(port, {
     baudrate: 9600
@@ -203,8 +196,8 @@ if (program.port){
 }
 
 app.set('x-powered-by', false);
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(allowCrossDomain);
 app.use(logger('dev'));
@@ -213,7 +206,8 @@ app.use(express.static(__dirname + '/public', { maxAge: oneDay }));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(compression());
+//app.use(compression());
+
 
 
 
@@ -241,27 +235,28 @@ getOA();
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Functions                                                                                                          //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//Functions ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+
 
 
 // Getting Configuration Settings from settings.txt
 function getOA(){
-    //setImmediate(function() {
-        dbOA.findOne({id: 'OpenAutomation.center'}, {_id: 0}, function (err, oaConfig) {
-            if (oaConfig) {
-                oa = oaConfig;
-                console.log('OA > Config loaded successfully from settings.txt'.green);
-            } else {
-                console.log('OA > ERROR: Config not loaded from settings.txt'.red);
-            }
-        });
-    //});
+
+    dbOA.findOne({id: 'OpenAutomation.center'}, { _id:0}, function(err, oaConfig) {
+        if (oaConfig) {
+            oa = oaConfig;
+            console.log('OA > Config loaded successfully from settings.txt'.green);
+        } else {
+            console.log('OA > ERROR: Config not loaded from settings.txt'.red);
+        }
+    });
 }
 
 // Update Configuration in settings.txt
 function updateOA(newOA){
+
     dbOA.update({id: 'OpenAutomation.center'}, newOA, {}, function(err, numReplaced) {
         if (err) {
             console.log('OA > ERROR: settings.txt update failed '.red + err);
@@ -270,6 +265,9 @@ function updateOA(newOA){
         }
     });
 }
+
+
+
 
 
 // Configure commands transmiter intervals
@@ -291,6 +289,7 @@ function activateTimers() {
         }
     }
 }
+
 
 
 // Get server IP address on LAN
@@ -322,7 +321,6 @@ function requestSensor(sensorID, command){
     });
 }
 
-
 // Save sensors value and time received to Real time store
 function realtimeSensorValueSet(sensorID, sensorValue, newID){
     if (sensorID == newID){
@@ -352,6 +350,7 @@ function getSensorT(sensorID, sensorLabel, sensorValue, sensorUnit, cb) {
     var configT = {T0 : '', T1 : '', T2 : '',  T3 : '',  T4 : '',  T5 : '',  T6 : '',  T7 : '',  T8 : '',  T9 : '', T10 : ''}; // Temp sensors DB
     configT[sensorID] = sensorValue;
     configT._id = new Date().toISOString();
+
 
 
     dbT.insert(configT);
@@ -402,95 +401,98 @@ function getSensorP(sensorID, sensorLabel, sensorValue, sensorUnit, cb) {
 //set-up server ID
 var serverID = { id: 'oaConfig', cid: ''};
 
+//
+// main program start
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// main program start                                                                                                 //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Check Server configuration from settings.txt
+dbCID.findOne({id: 'oaConfig'}, { _id:0}, function(err, existingCID) {
+    dbOA.findOne({id: 'OpenAutomation.center'}, { _id:0}, function(err, oaConfig) {
+
+            if (existingCID && oaConfig) {
+
+                hotp.serverID = existingCID.cid;
+                hotp.secret = parseInt(hotp.serverID, '36');
+                console.log("OA > Server ID: ".green + hotp.serverID + ' Secret:' + hotp.secret);
+
+                activateTimers();
 
 
-setTimeout(function() {
+                // Open Serial port for wireless communication with sensors
+                oaPort.open(function (error) {
+                    if (error) {
+                        console.log('OA > Error: Failed to open Serial Port: '.error + error);
+                    } else {
 
-    console.log('OA > started listening sensors'.green);
+                        console.log("OA > Radio Communication port: ".green + port + "\n");
+                        oaPort.on('data', function (data) {
+                            console.log(colors.green.underline('OA < ' + data));
 
-    // Check Server configuration from settings.txt
-    dbCID.findOne({id: 'oaConfig'}, { _id:0}, function(err, existingCID) {
-        dbOA.findOne({id: 'OpenAutomation.center'}, { _id:0}, function(err, oaConfig) {
+                            var inStr = data.toString();
+                            var inType = inStr.substring(0, 2);
+                            var inSensor = inStr.substring(1, 3);
+                            var inContent = inStr.substring(3, 5);
 
-                if (existingCID && oaConfig) {
+                            //console.log('OA > inType: ' + inType + ' inSensor: ' + inSensor + ' inContent: ' + inContent);
 
-                    hotp.serverID = existingCID.cid;
-                    hotp.secret = parseInt(hotp.serverID, '36');
-                    console.log("OA > Server ID: ".green + hotp.serverID + ' Secret:' + hotp.secret);
 
-                    activateTimers();
-
-                    // Open Serial port for wireless communication with sensors
-                    oaPort.open(function (error) {
-                        if (error) {
-                            console.log('OA > Error: Failed to open Serial Port: '.error + error);
-                        } else {
-                            console.log("OA > Radio Communication port: ".green + port + "\n");
-                            oaPort.on('data', function (data) {
-                                console.log(colors.green.underline('OA < ' + data));
-
-                                var inStr = data.toString();
-                                var inType = inStr.substring(0, 2);
-                                var inSensor = inStr.substring(1, 3);
-                                var inContent = inStr.substring(3, 5);
-
-                                //console.log('OA > inType: ' + inType + ' inSensor: ' + inSensor + ' inContent: ' + inContent);
-
-                                if (inType == 'aT' && inContent == 'TM') { //Getting temperature sensors responses
-                                    for (var i = 0; i < oa.sensors.length; i++) {
-                                        if (inSensor == oa.sensors[i]) getSensorT(oa.sensors[i], oa.sensorsLabel[i], inStr.substring(7, 12), oa.sensorsUnit[i], realtimeSensorValueSet);
-                                    }
+                            if (inType == 'aT' && inContent == 'TM') { //Getting temperature sensors responses
+                                for (var i = 0; i < oa.sensors.length; i++) {
+                                    if (inSensor == oa.sensors[i]) getSensorT(oa.sensors[i], oa.sensorsLabel[i], inStr.substring(7, 12), oa.sensorsUnit[i], realtimeSensorValueSet);
                                 }
-                                if (inType == 'aH' && inContent == 'CR') { //Getting humidity sensors responses
-                                    for (var i = 0; i < oa.sensors.length; i++) {
-                                        if (inSensor == oa.sensors[i]) getSensorH(oa.sensors[i], oa.sensorsLabel[i], inStr.substring(7, 12), oa.sensorsUnit[i], realtimeSensorValueSet);
-                                    }
+                            }
+                            if (inType == 'aH' && inContent == 'CR') { //Getting humidity sensors responses
+                                for (var i = 0; i < oa.sensors.length; i++) {
+                                    if (inSensor == oa.sensors[i]) getSensorH(oa.sensors[i], oa.sensorsLabel[i], inStr.substring(7, 12), oa.sensorsUnit[i], realtimeSensorValueSet);
                                 }
-                                if (inType == 'aE' && inContent == 'E:') { // Getting Energy Meters Energy sensor responses
-                                    for (var i = 0; i < oa.sensors.length; i++) {
-                                        if (inSensor == oa.sensors[i]) getSensorE(oa.sensors[i], oa.sensorsLabel[i], inStr.substring(5, 10), oa.sensorsUnit[i], realtimeSensorValueSet);
-                                    }
+                            }
+                            if (inType == 'aE' && inContent == 'E:') { // Getting Energy Meters Energy sensor responses
+                                for (var i = 0; i < oa.sensors.length; i++) {
+                                    if (inSensor == oa.sensors[i]) getSensorE(oa.sensors[i], oa.sensorsLabel[i], inStr.substring(5, 10), oa.sensorsUnit[i], realtimeSensorValueSet);
                                 }
-                                if (inType == 'aE' && inContent == 'P:') { // Getting Energy Meters Power sensor responses
-                                    for (var i = 0; i < oa.sensors.length; i++) {
-                                        if (inSensor == oa.sensors[i]) getSensorP(oa.sensors[i], oa.sensorsLabel[i], inStr.substring(5, 10), oa.sensorsUnit[i], realtimeSensorValueSet);
-                                    }
+                            }
+
+                            if (inType == 'aE' && inContent == 'P:') { // Getting Energy Meters Power sensor responses
+                                for (var i = 0; i < oa.sensors.length; i++) {
+                                    if (inSensor == oa.sensors[i]) getSensorP(oa.sensors[i], oa.sensorsLabel[i], inStr.substring(5, 10), oa.sensorsUnit[i], realtimeSensorValueSet);
                                 }
+                            }
 
-                            });
-                        }
-                    });
 
-                } else {
-
-                    // Creating Sever ID when starting first time
-                    serverID.cid = hat(bits=40, base=36);
-                    serverID.ver = programVersion;
-                    serverID.date = new Date().toISOString();
-
-                    dbOA.insert(oaSetup, function () {
-
-                        console.log("OA Set-UP: New Server Config created: ".cyan + JSON.stringify(oaSetup));
-
-                        dbCID.insert(serverID, function () {
-                            console.log("OA Set-UP: New Server ID created: ".cyan + serverID.cid + " Please restart Open Automation Server".cyan);
-                            process.exit(0);
                         });
+
+                    }
+                });
+
+
+            } else {
+
+                // Creating Sever ID when starting first time
+                serverID.cid = hat(bits=40, base=36);
+                serverID.ver = programVersion;
+                serverID.date = new Date().toISOString();
+
+                dbOA.insert(oaSetup, function () {
+
+                    console.log("OA Set-UP: New Server Config created: ".cyan + JSON.stringify(oaSetup));
+
+                    dbCID.insert(serverID, function () {
+                        console.log("OA Set-UP: New Server ID created: ".cyan + serverID.cid + " Please restart Open Automation Server".cyan);
+                        process.exit(0);
                     });
+                });
 
-                }
 
-        });
+            }
+
     });
-}, 3000);
+});
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  WEB Service part                                                                                                  //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//WEB Service part /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Send index.html
 app.get('/', function(req, res){
@@ -734,8 +736,50 @@ app.get('/update-settings', function(req, res) {
 
 
 
+
+//# > getApiKey
+app.get('/getApiKey', function(req, res) {
+    console.warn("# Creating new API KEY > ===================================================================".warn);
+
+    //var getAPIRequest = JSON.parse(JSON.stringify(req.body));
+    var getAPIRequest = {};
+    getAPIRequest.appID = req.query.appID;
+    getAPIRequest.apirequest = req.query.apirequest;
+
+    console.log(getAPIRequest);
+
+    var clientIP = req.header('X-Real-IP'); //   ip1 = req.header('x-forwarded-for');
+
+
+    var CIDKEY = 'xxxxxxxxxxxxxxxxxx1yxxx1xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+    CIDKEY = CIDKEY.substring(0, 18);
+
+    var newAPIRecord = {};
+
+    newAPIRecord.apiKey = getAPIRequest.apirequest;
+    newAPIRecord.appID = getAPIRequest.appID;
+    newAPIRecord.cid = CIDKEY;
+    newAPIRecord.ip = clientIP;
+    newAPIRecord.date = new Date();
+
+    //dbKey.insert( newAPIRecord, function (err) { });
+
+    console.log(newAPIRecord);
+
+    var answer = {};
+    answer.status = "welcome";
+    answer.cid = newAPIRecord.cid;
+
+    res.send(JSON.stringify(answer));
+
+});
+
+
 app.listen(app.get('port'), function(){
-    //logo.font('Open Automation', 'chunky', function(rendered){ console.log(logo.style(rendered, 'blue')); });
+    logo.font('Open Automation', 'chunky', function(rendered){ console.log(logo.style(rendered, 'blue+blink')); });
     console.log("Open Automation Center ".green + programVersion.warn + " listening on port: ".green + app.get('port'));
     console.log('Running on '.green + platform + ' ' + kernel);
     console.log('MRAA Version: '.green + mraa.getVersion());

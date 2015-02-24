@@ -14,14 +14,14 @@
 
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/jquery.mobile-1.4.4.min.js"></script>
-    <script src="canv-gauge/gauge.min.js"></script>
+    <script type="text/javascript" src="js/gauge.min.js"></script>
     <script type="text/javascript" src="js/2.0.0-crypto-sha1.js"></script>
     <script type="text/javascript" src="js/2.0.0-hmac-min.js"></script>
     <script type="text/javascript" src="js/sha1.js"></script>
     <script type="text/javascript" src="js/hotp.js"></script>
-    <script type="text/javascript" src="js/chart.js/Chart.js"></script>
+    <script type="text/javascript" src="js/chart.min.js"></script>
     <script type="text/javascript" src="js/alertify.min.js"></script>
-    <script type="text/javascript" src="js/fecha.min.js"></script>
+
 
 	<title>Open Automation Center</title>
 
@@ -119,12 +119,70 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
+                    <li><a id="chartCloseButton" href="#home" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
                 </ul>
             </div>
         </div>
     </div>
     <!-- chartPage END -->
+
+
+    <!-- connectionSet-UpPage START -->
+    <div data-role="page" id="connectionSet-UpPage" data-theme="b" data-content-theme="b">
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <h1>Connection Set-Up</h1>
+        </div>
+        <div data-role="content">
+            <div data-role="fieldcontainer">
+                <label >Please enter OA Server ID:</label>
+
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <input type="password" id="oaKeyInput" >
+                    </div>
+                    <div class="ui-block-c">
+                        <a id="clearOAKey" href="#" data-role="button" data-inline="true" data-theme="b" >Clear</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <p>
+
+            </p>
+
+            <div data-role="fieldcontainer">
+                <label >Please enter OA Server IP address:</label>
+
+                <div class="ui-grid-a">
+
+                    <div class="ui-block-a">
+                        <input type="text" id="oaIPAddressInput" >
+                    </div>
+
+                    <div class="ui-block-c">
+                        <a id="clearOAIP" href="#" data-role="button" data-inline="true" data-theme="b" >Clear</a>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <p>For more information please visit
+                <a class="ui-link" onclick='window.open("http://openautomation.center","_system", "location=yes")' href='javascript:void(0)' >http://openautomation.center</a>
+            </p>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- connectionSet-UpPage END -->
+
 
 
     <!-- toolsListPage START -->
@@ -135,10 +193,10 @@
         <div data-role="content">
             <ul data-role="listview" data-inset="true">
 
-                <li><a href="#set-up">
+                <li><a href="#connectionSet-UpPage">
                     <img src="icons/PNG/64x64/distribute-horizontal-centers.png" />
-                    Set-Up
-                    <p>Control all Settings here</p></a>
+                    Connection Set-Up
+                    <p>Enter Server ID and IP address</p></a>
                 </li>
 
                 <li><a href="#appsList">
@@ -861,78 +919,140 @@
 
 <script type="text/javascript">
 
-    var noTokenMode = true;
+    var noTokenMode = false;
+    var UTCTimeShift = 2;
+    var acceptableSensorTimeShiftMinutes = 2;
+
+
+    function handleConnectionSetup() {
+
+        $(document).on('pagebeforeshow', '#connectionSet-UpPage', function () {
+            if (window.localStorage.getItem('oa.serverID')) $('input#oaKeyInput').val(window.localStorage.getItem('oa.serverID'));
+            if (window.localStorage.getItem('oa.serverIP')) $('input#oaIPAddressInput').val(window.localStorage.getItem('oa.serverIP'));
+        });
+
+        $("#oaKeyInput").bind("change", function (event, ui) {
+            window.localStorage.setItem('oa.serverID', $('#oaKeyInput').val());
+        });
+
+        $("#oaIPAddressInput").bind("change", function (event, ui) {
+            window.localStorage.setItem('oa.serverIP', $('#oaIPAddressInput').val());
+        });
+
+        $(document).on("tap", '#clearOAKey', function () {
+            $("input#oaKeyInput").val('');
+        });
+
+        $(document).on("tap", '#clearOAIP', function () {
+            $('input#oaIPAddressInput').val('');
+        });
+
+    }
+
+
 
 
 function handleCanvasClicks(){
 
+    $( document ).on( "tap", '#chartCloseButton', function( event ) {
+        event.preventDefault();
+        lineChart.destroy();
+        $.mobile.navigate('#roomPage0');
+    });
 
-    var lineChart;
     var sensorChartSelect = '';
+
+    function drawLineChart(sensorData){
+
+        var lineChart;
+
+        console.log('lineChart > sensor data received: ' + JSON.stringify(sensorData));
+
+        sensorData.datasets[0].fillColor = "rgba(255,200,100,0.2)";
+        sensorData.datasets[0].strokeColor = "rgba(255,200,100,1)";
+        sensorData.datasets[0].pointColor = "rgba(255,200,100,1)";
+        sensorData.datasets[0].pointStrokeColor = "#fff";
+        sensorData.datasets[0].pointHighlightFill = "#fff";
+        sensorData.datasets[0].pointHighlightStroke = "rgba(255,200,100,1)";
+
+        var ctx = $('#chartZone').get(0).getContext('2d');
+
+        window.lineChart = new Chart(ctx).Line(sensorData, {
+            responsive: true,
+            maintainAspectRatio: true
+        });
+
+    }
+
 
     $( document ).on( "tap", '#gauge0', function() {
         sensorChartSelect = window.localStorage.getItem('gauge0');
-
-        $.mobile.changePage( "#chartPage", { transition: "fade", changeHash: true });
-
+        $.mobile.navigate('#chartPage');
+        //$.mobile.changePage( "#chartPage", { transition: "fade", changeHash: true });
         //$( "body" ).pagecontainer( "change", "#chartPage", { transition: "fade", changeHash: false });
+    });
+
+
+    $( "#gauge0" ).on( "swipe", function(){
+
+        $.mobile.navigate('#'+ oa.oa.rooms[activeRoom.id].app);
 
     });
 
+
     $( document ).on( "tap", '#gauge1', function() {
         sensorChartSelect = window.localStorage.getItem('gauge1');
-        $.mobile.changePage( "#chartPage", { transition: "fade", changeHash: true });
+        $.mobile.navigate('#chartPage');
 
     });
 
     $( document ).on( "tap", '#gauge2', function() {
         sensorChartSelect = window.localStorage.getItem('gauge2');
-        $.mobile.changePage( "#chartPage", { transition: "fade", changeHash: true });
+        $.mobile.navigate('#chartPage');
     });
 
 
     $(document).on( "pagecontainershow", function( event, ui ) {
+
         if (ui.toPage.prop("id") == "chartPage"){
 
+            $('#chartPage h1').text(activeRoom.label + ' ' + sensorChartSelect);
 
-            if (lineChart == null) {
+                if(noTokenMode) {
+                    var hLink = 'sensor/0/' + sensorChartSelect;
+                    $.getJSON(hLink, function (sensorData) {
+                        if (sensorData) {
+                            drawLineChart(sensorData);
+                        } else {
+                            console.log('lineChart > ERROR: sensor data not received from ' + hLink);
+                        }
+                    });
 
-                var hLink = 'sensor/' + sensorChartSelect;
+                } else {
 
-                $.getJSON(hLink, function (sensorData) {
+                    var tokenLink = 'token';
+                    console.log('lineChart > ' + tokenLink+ ' loading...');
+                    $.getJSON(tokenLink, function(token) {
+                        if (token) {
+                            var sessionID = getToken(token);
+                            var hLink = 'sensor/' + sessionID + '/' + sensorChartSelect;
+                            $.getJSON(hLink, function (sensorData) {
+                                if (sensorData) {
+                                    drawLineChart(sensorData);
+                                } else {
+                                    console.log('lineChart > ERROR: sensor data not received from ' + hLink);
+                                }
+                            });
+                        } else {
+                            console.log('lineChart > ERROR: Con\'t get token from ' + tokenLink);
+                        }
+                    });
 
-                    if (sensorData) {
-
-                        console.log('lineChart > sensor data received: ' + JSON.stringify(sensorData));
-
-                        alertify.log("LineChart > sensor data received", "", 2000);
-
-                        sensorData.datasets[0].fillColor = "rgba(255,200,100,0.2)";
-                        sensorData.datasets[0].strokeColor = "rgba(255,200,100,1)";
-                        sensorData.datasets[0].pointColor = "rgba(255,200,100,1)";
-                        sensorData.datasets[0].pointStrokeColor = "#fff";
-                        sensorData.datasets[0].pointHighlightFill = "#fff";
-                        sensorData.datasets[0].pointHighlightStroke = "rgba(255,200,100,1)";
-
-                        var ctx = $('#chartZone').get(0).getContext('2d');
-
-                        window.lineChart = new Chart(ctx).Line(sensorData, {
-                            responsive: true
-
-                        });
-
-                    } else {
-                        console.log('lineChart > ERROR: sensor data not received from ' + hLink);
-                    }
-
-                });
-
-            }
+                }
         }
     });
 
 }
-
 
 
 // Show Sensors on gouge
@@ -1204,13 +1324,25 @@ function drawCanvas(gauge, sensorType){
     gauge.onready = function() {
 
         getOA('token','info', function(){
-                var sensorValue = oa.allSensors[sensorType];
 
+                var sensorValue = '0';
+                var sensorTimeStr = '';
+
+                if (!!oa.allSensors) sensorValue = oa.allSensors[sensorType];
+                if (!!oa.allSensorsDates) sensorTimeStr = oa.allSensorsDates[sensorType];
                 if (sensorValue == '') sensorValue = '0';
 
-                gauge.setValue( sensorValue );
-                console.log('drawCanvas step 2 > sensor:' + sensorType + ' Value:' + sensorValue);
+                var diff = Math.abs(new Date() - new Date(sensorTimeStr));
+                var minutes = Math.floor((diff/1000)/60);
 
+                if (!!minutes && minutes > acceptableSensorTimeShiftMinutes ) {
+                    alertify.log("Sensor " + sensorType + " inactive " + (minutes - acceptableSensorTimeShiftMinutes) + " min!", "", 4000);
+                }
+
+                if(isNaN(minutes)) alertify.log("Sensor " + sensorType + " value not received yet!", "", 3000);
+
+                gauge.setValue( sensorValue );
+                console.log('drawCanvas step 2 > sensor:' + sensorType + ' value:' + sensorValue);
         });
     };
 
@@ -1248,22 +1380,34 @@ $(document).on('pagecreate', '#home', function() {
 
     handleCanvasClicks();
 
+    handleConnectionSetup();
+
+
 });
+
+function getToken(received){
+    var secret = '1234567890';
+    if (window.localStorage.getItem('oa.serverID')) secret = parseInt(window.localStorage.getItem('oa.serverID'), '36');
+    var hotpID = hotp( secret, received.token, "dec6" );
+    var sessionID = CryptoJS.SHA1(hotpID);
+    console.log('getToken > Token:' + received.token + ' for session:' + hotpID + ' : ' + sessionID);
+
+    return sessionID;
+}
+
 
 function getOA(tokenLink, infoLink, cb){
 
     if(noTokenMode) {
 
-        var iLink = infoLink + '/' + 'unauthenticated';
+        var iLink = infoLink + '/0';
 
         $.getJSON(iLink, function(oaConfig) {
             if (oaConfig) {
                 oa = oaConfig;
                 console.log(JSON.stringify(oa));
                 console.log('getOA > Config loaded successfully from ' + infoLink);
-
                 cb();
-
             } else {
                 console.log('getOA > ERROR: Config not loaded from ' + infoLink);
             }
@@ -1276,27 +1420,19 @@ function getOA(tokenLink, infoLink, cb){
         $.getJSON(tokenLink, function(oaToken) {
             if (oaToken) {
 
-                var secret = 488594252541;
-                var index = oaToken.token;
-                var hotpID = hotp( secret, index, "dec6" );
-                var sessionID = CryptoJS.SHA1(hotpID);
+                var sessionID = getToken(oaToken);
                 var iLink = infoLink + '/' + sessionID;
-
-                console.log('getOA > Get token:' + index + ' for session:' + hotpID);
 
                 $.getJSON(iLink, function(oaConfig) {
                     if (oaConfig) {
                         oa = oaConfig;
                         console.log(JSON.stringify(oa));
                         console.log('getOA > Config loaded successfully from ' + infoLink);
-
                         cb();
-
                     } else {
                         console.log('getOA > ERROR: Config not loaded from ' + infoLink);
                     }
                 });
-
 
             } else {
                 console.log('getOA > ERROR: Con\'t get token from ' + tokenLink);
@@ -1358,20 +1494,21 @@ function handleRoom(){
 
         var controlB0 = $('#control0');
         var controlB1 = $('#control1');
+        var controlB2 = $('#control2');
 
         if (activeRoom.sensors.length == 1) {
 
             controlB0.text('Control');
             controlB0.removeClass( 'ui-icon-carat-r');
             controlB0.addClass( ' ui-icon-power ');
-            controlB0.prop("href", "#appsList");
+            if(!oa.status) controlB0.prop("href", '#'+ oa.oa.rooms[activeRoom.id].app);
         }
 
         if (activeRoom.sensors.length == 2) {
             controlB1.text('Control');
             controlB1.removeClass( 'ui-icon-carat-r');
             controlB1.addClass( ' ui-icon-power ');
-            controlB1.prop("href", "#appsList");
+            if(!oa.status) controlB1.prop("href", '#'+ oa.oa.rooms[activeRoom.id].app);
 
             controlB0.text('Next');
             controlB0.removeClass( 'ui-icon-power');
@@ -1389,9 +1526,12 @@ function handleRoom(){
             controlB1.removeClass( 'ui-icon-power');
             controlB1.addClass( 'ui-icon-carat-r');
             controlB1.prop("href", "#roomPage2");
+
+            if(!oa.status) controlB2.prop("href", '#'+ oa.oa.rooms[activeRoom.id].app);
         }
 
         console.log('handleRoom > sensorID: ' + sensorID + ' sensorType: ' + sensorType);
+
         showSensors(sensorType, sensorID);
     });
 
@@ -1419,17 +1559,6 @@ function handleRoom(){
     });
 
 
-
-}
-
-
-
-function appNone(){
-
-}
-
-
-function appEnergyMeter(){
 
 }
 
