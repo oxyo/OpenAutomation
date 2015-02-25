@@ -1,20 +1,48 @@
 # openautomation.center
+
+```
+    .-'''-.                                                        
+   '   _    \                                                      
+ /   /` '.   _________   _...._           __.....__       _..._    
+.   |     \  \        |.'      '-.    .-''         '.   .'     '.  
+|   '      |  \        .'```'.    '. /     .-''"'-.  `..   .-.   . 
+\    \     / / \      |       \     /     /________\   |  '   '  | 
+ `.   ` ..' /   |     |        |    |                  |  |   |  | 
+    '-...-'`    |      \      /    .\    .-------------|  |   |  | 
+                |     |\`'-.-'   .'  \    '-.____...---|  |   |  | 
+                |     | '-....-'`     `.             .'|  |   |  | 
+               .'     '.                `''-...... -'  |  |   |  | 
+             '-----------'                             |  |   |  | 
+                                                       '--'   '--' 
+  ,---.          ,--.                         ,--. ,--.              
+ /  O  \,--.,--,-'  '-.,---.,--,--,--.,--,--,-'  '-`--',---.,--,--,  
+|  .-.  |  ||  '-.  .-| .-. |        ' ,-.  '-.  .-,--| .-. |      \ 
+|  | |  '  ''  ' |  | ' '-' |  |  |  \ '-'  | |  | |  ' '-' |  ||  | 
+`--' `--'`----'  `--'  `---'`--`--`--'`--`--' `--' `--'`---'`--''--' 
+
+```
+
 Open Automation server for Intel Edison &amp; Beaglebone Black.
-All documentation and tutorials are awailable here.
+All documentation and tutorials are available here.
 
 ## Features
 
-* Wireless Home automation solution
-* Designed for Intel Edison & Beagle Bone Black, but can be eassily installed on any computer
-* Touch friendly user Interface
+* Simple Home automation center
+* Designed for Intel Edison & Beagle Bone Black, but can be easilly installed on any platform
+* Touch friendly user Interface based on jQuery Mobile
+* Implemented Temperature, Humidity, CO2 and Energy metering
+* Up to 9 sensors support in one room
 * Simple JSON Configuration
 * Pure JavaScript implimentation based on Node.js
-* Implemented Temperature, Humidity, CO2 and Energy metering
-* Runs without any database backend
+* 
+* Runs without any database backend - sensors data stored in easilly readable text files
 * 100% control - no Cloud services required!
 * Strong Security - implemented HOTP RFC4226 token authentication
 * Ciseco LLAP protocol compatible
 * Easily extendable and customizable platform
+* Tested on these browsews IE10+, Firefox 30+, Chrome 40+, Windows Phone, Chrome for Android
+* Have some isues on Firefox for Android
+* Availabe mobile App on google Play
 
 
 
