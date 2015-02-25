@@ -21,7 +21,7 @@
     <script type="text/javascript" src="js/hotp.js"></script>
     <script type="text/javascript" src="js/chart.min.js"></script>
     <script type="text/javascript" src="js/alertify.min.js"></script>
-
+    <script type="text/javascript" src="js/base32.js"></script>
 
 	<title>Open Automation Center</title>
 
@@ -138,7 +138,7 @@
 
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
-                        <input type="password" id="oaKeyInput" >
+                        <input type="text" id="oaKeyInput" >
                     </div>
                     <div class="ui-block-c">
                         <a id="clearOAKey" href="#" data-role="button" data-inline="true" data-theme="b" >Clear</a>
@@ -922,6 +922,7 @@
     var noTokenMode = false;
     var UTCTimeShift = 2;
     var acceptableSensorTimeShiftMinutes = 2;
+    var debugMode = false;
 
 
     function handleConnectionSetup() {
@@ -1386,11 +1387,26 @@ $(document).on('pagecreate', '#home', function() {
 });
 
 function getToken(received){
-    var secret = '1234567890';
-    if (window.localStorage.getItem('oa.serverID')) secret = parseInt(window.localStorage.getItem('oa.serverID'), '36');
-    var hotpID = hotp( secret, received.token, "dec6" );
+
+    function stringToHex (tmp) {
+        function d2h(d) {
+            return d.toString(16);
+        }
+        var str = '', i = 0, l = tmp.length, c;
+        for (; i < l; i += 1) {
+            c = tmp.charCodeAt(i);
+            str += d2h(c);
+        }
+        return str;
+    }
+
+    secret = '123456789';
+    var serverID = window.localStorage.getItem('oa.serverID');
+    if (serverID) secret = stringToHex(serverID);
+    var hotpID = hotp(secret, received, "dec6" );
     var sessionID = CryptoJS.SHA1(hotpID);
-    console.log('getToken > Token:' + received.token + ' for session:' + hotpID + ' : ' + sessionID);
+    //alert('hotpID:' + hotpID + ' Secret:' + secret + ' Token:' + received + ' sessionID:' + sessionID);
+    console.log('getToken > Token:' + received + ' for session:' + hotpID + ':' + sessionID);
 
     return sessionID;
 }
@@ -1405,7 +1421,7 @@ function getOA(tokenLink, infoLink, cb){
         $.getJSON(iLink, function(oaConfig) {
             if (oaConfig) {
                 oa = oaConfig;
-                console.log(JSON.stringify(oa));
+                if (debugMode) console.log(JSON.stringify(oa));
                 console.log('getOA > Config loaded successfully from ' + infoLink);
                 cb();
             } else {
@@ -1424,12 +1440,15 @@ function getOA(tokenLink, infoLink, cb){
                 var iLink = infoLink + '/' + sessionID;
 
                 $.getJSON(iLink, function(oaConfig) {
-                    if (oaConfig) {
+                    if (!!oaConfig && !oaConfig.status) {
                         oa = oaConfig;
-                        console.log(JSON.stringify(oa));
                         console.log('getOA > Config loaded successfully from ' + infoLink);
+                        if (debugMode) console.log(JSON.stringify(oa));
                         cb();
                     } else {
+                        $.mobile.navigate('#connectionSet-UpPage');
+                        alertify.log('Authentication Error! Check Server ID', '', 4000);
+
                         console.log('getOA > ERROR: Config not loaded from ' + infoLink);
                     }
                 });
