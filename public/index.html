@@ -21,7 +21,7 @@
     <script type="text/javascript" src="js/hotp.js"></script>
     <script type="text/javascript" src="js/chart.min.js"></script>
     <script type="text/javascript" src="js/alertify.min.js"></script>
-    <script type="text/javascript" src="js/base32.js"></script>
+
 
 	<title>Open Automation Center</title>
 
@@ -48,6 +48,7 @@
     </div>
     <!-- homePage END -->
 
+
     <!-- roomPage0 START -->
     <div data-role="page" id="roomPage0" data-theme="b" data-content-theme="b">
         <div id="roomHeader0" data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -67,6 +68,7 @@
     </div>
     <!-- roomPage0 END -->
 
+
     <!-- roomPage1 START -->
     <div data-role="page" id="roomPage1" data-theme="b" data-content-theme="b">
         <div id="roomHeader1" data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -85,6 +87,7 @@
         </div>
     </div>
     <!-- roomPage1 END -->
+
 
     <!-- roomPage2 START -->
     <div data-role="page" id="roomPage2" data-theme="b" data-content-theme="b">
@@ -184,7 +187,6 @@
     <!-- connectionSet-UpPage END -->
 
 
-
     <!-- toolsListPage START -->
     <div data-role="page" id="toolsList" data-theme="b" data-content-theme="b">
         <div data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -207,7 +209,7 @@
 
                 <li><a href="#mainSensors">
                     <img src="icons/PNG/64x64/microphone.png" />
-                    Check Sensors
+                    All sensors check
                     <p>Check all Sensors at once</p></a>
                 </li>
 
@@ -263,21 +265,10 @@
     <!-- set-UpPage END -->
 
 
-
-
-
-
-
-
-
-
-
-
     <!-- appsPage START -->
-
     <div data-role="page" id="appsList" data-theme="b" data-content-theme="b">
 		<div data-role="header" data-position="fixed" data-tap-toggle="false">
-		    <h1>Smart apps</h1>
+		    <h1>Control apps</h1>
 		</div>
 
         <div data-role="content">
@@ -305,25 +296,19 @@
             </ul>
         </div>
 
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#home" data-icon="home" data-role="button" data-theme="b" data-transition="fade">Home</a>
-                    <li><a href="#mainSensors" data-icon="grid" data-role="button" data-theme="b" data-transition="fade">Sensors</a>
-
+                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
                 </ul>
             </div>
         </div>
 
 	</div>
-
     <!-- appsPage END -->
 
 
-
     <!-- mainSensors START -->
-
 	<div data-role="page" id="mainSensors" data-theme="b" data-content-theme="b">
 		<div data-role="header" data-position="fixed" data-tap-toggle="false">
 
@@ -346,14 +331,15 @@
 			</div>
 		</div>
 	</div>
-
     <!-- mainSensors END -->
 
 
 
 
-    <!-- co2FreeAppPage START -->
+<!-- Apps section START -->
 
+
+    <!-- co2FreeAppPage START -->
     <div data-role="page" id="co2FreeApp" data-cache="false" data-title="Comfort Zone Control" data-theme="b" data-content-theme="b">
 
         <div data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -431,7 +417,6 @@
             </div>
         </div>
     </div>
-
     <div data-role="page" id="co2FreeSettings" data-theme="b" data-content-theme="b">
         <div data-role="header" data-position="fixed" data-tap-toggle="false">
 
@@ -469,7 +454,6 @@
         </div>
 
     </div>
-
     <div data-role="page" id="aboutCo2FreeApp" data-overlay-theme="b" data-theme="b" data-content-theme="b">
         <div data-role="header" data-theme="a" data-position="fixed" data-tap-toggle="false">
 
@@ -496,22 +480,14 @@
         </div>
 
     </div>
-
     <!-- co2FreeAppPage END -->
 
 
-
-
-
-
-
     <!-- comfortZoneAppPage START -->
-
     <div data-role="page" id="comfortZoneApp" data-cache="false" data-title="Comfort Zone Control" data-theme="b" data-content-theme="b">
 
         <div data-role="header" data-position="fixed" data-tap-toggle="false">
-            <h1>Comfort Zone</h1>
-
+            <h1 id="comfortZoneAppHeader">Comfort Zone</h1>
         </div>
 
         <div data-role="content">
@@ -525,10 +501,7 @@
                 <label id="fanSpeedLabelCZ" >Fan speed set</label>
                 <input type="range" id="fanSpeedSetCZ" data-highlight="true" min="0" max="4" value="0">
             </div>
-
-
             <br />
-
             <div class="ui-grid-b">
                 <div class="ui-block-a">
                     <label >Power</label>
@@ -584,88 +557,18 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#home" data-icon="home" data-role="button" data-theme="b" data-transition="fade">Home</a>
-                    <li><a href="#mainSensors" data-icon="grid" data-role="button" data-theme="b" data-transition="fade">Sensors</a>
-                    <li><a href="#comfortZoneSettings" data-icon="gear" data-role="button" data-theme="b" data-transition="fade">Settings</a>
-                    <li><a href="#aboutComfortZoneApp" data-icon="info" data-role="button" data-theme="b" data-transition="fade">About</a>
+                    <li><a href="#home" class="ui-btn ui-icon-bullets ui-btn-icon-top">Home</a>
+                    <li><a href="#appsList" class="ui-btn ui-icon-grid ui-btn-icon-top">App list</a>
                 </ul>
             </div>
         </div>
     </div>
 
-    <div data-role="page" id="comfortZoneSettings" data-theme="b" data-content-theme="b">
-        <div data-role="header" data-position="fixed" data-tap-toggle="false">
-
-            <h1>Comfort Zone Settings</h1>
-
-        </div>
-        <div data-role="content">
-            <div data-role="fieldcontainer">
-                <label >Please enter your App ID:</label>
-                <input type="text" id="appIDInputCZ" >
-                <p>
-                    <a id="demoAPICZ" href="#" data-role="button" data-inline="true" data-theme="b" >DEMO ID</a>
-                    <a id="resetAPICZ" href="#" data-role="button" data-inline="true" data-theme="b" >Clear</a>
-                </p>
-            </div>
-
-            <div data-role="fieldcontainer">
-                <p>
-                    <a id="checkComfortZoneCommand" href="#" data-role="button" data-inline="true" data-theme="b" >Check controller command</a>
-                </p>
-            </div>
-
-            <p>For more information please visit
-                <a class="ui-link" onclick='window.open("https://smartsensors.io/app/temperature-control","_system", "location=yes")' href='javascript:void(0)' >https://smartsensors.io/app/temperature-control</a>
-            </p>
-        </div>
-
-
-        <div data-role="footer" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-
-    <div data-role="page" id="aboutComfortZoneApp" data-overlay-theme="b" data-theme="b" data-content-theme="b">
-        <div data-role="header" data-theme="a" data-position="fixed" data-tap-toggle="false">
-
-            <h1><img src="img/logo.png"></h1>
-            <h3>Comfort Zone v.1.0</h3>
-
-        </div>
-        <div data-role="content">
-            <p>Temperatuere control application.</p>
-            <p>Open firmware for Arduino Ethernet</p>
-            <p>Author: Vaidotas Gudaitis</p>
-            <p>Designed by: <a class="ui-link" onclick='window.open("http://appconstructor.io","_system", "location=yes")' href='javascript:void(0)' > appconstructor.io </a></p>
-            <p>For more information please visit
-                <a class="ui-link" onclick='window.open("https://smartsensors.io/app/temperature-control","_system", "location=yes")' href='javascript:void(0)' >https://smartsensors.io/app/temperature-control</a>
-            </p>
-        </div>
-        <div data-role="footer" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
-
-                </ul>
-            </div>
-        </div>
-
-    </div>
 
     <!-- comfortZoneAppPage END -->
 
 
-
-
-
     <!-- greenHouseAppPage START -->
-
     <div data-role="page" id="greenHouseApp" data-cache="false" data-title="Green House Control" data-theme="b" data-content-theme="b">
 
 		<div data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -776,7 +679,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div data-role="page" id="greenHouseSettings" data-theme="b" data-content-theme="b">
 		<div data-role="header" data-position="fixed" data-tap-toggle="false">
 
@@ -814,7 +716,6 @@
 		</div>
 
 	</div>
-
 	<div data-role="page" id="aboutGreenHouseApp" data-overlay-theme="b" data-theme="b" data-content-theme="b">
 		<div data-role="header" data-theme="a" data-position="fixed" data-tap-toggle="false">
 
@@ -841,7 +742,6 @@
         </div>
 
 	</div>
-
     <div data-role="page" id="wateringTimerSet1" data-dialog="true" data-overlay-theme="b" data-theme="b">
 		<div data-role="header">
 			<h1>Watering Timer 1</h1>
@@ -912,20 +812,27 @@
 			<a href="#" data-rel="back"  data-theme="b">Close</a>
 		</div>
 	</div>
-
     <!-- greenHouseAppPage END -->
+
+
+<!-- Apps section END -->
 
 
 
 <script type="text/javascript">
 
-    var noTokenMode = false;
-    var UTCTimeShift = 2;
-    var acceptableSensorTimeShiftMinutes = 2;
-    var debugMode = false;
+// Main parameters
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var UTCTimeShift = 2;
+var acceptableSensorTimeShiftMinutes = 2;
+var debugMode = false;
 
 
-    function handleConnectionSetup() {
+// Functions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Connection Set-Up
+function handleConnectionSetup() {
 
         $(document).on('pagebeforeshow', '#connectionSet-UpPage', function () {
             if (window.localStorage.getItem('oa.serverID')) $('input#oaKeyInput').val(window.localStorage.getItem('oa.serverID'));
@@ -948,111 +855,120 @@
             $('input#oaIPAddressInput').val('');
         });
 
-    }
+}
 
 
+// Check Sensors routine
+function handleSensors() {
 
-
-function handleCanvasClicks(){
-
-    $( document ).on( "tap", '#chartCloseButton', function( event ) {
-        event.preventDefault();
-        lineChart.destroy();
-        $.mobile.navigate('#roomPage0');
+    $(document).on('pagebeforecreate', '#mainSensors', function(){
+        var interval = setInterval(function(){
+            $.mobile.loading('show');
+            clearInterval(interval);
+        },100);
     });
 
-    var sensorChartSelect = '';
+    $(document).on('pageshow', '#mainSensors', function(){
+        var interval = setInterval(function(){
+            $.mobile.loading('hide');
+            clearInterval(interval);
+        },100);
+    });
 
-    function drawLineChart(sensorData){
+    $(document).on('pagebeforeshow', '#mainSensors', function(e, data){
 
-        var lineChart;
+        var activeApp = data.prevPage.attr('id');
+        var sensorsLabel = 'All Sensors';
 
-        console.log('lineChart > sensor data received: ' + JSON.stringify(sensorData));
+        $('h1#sensorsView').html(sensorsLabel);
 
-        sensorData.datasets[0].fillColor = "rgba(255,200,100,0.2)";
-        sensorData.datasets[0].strokeColor = "rgba(255,200,100,1)";
-        sensorData.datasets[0].pointColor = "rgba(255,200,100,1)";
-        sensorData.datasets[0].pointStrokeColor = "#fff";
-        sensorData.datasets[0].pointHighlightFill = "#fff";
-        sensorData.datasets[0].pointHighlightStroke = "rgba(255,200,100,1)";
+        getOA('token','info', function(){
 
-        var ctx = $('#chartZone').get(0).getContext('2d');
+            var sensorCount = oa.oa.sensors.length;
+            var tableConstruction = '';
+            var sensorValue = '0';
+            var sensorID = '';
+            var sensorLabel = '';
+            var sensorUnits = '';
+            var sensorTime = '';
 
-        window.lineChart = new Chart(ctx).Line(sensorData, {
-            responsive: true,
-            maintainAspectRatio: true
+            if (sensorCount > 0){
+                for( var i = 0, lenSensorCount = sensorCount; i < lenSensorCount; i++ ) {
+
+                    sensorID = oa.oa.sensors[i];
+
+                    if (!!oa.allSensors[sensorID]) {
+                        sensorValue = oa.allSensors[sensorID];
+                    } else {
+                        sensorValue = '0';
+                    }
+                    if (!!oa.allSensorsDates[sensorID]) {
+                        sensorTime = oa.allSensorsDates[sensorID];
+                    } else {
+                        sensorTime = '';
+                    }
+                    if (!!oa.oa.sensorsLabel[i]) {
+                        sensorLabel = oa.oa.sensorsLabel[i];
+                    } else {
+                        sensorLabel = '';
+                    }
+                    if (!!oa.oa.sensorsUnit[i]) {
+                        sensorUnits = oa.oa.sensorsUnit[i];
+                    } else {
+                        sensorUnits = '';
+                    }
+
+                    var sensorMinimumValue;
+                    var sensorMaximumValue;
+                    var status = 0;
+                    //if (parseFloat(sensorValue) < parseFloat(sensorMinimumValue)) status = 2;
+                    //if (parseFloat(sensorValue) > parseFloat(sensorMaximumValue)) status = 1;
+                    tableConstruction += oneSensorRow(sensorID, sensorLabel, sensorValue, sensorUnits, sensorTime, status);
+                }
+            }
+
+            console.log('handleSensors > processing ' + sensorCount + ' sensors');
+            $("#sensorsTable").html(tableConstruction).listview("refresh");
         });
 
-    }
+
+        function oneSensorRow(sensorID, sensorLabel, sensorValue, sensorUnits, sensorTime, status) {
+
+            var statusOK = ' ';
+            var statusOver = ' Over! ';
+            var statusUnder = ' Under! ';
+            var statusValue = ' ';
+            var sensorHighlightColor = '';
+            var sensorType = sensorID.substring(0,1);
+
+            if (sensorType == 'T') sensorHighlightColor = '<img src="img/star_red.png" class="ui-li-icon">';
+            if (sensorType == 'H') sensorHighlightColor = '<img src="img/star_blue.png" class="ui-li-icon">';
+            if (sensorType == 'C') sensorHighlightColor = '<img src="img/star_yellow.png" class="ui-li-icon">';
+            if (sensorType == 'E') sensorHighlightColor = '<img src="img/star_black.png" class="ui-li-icon">';
+            if (sensorType == 'P') sensorHighlightColor = '<img src="img/star_black.png" class="ui-li-icon">';
+
+            if (status == 0) statusValue = statusOK;
+            if (status == 1) statusValue = statusOver;
+            if (status == 2) statusValue = statusUnder;
 
 
-    $( document ).on( "tap", '#gauge0', function() {
-        sensorChartSelect = window.localStorage.getItem('gauge0');
-        $.mobile.navigate('#chartPage');
-        //$.mobile.changePage( "#chartPage", { transition: "fade", changeHash: true });
-        //$( "body" ).pagecontainer( "change", "#chartPage", { transition: "fade", changeHash: false });
-    });
+            var diff = Math.abs(new Date() - new Date(sensorTime));
+            var minutes = Math.floor((diff/1000)/60);
+            var minutesToDisplay = ' ';
 
+            if (!!minutes && minutes > acceptableSensorTimeShiftMinutes ) {
+                minutesToDisplay = ' ' + (minutes - acceptableSensorTimeShiftMinutes) + ' min. ago' + ' ';
+            }
 
-    $( "#gauge0" ).on( "swipe", function(){
+            if(isNaN(minutes)) statusValue = ' waiting...';
 
-        $.mobile.navigate('#'+ oa.oa.rooms[activeRoom.id].app);
-
-    });
-
-
-    $( document ).on( "tap", '#gauge1', function() {
-        sensorChartSelect = window.localStorage.getItem('gauge1');
-        $.mobile.navigate('#chartPage');
-
-    });
-
-    $( document ).on( "tap", '#gauge2', function() {
-        sensorChartSelect = window.localStorage.getItem('gauge2');
-        $.mobile.navigate('#chartPage');
-    });
-
-
-    $(document).on( "pagecontainershow", function( event, ui ) {
-
-        if (ui.toPage.prop("id") == "chartPage"){
-
-            $('#chartPage h1').text(activeRoom.label + ' ' + sensorChartSelect);
-
-                if(noTokenMode) {
-                    var hLink = 'sensor/0/' + sensorChartSelect;
-                    $.getJSON(hLink, function (sensorData) {
-                        if (sensorData) {
-                            drawLineChart(sensorData);
-                        } else {
-                            console.log('lineChart > ERROR: sensor data not received from ' + hLink);
-                        }
-                    });
-
-                } else {
-
-                    var tokenLink = 'token';
-                    console.log('lineChart > ' + tokenLink+ ' loading...');
-                    $.getJSON(tokenLink, function(token) {
-                        if (token) {
-                            var sessionID = getToken(token);
-                            var hLink = 'sensor/' + sessionID + '/' + sensorChartSelect;
-                            $.getJSON(hLink, function (sensorData) {
-                                if (sensorData) {
-                                    drawLineChart(sensorData);
-                                } else {
-                                    console.log('lineChart > ERROR: sensor data not received from ' + hLink);
-                                }
-                            });
-                        } else {
-                            console.log('lineChart > ERROR: Con\'t get token from ' + tokenLink);
-                        }
-                    });
-
-                }
+            return '<li>'
+                    + sensorHighlightColor
+                    + sensorID  + ' - '  + sensorLabel
+                    + '<span class="ui-li-count">' + sensorValue  + sensorUnits + statusValue  + minutesToDisplay + '</span>'
+                    + '</li>';
         }
     });
-
 }
 
 
@@ -1319,6 +1235,7 @@ function showSensors(sensorType, sensorID){
 }
 
 
+// Draw sensor gauge
 function drawCanvas(gauge, sensorType){
     console.log('drawCanvas step1 > sensor:' + sensorType );
 
@@ -1358,34 +1275,98 @@ function drawCanvas(gauge, sensorType){
 }
 
 
+// Draw Line Chart after click on gauge
+function handleCanvasClicks(){
+
+    $( document ).on( "tap", '#chartCloseButton', function( event ) {
+        event.preventDefault();
+        if (!!lineChart) lineChart.destroy();
+        $.mobile.navigate('#roomPage0');
+    });
+
+    var sensorChartSelect = '';
+
+    function drawLineChart(sensorData){
+
+        var lineChart;
+
+        console.log('lineChart > sensor data received: ' + JSON.stringify(sensorData));
+
+        sensorData.datasets[0].fillColor = "rgba(255,200,100,0.2)";
+        sensorData.datasets[0].strokeColor = "rgba(255,200,100,1)";
+        sensorData.datasets[0].pointColor = "rgba(255,200,100,1)";
+        sensorData.datasets[0].pointStrokeColor = "#fff";
+        sensorData.datasets[0].pointHighlightFill = "#fff";
+        sensorData.datasets[0].pointHighlightStroke = "rgba(255,200,100,1)";
+
+        var ctx = $('#chartZone').get(0).getContext('2d');
+
+        window.lineChart = new Chart(ctx).Line(sensorData, {
+            responsive: true,
+            maintainAspectRatio: true
+        });
+
+    }
 
 
-//$(document).ready(function(){
-$(document).on('pagecreate', '#home', function() {
-
-    oa = {};
-
-    activeRoom = {
-        id : null,
-        label : null,
-        sensors : [],
-        allSensors : []
-    };
+    $( document ).on( "tap", '#gauge0', function() {
+        sensorChartSelect = window.localStorage.getItem('gauge0');
+        $.mobile.navigate('#chartPage');
+        //$.mobile.changePage( "#chartPage", { transition: "fade", changeHash: true });
+        //$( "body" ).pagecontainer( "change", "#chartPage", { transition: "fade", changeHash: false });
+    });
 
 
-    getOA('token', 'info', getRoomList);
+    $( "#gauge0" ).on( "swipe", function(){
 
-    deviceReady();
+        $.mobile.navigate('#'+ oa.oa.rooms[activeRoom.id].app);
 
-    handleRoom();
-
-    handleCanvasClicks();
-
-    handleConnectionSetup();
+    });
 
 
-});
+    $( document ).on( "tap", '#gauge1', function() {
+        sensorChartSelect = window.localStorage.getItem('gauge1');
+        $.mobile.navigate('#chartPage');
 
+    });
+
+    $( document ).on( "tap", '#gauge2', function() {
+        sensorChartSelect = window.localStorage.getItem('gauge2');
+        $.mobile.navigate('#chartPage');
+    });
+
+
+    $(document).on( "pagecontainershow", function( event, ui ) {
+
+        if (ui.toPage.prop("id") == "chartPage"){
+
+            $('#chartPage h1').text(activeRoom.label + ' ' + sensorChartSelect);
+
+                var tokenLink = 'token';
+                console.log('lineChart > ' + tokenLink+ ' loading...');
+                $.getJSON(tokenLink, function(token) {
+                    if (token) {
+                        var sessionID = getToken(token);
+                        var hLink = 'sensor/' + sessionID + '/' + sensorChartSelect;
+                        $.getJSON(hLink, function (sensorData) {
+                            if (sensorData) {
+                                drawLineChart(sensorData);
+                            } else {
+                                console.log('lineChart > ERROR: sensor data not received from ' + hLink);
+                            }
+                        });
+                    } else {
+                        console.log('lineChart > ERROR: Con\'t get token from ' + tokenLink);
+                    }
+                });
+
+        }
+    });
+
+}
+
+
+// Generate session ID from token
 function getToken(received){
 
     function stringToHex (tmp) {
@@ -1412,24 +1393,8 @@ function getToken(received){
 }
 
 
+// Get config from OA server
 function getOA(tokenLink, infoLink, cb){
-
-    if(noTokenMode) {
-
-        var iLink = infoLink + '/0';
-
-        $.getJSON(iLink, function(oaConfig) {
-            if (oaConfig) {
-                oa = oaConfig;
-                if (debugMode) console.log(JSON.stringify(oa));
-                console.log('getOA > Config loaded successfully from ' + infoLink);
-                cb();
-            } else {
-                console.log('getOA > ERROR: Config not loaded from ' + infoLink);
-            }
-        });
-
-    } else {
 
         console.log('getOA > ' + tokenLink+ ' Loading...');
 
@@ -1446,9 +1411,8 @@ function getOA(tokenLink, infoLink, cb){
                         if (debugMode) console.log(JSON.stringify(oa));
                         cb();
                     } else {
-                        $.mobile.navigate('#connectionSet-UpPage');
-                        alertify.log('Authentication Error! Check Server ID', '', 4000);
-
+                        //$.mobile.navigate('#connectionSet-UpPage');
+                        alertify.log('Authentication Error! Check Server ID', '', 2000);
                         console.log('getOA > ERROR: Config not loaded from ' + infoLink);
                     }
                 });
@@ -1457,24 +1421,22 @@ function getOA(tokenLink, infoLink, cb){
                 console.log('getOA > ERROR: Con\'t get token from ' + tokenLink);
             }
         });
-
-    }
-
 }
 
 
-function roomListConfig(){
-    var liStr = '';
-    for (var i = 0; i < oa.oa.rooms.length; i++) {
-
-        liStr += '<li><a href="" data-id="' + i + '"> <img src="img/room.png" />' + oa.oa.rooms[i].label + '<p>Control ' + oa.oa.rooms[i].label + '</p></a></li>'
-    }
-    return liStr;
-}
-
-
-
+// Step-01 Get Room list from OA config
 function getRoomList(){
+
+    function roomListConfig(){
+        var liStr = '';
+        for (var i = 0; i < oa.oa.rooms.length; i++) {
+
+            liStr += '<li><a href="" data-id="' + i
+            + '"> <img src="img/room.png" />' + oa.oa.rooms[i].label + '<p>Control ' + oa.oa.rooms[i].label
+            + '</p></a></li>'
+        }
+        return liStr;
+    }
 
     $('#rooms-list li').remove();
     $('#rooms-list').append(roomListConfig).listview('refresh');
@@ -1492,7 +1454,7 @@ function getRoomList(){
 }
 
 
-
+// Step-02 Handle sensors in active room
 function handleRoom(){
 
     $(document).on('pagebeforeshow', '#roomPage0', function(e, data) {
@@ -1577,11 +1539,52 @@ function handleRoom(){
 
     });
 
-
-
 }
 
 
+// Step-03 Applications Start-Up
+function handleApps() {
+
+    appComfortZone();
+    appGreenHouse();
+    appCO2Free();
+}
+
+
+// Program Entry Point
+//$(document).ready(function(){
+$(document).on('pagecreate', '#home', function() {
+
+    // Global variables
+    oa = {};
+    activeRoom = {
+        id : null,
+        label : null,
+        sensors : [],
+        allSensors : []
+    };
+
+    // STEP-00 - Getting config from OA server
+    getOA('token', 'info', getRoomList);
+
+    handleSensors();
+    handleRoom();
+    handleCanvasClicks();
+    handleConnectionSetup();
+    handleApps();
+
+});
+
+
+
+
+
+// Applications section
+// Place installed apps here. Include app function in handleApps().
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// appCO2Free CO2 level control app v.1.0.1 (c) Vaidotas Gudaitis MIT license
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function appCO2Free(){
 
     $(document).on('pagebeforeshow', '#co2FreeApp', function(){
@@ -1839,121 +1842,87 @@ function appCO2Free(){
 }
 
 
+
+// appComfortZone Temperature control for fancoils v.0.0.1 (c) Vaidotas Gudaitis greituolis@gmail.com
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function appComfortZone(){
 
     $(document).on('pagebeforeshow', '#comfortZoneApp', function(){
 
-        if (window.localStorage.getItem('comfortZone.setTemperature')) $("input#temperatureSetCZ").val(window.localStorage.getItem('comfortZone.setTemperature')).slider("refresh");
-        if (window.localStorage.getItem('comfortZone.setFanSpeed')) $("input#fanSpeedSetCZ").val(window.localStorage.getItem('comfortZone.setFanSpeed')).slider("refresh");
+        $('h1#comfortZoneAppHeader').html(activeRoom.label);
 
-        if (window.localStorage.getItem('comfortZone.powerOn') == 'true')     $("input#powerOnSwCZ").prop("checked", true).flipswitch("refresh");
-        if (window.localStorage.getItem('comfortZone.setMode') == 'heating')     $("input#modeSetCZ").prop("checked", true).flipswitch("refresh");
-        if (window.localStorage.getItem('comfortZone.enableOffHours') == 'true')   $("input#offlineHoursModeSetCZ").prop("checked", true).flipswitch("refresh");
+        var sel = 'comfortZone' + activeRoom.id;
 
-        if (window.localStorage.getItem('comfortZone.offHB')) $('input#offHBCZ').val(window.localStorage.getItem('comfortZone.offHB'));
-        if (window.localStorage.getItem('comfortZone.offHE')) $('input#offHECZ').val(window.localStorage.getItem('comfortZone.offHE'));
+        if (window.localStorage.getItem(sel+'.setTemperature')) $("input#temperatureSetCZ").val(window.localStorage.getItem(sel+'.setTemperature')).slider("refresh");
+        if (window.localStorage.getItem(sel+'.setFanSpeed')) $("input#fanSpeedSetCZ").val(window.localStorage.getItem(sel+'.setFanSpeed')).slider("refresh");
 
-    });
+        if (window.localStorage.getItem(sel+'.powerOn') == 'true')     {
+            $("input#powerOnSwCZ").prop("checked", true).flipswitch("refresh");
+        } else {
+            $("input#powerOnSwCZ").prop("checked", false).flipswitch("refresh");
+        }
 
-    $(document).on('pagebeforeshow', '#comfortZoneSettings', function(){
-        if (window.localStorage.getItem('comfortZone.APPID')) $('#appIDInputCZ').val(window.localStorage.getItem('comfortZone.APPID'));
-    });
+        if (window.localStorage.getItem(sel+'.setMode') == 'heating') {
+            $("input#modeSetCZ").prop("checked", true).flipswitch("refresh");
+        }  else{
+            $("input#modeSetCZ").prop("checked", false).flipswitch("refresh");
+        }
 
-    $( document ).on( "tap", '#checkComfortZoneCommand', function() {
+        if (window.localStorage.getItem(sel+'.enableOffHours') == 'true')   {
+            $("input#offlineHoursModeSetCZ").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#offlineHoursModeSetCZ").prop("checked", false).flipswitch("refresh");
+        }
 
-        function emptyCallback() {}
-
-        var appID = window.localStorage.getItem('comfortZone.APPID') || 'noApiKey';
-        var url = 'http://smartsensors.io:8888/?cid=' + appID;
-
-
-        $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'text',
-            crossDomain: true,
-            //contentType: "application/json",
-            success: function(res) {
-
-                if (res == "App-ID-Error") {
-                    toast.showShort(" Incorrect Comfort Zone App ID! \n Check App ID entered or use Demo ID");
-                } else {
-
-                    navigator.notification.alert(
-                            res,
-                            emptyCallback,
-                            'Controller command:',
-                            'OK'
-                    );
-                }
-
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-
-                toast.showShort("Network error ");
-                toast.showShort(xhr.status);
-                toast.showShort(thrownError);
-
-            }
-        });
+        if (window.localStorage.getItem(sel+'.offHB')) $('input#offHBCZ').val(window.localStorage.getItem(sel+'.offHB'));
+        if (window.localStorage.getItem(sel+'.offHE')) $('input#offHECZ').val(window.localStorage.getItem(sel+'.offHE'));
 
     });
 
-    $( document ).on( "tap", '#demoAPICZ', function() {
-        var CID =   'b674d96d63b7ae5efb';
-        $("#appIDInputCZ").val(CID);
-        window.localStorage.setItem('comfortZone.APPID', CID);
-    });
 
-    $( document ).on( "tap", '#resetAPICZ', function() {
-        var CID =   '';
-        $("#appIDInputCZ").val(CID);
-    });
-
-    $(document).on('pagecreate', function () {
+    $(document).on('pagecreate', '#comfortZoneApp',  function () {
 
         function appCommandPost(postData) {
-            $.ajax({
-                type: "POST",
-                async: true,
-                url: 'https://smartsensors.io/appFanCoil',
-                data: postData,
-                success: function (response) {
-                    var answer = JSON.parse(response);
 
-                    if (answer.status == 'welcome') {
+            var tokenLink = 'token';
+            console.log('appCommandPost > ' + tokenLink+ ' Loading...');
 
-                        //alert('App settings accepted by server!');
+            $.getJSON(tokenLink, function(oaToken) {
+                if (oaToken) {
+                    var sessionID = getToken(oaToken);
+                    var pLink = 'control/' + sessionID;
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        url: pLink,
+                        data: postData,
+                        success: function (response) {
+                            var answer = JSON.parse(response);
+                            if (answer.status == 'welcome') {
 
-                    } else if (answer.status == 'noApiKey') {
-
-                        toast.showShort(" Please set correct APP ID in settings tab first!");
-
-                    } else {
-
-                        toast.showShort(" Incorrect Comfort Zone App ID! \n Please set correct APP ID in Settings tab.");
-
-                    }
+                            } else {
+                                //toast.showShort(" Authentication Error! \n Please set correct Server ID in Connection Settings tab.");
+                                //alertify.log('Authentication Error! Check Server ID', '', 4000);
+                            }
+                        }
+                    });
                 }
             });
         }
 
         function buildCommandComfortZone() {
-
-            var CID = window.localStorage.getItem('comfortZone.APPID') || 'noApiKey';
+            var CID = window.localStorage.getItem('comfortZone.APPID') || 'oa';
             var tSet = $("#temperatureSetCZ").val() || '23';
             var fSet = $("#fanSpeedSetCZ").val() || '4';
 
             var offFrom = $("#offHBCZ").val() || '00:00';
             var offTo = $("#offHECZ").val() || '00:00';
 
-            var virtualRoomID = '0';
+            var virtualRoomID = activeRoom.id;
 
             if (offFrom.length < 5) offFrom = '0' + offFrom;
             if (offTo.length < 5) offTo = '0' + offTo;
             if (tSet.length < 2) tSet = '0' + tSet;
-
-
             var command = '';
             command = 'F';
             command += virtualRoomID + ':';
@@ -1972,26 +1941,21 @@ function appComfortZone(){
                 command += 'M=C';
             }
 
-
             if ($('input#offlineHoursModeSetCZ').is(':checked')) {
                 command += 'A=0';
-
             } else {
                 command += 'A=1';
             }
 
             command += 'O=' + offFrom + offTo;
 
-            //alert('Command: ' + command);
-
-            var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, CID: CID, command: command, CommandCount: 1};
+            var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, command: command};
             appCommandPost(commandToPost);
-
         }
 
         function appSave(postData) {
 
-            var key = 'comfortZone.';
+            var key = 'comfortZone' + activeRoom.id + '.';
             var value = '';
 
             if (postData.decision === 'setTemperature') {
@@ -1999,30 +1963,29 @@ function appComfortZone(){
                 value = postData.temperature;
                 window.localStorage.setItem(key, value);
                 buildCommandComfortZone();
-                //alert ('Saved ' + postData.decision + ' ' + value);
             }
 
             if (postData.decision === 'setFanSpeed') {
                 key +=  postData.decision;
                 value = postData.fanSpeed;
                 window.localStorage.setItem(key, value);
-                //alert ('Saved ' + postData.decision + ' ' + value);
                 buildCommandComfortZone();
             }
 
             if (postData.decision === 'powerOn') {
                 key +=  postData.decision;
                 value = postData.SW;
-                window.localStorage.setItem(key, value);
-                //alert ('Saved ' + postData.decision + ' ' + value);
-                buildCommandComfortZone();
+
+                if (window.localStorage.getItem(key) != value){
+                    window.localStorage.setItem(key, value);
+                    buildCommandComfortZone();
+                }
             }
 
             if (postData.decision === 'setMode') {
                 key += postData.decision;
                 value = postData.mode;
                 window.localStorage.setItem(key, value);
-                //alert ('Saved ' + postData.decision + ' ' + value);
                 buildCommandComfortZone();
             }
 
@@ -2030,7 +1993,6 @@ function appComfortZone(){
                 key += postData.decision;
                 value = postData.SW;
                 window.localStorage.setItem(key, value);
-                //alert ('Saved ' + postData.decision + ' ' + value);
                 buildCommandComfortZone();
             }
 
@@ -2060,58 +2022,51 @@ function appComfortZone(){
             var postData = {};
             if ($(this).is(":checked")) {
                 postData = {decision: 'powerOn', SW: true};
-                appSave(postData);
             } else {
                 postData = {decision: 'powerOn', SW: false};
-                appSave(postData);
             }
+            appSave(postData);
         });
 
         $("input#modeSetCZ").change(function () {
             var postData = {};
             if ($(this).is(":checked")) {
                 postData = {decision: 'setMode', mode: 'heating'};
-                appSave(postData);
             } else {
                 postData = {decision: 'setMode', mode: 'cooling'};
-                appSave(postData);
             }
+            appSave(postData);
         });
 
         $("input#offlineHoursModeSetCZ").change(function () {
             var postData = {};
             if ($(this).is(":checked")) {
                 postData = {decision: 'enableOffHours', SW: true};
-                appSave(postData);
             } else {
                 postData = {decision: 'enableOffHours', SW: false};
-                appSave(postData);
             }
+            appSave(postData);
         });
 
 
         $("input#offHBCZ").bind("change", function (event, ui) {
-            window.localStorage.setItem('comfortZone.offHB', $("input#offHBCZ").val());
+            window.localStorage.setItem('comfortZone' + activeRoom.id + '.offHB', $("input#offHBCZ").val());
             buildCommandComfortZone();
         });
 
         $("input#offHECZ").bind("change", function (event, ui) {
-            window.localStorage.setItem('comfortZone.offHE', $("input#offHECZ").val());
+            window.localStorage.setItem('comfortZone' + activeRoom.id + '.offHE', $("input#offHECZ").val());
             buildCommandComfortZone();
         });
-
-
-        $("input#appIDInputCZ").bind("change", function (event, ui) {
-            window.localStorage.setItem('comfortZone.APPID', $("input#appIDInputCZ").val());
-        });
-
-
 
     });
 
 }
 
 
+
+// Green House control app v.1.0.1 (c) Vaidotas Gudaitis MIT license
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function appGreenHouse() {
 
     $(document).on('pagebeforeshow', '#greenHouseApp', function(){
@@ -2530,139 +2485,6 @@ function appGreenHouse() {
 }
 
 
-function handleSensors() {
-
-    $(document).on('pagebeforecreate', '#mainSensors', function(){
-        var interval = setInterval(function(){
-            $.mobile.loading('show');
-            clearInterval(interval);
-        },100);
-    });
-
-    $(document).on('pageshow', '#mainSensors', function(){
-        var interval = setInterval(function(){
-            $.mobile.loading('hide');
-            clearInterval(interval);
-        },100);
-    });
-
-    $(document).on('pagebeforeshow', '#mainSensors', function(e, data){
-
-        var activeApp = data.prevPage.attr('id');
-        var virtualRoomID = '0';
-        var appID = '';
-        var sensorsLabel = 'Sensors View';
-
-        if(activeApp == 'greenHouseApp') {
-            appID = window.localStorage.getItem('greenHouse.APPID') || 'noApiKey';
-            sensorsLabel = 'Green House sensors';
-        }
-        if(activeApp == 'comfortZoneApp') {
-            appID = window.localStorage.getItem('comfortZone.APPID') || 'noApiKey';
-            sensorsLabel = 'Comfort Zone sensors';
-        }
-        if(activeApp == 'co2FreeApp') {
-            appID = window.localStorage.getItem('co2Free.APPID') || 'noApiKey';
-            sensorsLabel = 'CO2 Free sensors';
-        }
-
-        $('h1#sensorsView').html(sensorsLabel);
-
-        //alert(activeApp + ' ' + appID);
-
-        var infoSensorLink = 'https://smartsensors.io/info-sensor/' + appID + '/' + virtualRoomID;
-
-        $.getJSON(infoSensorLink, function(sensorsList) {
-
-            var sensorCount = sensorsList.sensorCount;
-            var allSensorsShow = sensorsList.allSensorsShow;
-            var tableConstruction = '';
-
-            if (sensorCount > 0){
-
-
-                for( var i = 0, lenSensorCount = sensorCount; i < lenSensorCount; i++ ) {
-
-                    var sensorRoom = sensorsList.sensorRoom[i];
-                    var sensorType = sensorsList.sensorType[i];
-                    var sensorLabel = sensorsList.sensorLabel[i];
-                    var sensorID = sensorsList.sensorID[i];
-                    var sensorValue = sensorsList.sensorValue[i];
-                    var sensorUnits = sensorsList.sensorUnits[i];
-                    var sensorMinimumValue = sensorsList.sensorMinimumValue[i];
-                    var sensorMaximumValue = sensorsList.sensorMaximumValue[i];
-                    var sensorTime = sensorsList.sensorTime[i];
-                    var status = 0;
-
-
-                    if (parseFloat(sensorValue) < parseFloat(sensorMinimumValue)) status = 2;
-                    if (parseFloat(sensorValue) > parseFloat(sensorMaximumValue)) status = 1;
-
-                    //if (allSensorsShow && virtualRoomID == '0') {
-                    tableConstruction += oneSensorRow(sensorType, sensorID, sensorLabel, sensorValue, sensorUnits, sensorTime, status);
-                    //}
-                }
-
-            }
-
-
-            //alert(tableConstruction);
-
-            $("#sensorsTable").html(tableConstruction).listview("refresh");
-
-        });
-
-
-
-        function oneSensorRow(sensorType, sensorID, sensorLabel, sensorValue, sensorUnits, sensorTime, status) {
-
-            var statusOK = ' ';
-            var statusOver = ' Over! ';
-            var statusProblem = ' problem! ';
-            var statusUnder = ' Under! ';
-            var statusValue = ' ';
-            var sensorHighlightColor = '';
-            if (sensorType == 'T') sensorHighlightColor = '<img src="img/star_red.png" class="ui-li-icon">';
-            if (sensorType == 'H') sensorHighlightColor = '<img src="img/star_blue.png" class="ui-li-icon">';
-            if (sensorType == 'D') sensorHighlightColor = '<img src="img/star_yellow.png" class="ui-li-icon">';
-            if (sensorType == 'R') sensorHighlightColor = '<img src="img/star_black.png" class="ui-li-icon">';
-
-            if (status == 0) statusValue = statusOK;
-            if (status == 1) statusValue = statusOver;
-            if (status == 2) statusValue = statusUnder;
-
-            //var diff = Math.abs(new Date() - new Date(sensorTime));
-            //var minutes = Math.floor((diff/1000)/60);
-            //var minutesToDisplay = ' ' + minutes + ' min. ago' + ' ';
-
-
-            //if (minutes > 9) statusValue = statusProblem;
-
-            //if (minutes > 99) minutesToDisplay = ' ' + ' ages ago' + ' ';
-
-            return '<li>'
-                    + sensorHighlightColor
-                    + sensorID  + ' - '  + sensorLabel
-
-                    + '<span class="ui-li-count">' + sensorValue  + sensorUnits + statusValue   + '</span>'
-                //+ minutesToDisplay
-                    + '</li>';
-        }
-
-
-    });
-
-}
-
-
-function deviceReady() {
-
-    handleSensors();
-    appComfortZone();
-    appGreenHouse();
-    appCO2Free();
-
-}
 </script>
 </body>
 </html>

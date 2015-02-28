@@ -1,15 +1,37 @@
-/**
- * Created by Vaidas on 2015.01.20.
- * Open Automation Server for Edison and Beaglebone Black
+/*
+ Open Automation Center for Intel Edison and Beaglebone Black
+
+ Copyright (c) 2015 Vaidotas Gudaitis http://openautomation.center
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+
  */
 
 
-// Main parameters
+// Main parameters - can be set from command shell
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var notokenMode = false;
-var debugMode = false;
-var checkSensorsActivityInterval = 20000;
 var programVersion = '0.0.1';
+var notokenMode = false;                    // disable HOTP authentication
+var debugMode = false;                      // enable debug mode
+var saveSensorsToDisk = false;              // enable persistent sensors datastore with automatic loading
+var checkSensorsActivityInterval = 20000;   // set sensors activity check on serial port, if no data received in time
+                                            // interval - application process killed
 
 
 
@@ -69,16 +91,11 @@ var oaSetup = {
 
 
 
-
 // Application Code
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //var SegfaultHandler = require('segfault-handler');
-    //    SegfaultHandler.registerHandler();
     var program = require('commander');
-    //var fecha = require('fecha');
     var crypto = require('crypto');
-    //var t2 = require('thirty-two');
     var speakeasy = require('speakeasy');
     var hat = require('hat');
     var os = require('os');
@@ -114,12 +131,13 @@ var oaSetup = {
         .option('-s, --serial [port]', 'set serial port for sensors communications [/dev/ttyMFD1]', '/dev/ttyMFD1')
         .option('-p, --port [port]', 'set TCP port for management interface, Default - 8000', '8000')
         .option('-n, --notoken', 'disable HOTP RFC4226 authentication')
+        .option('-S, --savetodisk', 'enable persistent sensors datastore')
         .option('-d, --debug', 'activate Debug mode')
         .parse(process.argv);
 
     if (program.notoken) notokenMode = true;
     if (program.debug) debugMode = true;
-
+    if (program.savetodisk) saveSensorsToDisk = true;
 
 
 // STEP-02 Edison or BBB?
@@ -293,16 +311,23 @@ function terminateOA(){
 // Datastore initialization
 function handleDataStore(cb){
 
-    //var currentDIR = path.dirname(fs.realpathSync(__filename));
-    //var dbOA = new Datastore({ filename: path.join(currentDIR, 'settings.txt'), autoload: true });
-
     dbOA = new Datastore({ filename: 'settings.txt', autoload: true });
     dbCID = new Datastore({ filename: 'serverID.txt', autoload: true });
-    dbH = new Datastore({ filename: 'sensorsH.db', autoload: true });
-    dbC = new Datastore({ filename: 'sensorsC.db', autoload: true });
-    dbE = new Datastore({ filename: 'sensorsE.db', autoload: true });
-    dbP = new Datastore({ filename: 'sensorsP.db', autoload: true });
-    dbT = new Datastore({ filename: 'sensorsT.db', autoload: true });
+
+    if (saveSensorsToDisk){
+        dbH = new Datastore({ filename: 'sensorsH.db', autoload: true });
+        dbC = new Datastore({ filename: 'sensorsC.db', autoload: true });
+        dbE = new Datastore({ filename: 'sensorsE.db', autoload: true });
+        dbP = new Datastore({ filename: 'sensorsP.db', autoload: true });
+        dbT = new Datastore({ filename: 'sensorsT.db', autoload: true });
+    } else {
+        dbH = new Datastore();
+        dbC = new Datastore();
+        dbE = new Datastore();
+        dbP = new Datastore();
+        dbT = new Datastore();
+    }
+
     cb();
 }
 
@@ -354,7 +379,7 @@ function getIPAddress() {
 }
 
 
-// Send commands to Energy Meter
+// Send commands to Energy Meters and controllers
 function requestSensor(sensorID, command){
     var sensorRequest = '\na' + sensorID + command + '\n';
     oaPort.write(sensorRequest, function(err) {
@@ -362,7 +387,21 @@ function requestSensor(sensorID, command){
             console.log('OA > Sensor Request ERROR: '.error + err);
             compactDB(terminateOA);
         }else{
-            console.log(colors.green('OA > Requesting ' + sensorID + command));
+            console.log(colors.cyan('OA > Requesting ' + sensorID + command));
+        }
+    });
+}
+
+
+// Send commands to Controllers
+function controllerCommandSend(command){
+    var controllerCommand = '\na' + command + '\n';
+    oaPort.write(controllerCommand, function(err) {
+        if(err) {
+            console.log('OA > broadcasting command ERROR: '.error + err);
+            compactDB(terminateOA);
+        }else{
+            console.log(colors.cyan('OA > broadcasting command: ' + 'a'+command));
         }
     });
 }
@@ -446,7 +485,7 @@ function getSensorP(sensorID, sensorLabel, sensorValue, sensorUnit, cb) {
 // Main program
 function oaListening() {
 
-    console.log('OA Datastore loaded'.green);
+    if (saveSensorsToDisk) console.log('OA Datastore loaded'.green);
 
     // Check Server configuration from settings.txt
     dbCID.findOne({id: 'oaConfig'}, { _id:0}, function(err, existingCID) {
@@ -535,7 +574,7 @@ function oaListening() {
 }
 
 
-//  WEB Service part
+//  WEB Service
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Send index.html
@@ -545,65 +584,30 @@ app.get('/', function(req, res){
 });
 
 
-// Check Communication problems with sensors
-app.get('/reset', function(req, res){
-    console.log("OA > www > /reset Sensors communication check...".cyan);
-    if (communicationProblem) {
-        console.log("OA > No sensors signal detected. Service terminated. Please restart Open Automation Server".cyan);
-        compactDB(terminateOA);
-    } else{
-        var answer = {};
-        answer.status = "INFO: Sensors communication active";
-
-        hotp.session = '';
-        console.log("OA > www > Sensors communication check completed".cyan);
-        res.end(JSON.stringify(answer));
-    }
-});
-
-
-
-app.get('/db', function(req, res){
-
-    var yesterdayStr = new Date((new Date()).valueOf() - 1000*60*60*24).toISOString();
-        yesterdayStr = yesterdayStr.substring(0, 9);
-
-    dbT.remove({ _id: { $lt: '2015-02-23' }}, { multi: true }, function (err, numRemoved) {
-
-        console.log("OA > www > DBT Check" + new Date().toISOString());
-
-        dbT.persistence.compactDatafile();
-
-        res.send(JSON.stringify(yesterdayStr));
-
-    });
-
-});
-
-
-
+// Send HOTP token
 app.get('/token', function(req, res){
     hotp.tokenCount += 1;
     hotp.token = hat(bits=16, base=10);
     hotp.id = speakeasy.hotp({key: hotp.secret, counter: hotp.token, encoding: 'hex'});
     hotp.session = crypto.createHash('sha1').update(hotp.id).digest('hex');
-    console.warn("OA > www > /token #".green + hotp.tokenCount + ' ' + hotp.token + ' session:' + hotp.id + ':' + hotp.session + ' secret:' + hotp.secret);
-    res.end(JSON.stringify(hotp.token)); //{token:hotp.token}
+    console.warn("OA > www > /token #".green + hotp.tokenCount + ' session:' + hotp.session);
+    res.end(JSON.stringify(hotp.token));
 });
 
 
-app.get('/info/:sesID', function(req, res){
+// Send OA config
+app.get('/info/:sID', function(req, res){
 
-    var sessionIDinfo = req.params.sesID;
+    var sessionID = req.params.sID;
 
     if (notokenMode) { //Disable HOTP authentication
-        hotp.session = sessionIDinfo = '5874458cf661722a0bc6a922902a09cc9b5233c9';
+        hotp.session = sessionID = '5874458cf661722a0bc6a922902a09cc9b5233c9';
         console.warn("OA > www > /info TOKEN CHECK DISABLED".cyan);
     }
 
-    if (sessionIDinfo.length == 40 && sessionIDinfo == hotp.session){
+    if (sessionID.length == 40 && sessionID == hotp.session){
 
-        console.warn("OA > www > /info #".green + hotp.count + ' session:' + hotp.id + ':' + hotp.session + ':' + sessionIDinfo);
+        console.warn("OA > www > /info #".green + hotp.count + ' session:' + hotp.session + ':' + sessionID);
         if (!notokenMode) hotp.session = '';
         hotp.count +=1;
 
@@ -621,7 +625,7 @@ app.get('/info/:sesID', function(req, res){
         answer.status = "ERROR: Access Denied";
 
         hotp.falseCount +=1;
-        console.warn("OA > www > /info failed #".error + hotp.falseCount + ' session: '.error + hotp.id + ':' + hotp.session + ':' + sessionIDinfo);
+        console.warn("OA > www > /info failed #".error + hotp.falseCount + ' session: '.error + hotp.session + ':' + sessionID);
         hotp.session = '';
 
         res.end(JSON.stringify(answer));
@@ -630,15 +634,15 @@ app.get('/info/:sesID', function(req, res){
 });
 
 
+// Send sensors history data
+app.get('/sensor/:sid/:id', function(req, res){
 
-app.get('/sensor/:ssid/:id', function(req, res){
-
-    var sessionID = req.params.ssid;
+    var sessionID = req.params.sid;
     var sensorID = req.params.id;
 
     if (notokenMode) { //Disable HOTP authentication
         hotp.session = sessionID = '5874458cf661722a0bc6a922902a09cc9b5233c9';
-        console.warn("OA > www > TOKEN CHECK DISABLED".red);
+        console.warn("OA > www > /sensor TOKEN CHECK DISABLED".cyan);
     }
 
     function sensorsChart(sensorID, sensors, label){
@@ -707,7 +711,7 @@ app.get('/sensor/:ssid/:id', function(req, res){
             dbT.find({}, function (err, sensors) {
                 if (sensors) {
                     var sensorsData = sensorsChart(sensorID, sensors, 'Temperature');
-                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.id);
+                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.session);
                     res.end(JSON.stringify(sensorsData));
                 }
             });
@@ -716,7 +720,7 @@ app.get('/sensor/:ssid/:id', function(req, res){
             dbH.find({}, function (err, sensors) {
                 if (sensors) {
                     var sensorsData = sensorsChart(sensorID, sensors, 'Humidity');
-                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.id);
+                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.session);
                     res.end(JSON.stringify(sensorsData));
                 }
             });
@@ -725,7 +729,7 @@ app.get('/sensor/:ssid/:id', function(req, res){
             dbC.find({}, function (err, sensors) {
                 if (sensors) {
                     var sensorsData = sensorsChart(sensorID, sensors, 'CO2 level');
-                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.id);
+                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.session);
                     res.end(JSON.stringify(sensorsData));
                 }
             });
@@ -734,7 +738,7 @@ app.get('/sensor/:ssid/:id', function(req, res){
             dbE.find({}, function (err, sensors) {
                 if (sensors) {
                     var sensorsData = sensorsChart(sensorID, sensors, 'Energy');
-                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.id);
+                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.session);
                     res.end(JSON.stringify(sensorsData));
                 }
             });
@@ -743,7 +747,7 @@ app.get('/sensor/:ssid/:id', function(req, res){
             dbP.find({}, function (err, sensors) {
                 if (sensors) {
                     var sensorsData = sensorsChart(sensorID, sensors, 'Power');
-                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.id);
+                    console.warn('OA > www > ' + sensorID + ' sensorChart request #'.green + hotp.count + ' for session:' + hotp.session);
                     res.end(JSON.stringify(sensorsData));
                 }
             });
@@ -756,7 +760,7 @@ app.get('/sensor/:ssid/:id', function(req, res){
             hotp.session = '';
             hotp.falseCount +=1;
 
-            console.warn('OA > www > ERROR: ' + sensorID + ' sensorChart failed locate sensor #'.error + hotp.count + ' for session:' + hotp.id);
+            console.warn('OA > www > ERROR: ' + sensorID + ' sensorChart failed locate sensor! '.error);
             res.end(JSON.stringify(answer));
 
         }
@@ -765,38 +769,135 @@ app.get('/sensor/:ssid/:id', function(req, res){
 
         var answer = {};
         answer.status = "ERROR: Access Denied";
-        answer.debug = 'OA > www > ERROR: ' + sensorID + ' sensorChart Access Denied #' + hotp.count + ' for session:' + hotp.id + ' : ' + sessionID;
-
         hotp.session = '';
         hotp.falseCount +=1;
 
-        console.warn('OA > www > ERROR: ' + sensorID + ' sensorChart Access Denied #'.error + hotp.count + ' for session:' + hotp.id);
+        console.warn('OA > www > ERROR: ' + sensorID + ' sensorChart Access Denied #' + hotp.falseCount + ' for session:' + hotp.session + ':' + sessionID);
         res.end(JSON.stringify(answer));
     }
 
 });
 
 
+// Getting controll command
+app.post('/control/:sid',  function(req, res){
 
+    var sessionID = req.params.sid;
 
+    if (notokenMode) { //Disable HOTP authentication
+        hotp.session = sessionID = '5874458cf661722a0bc6a922902a09cc9b5233c9';
+        console.warn("OA > www > /control TOKEN CHECK DISABLED".cyan);
+    }
 
-// Update settings
-app.get('/update-settings', function(req, res) {
-    console.warn("OA > www > Update Settings request".warn);
+    if (sessionID.length == 40 && sessionID == hotp.session) {
 
-    //appID = req.query.appID;
-    //apirequest = req.query.apirequest;
+        console.warn("OA > www > /control #".green + hotp.count + ' session:' + hotp.session + ':' + sessionID);
+        if (!notokenMode) hotp.session = '';
+        hotp.count +=1;
 
-    var answer = {};
-    answer.status = "Settings Updated";
+        var controllerSettings = req.body;
+        var decision = JSON.parse(JSON.stringify(controllerSettings.decision));
+        var answer = {};
+        answer.status = "welcome";
 
-    oa.comment = "Kuku123";
-    updateOA(oa);
+        if (debugMode) console.warn('OA > /control > decision: '.green + decision);
 
-    res.send(JSON.stringify(answer));
+        if (decision == 'setCommand') {
+            if (debugMode) console.log('OA > /control > new command:\n'.green + JSON.stringify(controllerSettings));
+
+            if (!!controllerSettings.command) {
+
+                controllerCommandSend(controllerSettings.command);
+                res.send(JSON.stringify(answer));
+
+            } else {
+
+                answer.status = "invalidSettings";
+                res.send(JSON.stringify(answer));
+                console.log('OA > /control > command set ERROR:'.error + JSON.stringify(controllerSettings));
+
+            }
+
+        } else {
+
+            answer.status = "good day isn\'t?";
+            res.send(JSON.stringify(answer));
+            console.log('OA > /control > ERROR: BAD Form data!'.error + JSON.stringify(controllerSettings));
+
+        }
+
+    } else {
+
+        var answer = {};
+        answer.status = "ERROR: Access Denied";
+
+        hotp.falseCount +=1;
+        console.warn("OA > www > /control failed #".error + hotp.falseCount + ' session: '.error + hotp.session + ':' + sessionID);
+        hotp.session = '';
+
+        res.end(JSON.stringify(answer));
+
+    }
 
 });
 
+
+// Compact sensors databases
+app.get('/dbreset/:sid', function(req, res){
+
+    var answer = {};
+    answer.status = "OK";
+    var sessionID = req.params.sid;
+
+    if (notokenMode) { //Disable HOTP authentication
+        hotp.session = sessionID = '5874458cf661722a0bc6a922902a09cc9b5233c9';
+        console.warn("OA > www > /dbreset TOKEN CHECK DISABLED".cyan);
+    }
+
+    if (sessionID.length == 40 && sessionID == hotp.session) {
+        hotp.count += 1;
+        console.warn("OA > www > /dbreset #".green + hotp.count + ' session:' + hotp.session + ':' + sessionID);
+        if (!notokenMode) hotp.session = '';
+
+        var yesterdayStr = new Date((new Date()).valueOf() - 1000 * 60 * 60 * 24).toISOString();
+        yesterdayStr = yesterdayStr.substring(0, 10);
+
+        dbT.remove({_id: {$lt: yesterdayStr}}, {multi: true}, function (errT, numRemovedT) {
+            dbH.remove({_id: {$lt: yesterdayStr}}, {multi: true}, function (errH, numRemovedH) {
+                dbC.remove({_id: {$lt: yesterdayStr}}, {multi: true}, function (errC, numRemovedC) {
+                    dbE.remove({_id: {$lt: yesterdayStr}}, {multi: true}, function (errE, numRemovedE) {
+                        dbP.remove({_id: {$lt: yesterdayStr}}, {multi: true}, function (errP, numRemovedP) {
+
+                            dbT.persistence.compactDatafile();
+                            dbH.persistence.compactDatafile();
+                            dbC.persistence.compactDatafile();
+                            dbE.persistence.compactDatafile();
+                            dbP.persistence.compactDatafile();
+
+                            console.log("OA > DBT successfully removed " + numRemovedT + ' records from ' + yesterdayStr);
+                            console.log("OA > DBH successfully removed " + numRemovedH + ' records from ' + yesterdayStr);
+                            console.log("OA > DBC successfully removed " + numRemovedC + ' records from ' + yesterdayStr);
+                            console.log("OA > DBE successfully removed " + numRemovedE + ' records from ' + yesterdayStr);
+                            console.log("OA > DBP successfully removed " + numRemovedP + ' records from ' + yesterdayStr);
+
+                            res.send(JSON.stringify(answer));
+
+                        });
+                    });
+                });
+            });
+        });
+
+    } else {
+
+        answer.status = "ERROR: Access Denied";
+        hotp.falseCount +=1;
+        console.warn("OA > www > /dbreset failed #".error + hotp.falseCount + ' session: '.error + hotp.session + ':' + sessionID);
+        hotp.session = '';
+        res.end(JSON.stringify(answer));
+    }
+
+});
 
 
 app.listen(app.get('port'), function(){
@@ -806,6 +907,7 @@ app.listen(app.get('port'), function(){
     console.log('MRAA Version: '.green + mraa.getVersion());
     console.log('HOTP RFC4226 Authentication: '.green + !notokenMode);
     console.log('Debug Mode: '.green + debugMode);
+    console.log('Persistent datastore: '.green + saveSensorsToDisk);
     console.log('IP address on LAN: '.green + getIPAddress() + '\n');
 });
 
