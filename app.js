@@ -408,14 +408,9 @@ function controllerCommandSend(command){
 
 
 // Save sensors value and time received to Real time store
-function realtimeSensorValueSet(sensorID, sensorValue, newID){
-    if (sensorID == newID){
-        allSensors[sensorID] = sensorValue;
-        allSensorsDates[sensorID] = new Date().toISOString();
-    } else{
-        allSensors[newID] = sensorValue;
-        allSensorsDates[sensorID] = new Date().toISOString();
-    }
+function realtimeSensorValueSet(sensorID, sensorValue){
+    allSensors[sensorID] = sensorValue;
+    allSensorsDates[sensorID] = new Date().toISOString();
     allSensors.date = new Date().toISOString();
 }
 
@@ -427,7 +422,7 @@ function getSensorC(sensorID, sensorLabel, sensorValue, sensorUnit, cb) {
     configC._id = new Date().toISOString();
     dbC.insert(configC);
     console.log('OA > CO2 Level '.warn + sensorID + ' - ' + sensorLabel + ' ' + sensorValue + sensorUnit);
-    cb(sensorID, sensorValue, sensorID);
+    cb(sensorID, sensorValue);
 }
 
 
@@ -439,7 +434,7 @@ function getSensorT(sensorID, sensorLabel, sensorValue, sensorUnit, cb) {
     dbT.insert(configT);
     //dbT.insert( configT, function (err) { if (err) console.log('OA > ERROR:' + JSON.stringify(err) +' Can\'t write to Temperature Sensors DB'.error); });
     console.log('OA > Temperature '.warn + sensorID + ' - ' + sensorLabel + ' ' + sensorValue + sensorUnit);
-    cb(sensorID, sensorValue, sensorID);
+    cb(sensorID, sensorValue);
 }
 
 
@@ -450,7 +445,7 @@ function getSensorH(sensorID, sensorLabel, sensorValue, sensorUnit, cb) {
     configH._id = new Date().toISOString();
     dbH.insert( configH, function (err) { if (err) console.log('OA > ERROR:' + JSON.stringify(err) + ' Can\'t write to Humidity Sensors DB'.error); });
     console.log('OA > Humidity '.warn + sensorID + ' - ' + sensorLabel + ' ' + sensorValue + sensorUnit);
-    cb(sensorID, sensorValue, sensorID);
+    cb(sensorID, sensorValue);
 }
 
 
@@ -464,7 +459,7 @@ function getSensorE(sensorID, sensorLabel, sensorValue, sensorUnit, cb) {
             if (err) console.log('OA > ERROR:' + JSON.stringify(err) + ' Can\'t write to Energy DB'.error);
         });
         console.log('OA > Energy consumed '.warn + sensorID + ' - ' + sensorLabel + ' ' + sensorValue + sensorUnit);
-        cb(sensorID, sensorValue, sensorID);
+        cb(sensorID, sensorValue);
     }
 }
 
@@ -477,7 +472,7 @@ function getSensorP(sensorID, sensorLabel, sensorValue, sensorUnit, cb) {
         configP._id = new Date().toISOString();
         dbP.insert(configP);
         console.log('OA > Power usage '.warn + sensorID + ' - ' + sensorLabel + ' ' + sensorValue + 'W');
-        cb(sensorID, sensorValue, newID);
+        cb(newID, sensorValue);
     }
 }
 

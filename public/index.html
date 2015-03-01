@@ -343,27 +343,21 @@
     <div data-role="page" id="co2FreeApp" data-cache="false" data-title="Comfort Zone Control" data-theme="b" data-content-theme="b">
 
         <div data-role="header" data-position="fixed" data-tap-toggle="false">
-            <h1>CO2 Free</h1>
-
+            <h1 id="co2FreeAppHeader">CO2 Free</h1>
         </div>
 
         <div data-role="content">
-
             <div data-role="fieldcontainer">
                 <label id="temperatureSetLabelCO2" >Temperature set</label>
                 <input type="range" id="temperatureSetCO2" data-highlight="true" min="10" max="50" value="25">
             </div>
-
             <div data-role="fieldcontainer">
                 <label id="co2LevelSetLabelCO2" >CO2 level set</label>
                 <input type="range" id="co2LevelSetCO2" data-highlight="true" min="380" max="900" value="500">
             </div>
 
-
             <br />
-
             <div class="ui-grid-b">
-
                 <div class="ui-block-a">
                     <label >Mode</label>
                     <input type="checkbox" id="modeSetSwCO2" data-on-text="Heat" data-off-text="Cool" data-role="flipswitch">
@@ -380,27 +374,19 @@
                 </div>
             </div>
 
-
             <div data-role="collapsible-set">
-
                 <div data-role="collapsible" data-collapsed="true" data-theme="b">
                     <h4>Fan On timer set</h4>
-
                     <div class="ui-grid-a">
-
                         <div class="ui-block-a">
                             <label >Fan from:</label>
                             <input type="time" id="fanFromCO2"  placeholder="00:00">
                         </div>
-
                         <div class="ui-block-b">
                             <label >Fan to:</label>
                             <input type="time" id="fanToCO2"  placeholder="00:00">
                         </div>
-
                     </div>
-
-
                 </div>
             </div>
 
@@ -409,77 +395,14 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#home" data-icon="home" data-role="button" data-theme="b" data-transition="fade">Home</a>
-                    <li><a href="#mainSensors" data-icon="grid" data-role="button" data-theme="b" data-transition="fade">Sensors</a>
-                    <li><a href="#co2FreeSettings" data-icon="gear" data-role="button" data-theme="b" data-transition="fade">Settings</a>
-                    <li><a href="#aboutCo2FreeApp" data-icon="info" data-role="button" data-theme="b" data-transition="fade">About</a>
+                    <li><a href="#home" class="ui-btn ui-icon-bullets ui-btn-icon-top">Home</a>
+                    <li><a href="#appsList" class="ui-btn ui-icon-grid ui-btn-icon-top">App list</a>
                 </ul>
             </div>
         </div>
     </div>
-    <div data-role="page" id="co2FreeSettings" data-theme="b" data-content-theme="b">
-        <div data-role="header" data-position="fixed" data-tap-toggle="false">
-
-            <h1>CO2 Free Settings</h1>
-
-        </div>
-        <div data-role="content">
-            <div data-role="fieldcontainer">
-                <label >Please enter your App ID:</label>
-                <input type="text" id="appIDInputCO2" >
-                <p>
-                    <a id="demoAPICO2" href="#" data-role="button" data-inline="true" data-theme="b" >DEMO ID</a>
-                    <a id="resetAPICO2" href="#" data-role="button" data-inline="true" data-theme="b" >Clear</a>
-                </p>
-            </div>
-
-            <div data-role="fieldcontainer">
-                <p>
-                    <a id="checkCO2Command" href="#" data-role="button" data-inline="true" data-theme="b" >Check controller command</a>
-                </p>
-            </div>
-
-            <p>For more information please visit
-                <a class="ui-link" onclick='window.open("https://smartsensors.io/app/co2-free","_system", "location=yes")' href='javascript:void(0)' >https://smartsensors.io/app/co2-free</a>
-            </p>
-        </div>
 
 
-        <div data-role="footer" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-    <div data-role="page" id="aboutCo2FreeApp" data-overlay-theme="b" data-theme="b" data-content-theme="b">
-        <div data-role="header" data-theme="a" data-position="fixed" data-tap-toggle="false">
-
-            <h1><img src="img/logo.png"></h1>
-            <h3>CO2 Free v.1.0</h3>
-
-        </div>
-        <div data-role="content">
-            <p>CO2 level control </p>
-            <p>Open firmware for Arduino Ethernet</p>
-            <p>Author: Vaidotas Gudaitis</p>
-            <p>Designed by: <a class="ui-link" onclick='window.open("http://appconstructor.io","_system", "location=yes")' href='javascript:void(0)' > appconstructor.io </a></p>
-            <p>For more information please visit
-                <a class="ui-link" onclick='window.open("https://smartsensors.io/app/co2-free","_system", "location=yes")' href='javascript:void(0)' >https://smartsensors.io/app/co2-free</a>
-            </p>
-        </div>
-        <div data-role="footer" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
-
-                </ul>
-            </div>
-        </div>
-
-    </div>
     <!-- co2FreeAppPage END -->
 
 
@@ -572,7 +495,7 @@
     <div data-role="page" id="greenHouseApp" data-cache="false" data-title="Green House Control" data-theme="b" data-content-theme="b">
 
 		<div data-role="header" data-position="fixed" data-tap-toggle="false">
-			<h1>Green House Control</h1>
+			<h1 id="greenHouseAppHeader">Green House Control</h1>
 
 		</div>
 
@@ -607,14 +530,9 @@
 					<input type="checkbox" id="fanOnSw" data-role="flipswitch">
 				</div>
 			</div>
-
-
-
 			<div data-role="collapsible-set">
 				<div data-role="collapsible" data-collapsed="true" data-theme="b">
 					<h4>Humidity timers </h4>
-
-
                     <div class="ui-grid-a">
                         <div class="ui-block-a">
 
@@ -631,12 +549,9 @@
                             <a id="wTbutton3" href="#wateringTimerSet3" data-role="button" data-inline="true"  data-transition="pop">T3 00:00</a>
                             <a id="wTbutton4" href="#wateringTimerSet4" data-role="button" data-inline="true"  data-transition="pop">T4 00:00</a>
                             <a id="wTbutton5" href="#wateringTimerSet5" data-role="button" data-inline="true"  data-transition="pop">T5 00:00</a>
-
-
                         </div>
 
                     </div>
-
 				</div>
 				<div data-role="collapsible" data-collapsed="true" data-theme="b">
 					<h4>Light timer</h4>
@@ -647,7 +562,6 @@
                             <div data-role="fieldcontainer">
                                 <input type="checkbox" id="lightTimerSW" data-role="flipswitch">
                             </div>
-
                         </div>
 
                         <div class="ui-block-b">
@@ -661,8 +575,6 @@
                         </div>
 
                     </div>
-
-
 				</div>
 			</div>
 
@@ -671,77 +583,14 @@
 		<div data-role="footer" data-position="fixed">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#home" data-icon="home" data-role="button" data-theme="b" data-transition="fade">Home</a>
-					<li><a href="#mainSensors" data-icon="grid" data-role="button" data-theme="b" data-transition="fade">Sensors</a>
-					<li><a href="#greenHouseSettings" data-icon="gear" data-role="button" data-theme="b" data-transition="fade">Settings</a>
-					<li><a href="#aboutGreenHouseApp" data-icon="info" data-role="button" data-theme="b" data-transition="fade">About</a>
+                    <li><a href="#home" class="ui-btn ui-icon-bullets ui-btn-icon-top">Home</a>
+                    <li><a href="#appsList" class="ui-btn ui-icon-grid ui-btn-icon-top">App list</a>
 				</ul>
 			</div>
 		</div>
 	</div>
-	<div data-role="page" id="greenHouseSettings" data-theme="b" data-content-theme="b">
-		<div data-role="header" data-position="fixed" data-tap-toggle="false">
-
-		<h1>Green House Settings</h1>
-
-		</div>
-		<div data-role="content">
-			<div data-role="fieldcontainer">
-				<label >Please enter your App ID:</label>
-				<input type="text" id="appIDInput" >
-                <p>
-				<a id="demoAPI" href="#" data-role="button" data-inline="true" data-theme="b" >DEMO ID</a>
-                <a id="resetAPI" href="#" data-role="button" data-inline="true" data-theme="b" >Clear</a>
-                </p>
-			</div>
-
-            <div data-role="fieldcontainer">
-                <p>
-                    <a id="checkGreenHouseCommand" href="#" data-role="button" data-inline="true" data-theme="b" >Check controller command</a>
-                </p>
-            </div>
-
-            <p>For more information please visit
-                <a class="ui-link" onclick='window.open("https://smartsensors.io/app/warm-house","_system", "location=yes")' href='javascript:void(0)' >https://smartsensors.io/app/warm-house</a>
-            </p>
-		</div>
 
 
-		<div data-role="footer" data-position="fixed">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>		
-				</ul>
-			</div>
-		</div>
-
-	</div>
-	<div data-role="page" id="aboutGreenHouseApp" data-overlay-theme="b" data-theme="b" data-content-theme="b">
-		<div data-role="header" data-theme="a" data-position="fixed" data-tap-toggle="false">
-
-			<h1><img src="img/logo.png"></h1>
-			<h3>Green House v.1.2</h3>
-
-		</div>
-		<div data-role="content">
-			<p>Green House control application.</p>
-            <p>Open firmware for Arduino Ethernet</p>
-			<p>Author: Vaidotas Gudaitis</p>
-            <p>Designed by: <a class="ui-link" onclick='window.open("http://appconstructor.io","_system", "location=yes")' href='javascript:void(0)' > appconstructor.io </a></p>
-            <p>For more information please visit
-                <a class="ui-link" onclick='window.open("https://smartsensors.io/app/warm-house","_system", "location=yes")' href='javascript:void(0)' >https://smartsensors.io/app/warm-house</a>
-            </p>
-		</div>
-        <div data-role="footer" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
-
-                </ul>
-            </div>
-        </div>
-
-	</div>
     <div data-role="page" id="wateringTimerSet1" data-dialog="true" data-overlay-theme="b" data-theme="b">
 		<div data-role="header">
 			<h1>Watering Timer 1</h1>
@@ -826,10 +675,40 @@
 var UTCTimeShift = 2;
 var acceptableSensorTimeShiftMinutes = 2;
 var debugMode = false;
+jQuery.support.cors = true;
 
 
 // Functions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Application commands handler
+function appCommandPost(tokenLink, postData) {
+
+    console.log('appCommandPost > ' + tokenLink+ ' Loading...');
+
+    $.getJSON(tokenLink, function(oaToken) {
+        if (oaToken) {
+            var sessionID = getToken(oaToken);
+            var pLink = 'control/' + sessionID;
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: pLink,
+                data: postData,
+                success: function (response) {
+                    var answer = JSON.parse(response);
+                    if (answer.status == 'welcome') {
+
+                    } else {
+                        //toast.showShort(" Authentication Error! \n Please set correct Server ID in Connection Settings tab.");
+                        //alertify.log('Authentication Error! Check Server ID', '', 4000);
+                    }
+                }
+            });
+        }
+    });
+}
+
 
 // Connection Set-Up
 function handleConnectionSetup() {
@@ -960,7 +839,11 @@ function handleSensors() {
                 minutesToDisplay = ' ' + (minutes - acceptableSensorTimeShiftMinutes) + ' min. ago' + ' ';
             }
 
-            if(isNaN(minutes)) statusValue = ' waiting...';
+            if(isNaN(minutes)) {
+                statusValue = ' waiting...';
+            } else {
+                statusValue = '';
+            }
 
             return '<li>'
                     + sensorHighlightColor
@@ -1583,117 +1466,50 @@ $(document).on('pagecreate', '#home', function() {
 // Place installed apps here. Include app function in handleApps().
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// appCO2Free CO2 level control app v.1.0.1 (c) Vaidotas Gudaitis MIT license
+// appCO2Free CO2 level control app v.1.0.1 (c) Vaidotas Gudaitis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function appCO2Free(){
 
     $(document).on('pagebeforeshow', '#co2FreeApp', function(){
 
-        if (window.localStorage.getItem('co2Free.setTemperature')) $("input#temperatureSetCO2").val(window.localStorage.getItem('co2Free.setTemperature')).slider("refresh");
-        if (window.localStorage.getItem('co2Free.setCo2Level')) $("input#co2LevelSetCO2").val(window.localStorage.getItem('co2Free.setCo2Level')).slider("refresh");
+        $('h1#co2FreeAppHeader').html(activeRoom.label);
 
-        if (window.localStorage.getItem('co2Free.fanOn') == 'true')     $("input#fanSwCO2").prop("checked", true).flipswitch("refresh");
-        if (window.localStorage.getItem('co2Free.setMode') == 'heating')     $("input#modeSetSwCO2").prop("checked", true).flipswitch("refresh");
-        if (window.localStorage.getItem('co2Free.enableFanTimer') == 'true')   $("input#fanTimerSwCO2").prop("checked", true).flipswitch("refresh");
+        var sel = 'co2Free' + activeRoom.id;
 
-        if (window.localStorage.getItem('co2Free.fanFrom')) $('input#fanFromCO2').val(window.localStorage.getItem('co2Free.fanFrom'));
-        if (window.localStorage.getItem('co2Free.fanTo')) $('input#fanToCO2').val(window.localStorage.getItem('co2Free.fanTo'));
+        if (window.localStorage.getItem(sel+'.setTemperature')) $("input#temperatureSetCO2").val(window.localStorage.getItem(sel+'.setTemperature')).slider("refresh");
+        if (window.localStorage.getItem(sel+'.setCo2Level')) $("input#co2LevelSetCO2").val(window.localStorage.getItem(sel+'.setCo2Level')).slider("refresh");
 
-    });
-
-    $(document).on('pagebeforeshow', '#co2FreeSettings', function(){
-        if (window.localStorage.getItem('co2Free.APPID')) $('#appIDInputCO2').val(window.localStorage.getItem('co2Free.APPID'));
-    });
-
-    $(document).on( "tap", "#checkCO2Command", function() {
-
-        function emptyCallback(){}
-
-        var appID = window.localStorage.getItem('co2Free.APPID') || 'noApiKey';
-        var url = 'http://smartsensors.io:8888/?cid=' + appID;
-
-
-        $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'text',
-            crossDomain: true,
-            //contentType: "application/json",
-            success: function(res) {
-
-                if (res == "App-ID-Error") {
-                    toast.showShort(" Incorrect CO2 Free App ID! \n Check App ID entered or use Demo ID");
-
-                } else {
-
-                    navigator.notification.alert(
-                            res,
-                            emptyCallback,
-                            'Controller command:',
-                            'OK'
-                    );
-                }
-
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-
-                toast.showShort("Network error ");
-                toast.showShort(xhr.status);
-                toast.showShort(thrownError);
-
-            }
-        });
-
-    });
-
-    $( document ).on( "tap", '#demoAPICO2', function() {
-        var CID = 'aae38ef13018afcc38';
-        $("#appIDInputCO2").val(CID);
-        window.localStorage.setItem('co2Free.APPID', CID);
-    });
-
-    $( document ).on( "tap", '#resetAPICO2', function() {
-        var CID = '';
-        $("#appIDInputCO2").val(CID);
-    });
-
-    $(document).on('pagecreate', function () {
-
-
-        function appCommandPost(postData) {
-            $.ajax({
-                type: "POST",
-                async: true,
-                url: 'https://smartsensors.io/appCO2Free',
-                data: postData,
-                success: function (response) {
-                    var answer = JSON.parse(response);
-
-                    if (answer.status == 'welcome') {
-
-                        //alert('App settings accepted by server!');
-
-                    } else if (answer.status == 'noApiKey') {
-
-                        toast.showShort(" Please set correct APP ID in settings tab first!");
-
-                    } else {
-
-                        toast.showShort(" Incorrect CO2 Free App ID! \n Please set correct APP ID in Settings tab.");
-
-                    }
-                }
-            });
+        if (window.localStorage.getItem(sel+'.fanOn') == 'true')     {
+            $("input#fanSwCO2").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#fanSwCO2").prop("checked", false).flipswitch("refresh");
         }
+        if (window.localStorage.getItem(sel+'.setMode') == 'heating') {
+            $("input#modeSetSwCO2").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#modeSetSwCO2").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.enableFanTimer') == 'true')   {
+            $("input#fanTimerSwCO2").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#fanTimerSwCO2").prop("checked", false).flipswitch("refresh");
+        }
+
+        if (window.localStorage.getItem(sel+'.fanFrom')) $('input#fanFromCO2').val(window.localStorage.getItem(sel+'.fanFrom'));
+        if (window.localStorage.getItem(sel+'.fanTo')) $('input#fanToCO2').val(window.localStorage.getItem(sel+'.fanTo'));
+
+    });
+
+    $(document).on('pagecreate', '#co2FreeApp', function () {
 
         function buildCommandCo2Free() {
 
-            var CID = window.localStorage.getItem('co2Free.APPID') || 'noApiKey';
+            var CID = window.localStorage.getItem('co2Free.APPID') || 'oa';
             var tSet = $("input#temperatureSetCO2").val() || '23';
             var cSet = $("input#co2LevelSetCO2").val() || '400';
             var fanFrom = $("#fanFromCO2").val() || '00:00';
             var fanTo = $("#fanToCO2").val() || '00:00';
-            var virtualRoomID = '0';
+            var virtualRoomID = activeRoom.id;
 
             if (fanFrom.length < 5) fanFrom = '0' + fanFrom;
             if (fanTo.length < 5) fanTo = '0' + fanTo;
@@ -1708,32 +1524,25 @@ function appCO2Free(){
             if ($("input#fanSwCO2").is(":checked")) {
                 command += 'R=1';
             } else {
-
                 if ($('input#fanTimerSwCO2').is(':checked')) {
                     command += 'R=T';
                 } else {
                     command += 'R=0';
                 }
-
             }
-
             command += 'R=' + fanFrom + fanTo;
-
             if ($('input#modeSetSwCO2').is(':checked')) {
                 command += 'M=H';
             } else {
                 command += 'M=C';
             }
+            var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, command: command};
 
-            //alert('Command: ' + command);
-
-            var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, CID: CID, command: command, CommandCount: 1};
-            appCommandPost(commandToPost);
+            appCommandPost('token', commandToPost);
         }
 
         function appSave(postData) {
-
-            var key = 'co2Free.';
+            var key = 'co2Free' + activeRoom.id + '.';
             var value = '';
 
             if (postData.decision === 'setTemperature') {
@@ -1830,13 +1639,6 @@ function appCO2Free(){
             window.localStorage.setItem('co2Free.fanTo', $("input#fanToCO2").val());
             buildCommandCo2Free();
         });
-
-        $("input#appIDInputCO2").bind("change", function (event, ui) {
-            window.localStorage.setItem('co2Free.APPID', $("input#appIDInputCO2").val());
-        });
-
-
-
     });
 
 }
@@ -1879,47 +1681,15 @@ function appComfortZone(){
 
     });
 
-
     $(document).on('pagecreate', '#comfortZoneApp',  function () {
-
-        function appCommandPost(postData) {
-
-            var tokenLink = 'token';
-            console.log('appCommandPost > ' + tokenLink+ ' Loading...');
-
-            $.getJSON(tokenLink, function(oaToken) {
-                if (oaToken) {
-                    var sessionID = getToken(oaToken);
-                    var pLink = 'control/' + sessionID;
-                    $.ajax({
-                        type: "POST",
-                        async: true,
-                        url: pLink,
-                        data: postData,
-                        success: function (response) {
-                            var answer = JSON.parse(response);
-                            if (answer.status == 'welcome') {
-
-                            } else {
-                                //toast.showShort(" Authentication Error! \n Please set correct Server ID in Connection Settings tab.");
-                                //alertify.log('Authentication Error! Check Server ID', '', 4000);
-                            }
-                        }
-                    });
-                }
-            });
-        }
 
         function buildCommandComfortZone() {
             var CID = window.localStorage.getItem('comfortZone.APPID') || 'oa';
             var tSet = $("#temperatureSetCZ").val() || '23';
             var fSet = $("#fanSpeedSetCZ").val() || '4';
-
             var offFrom = $("#offHBCZ").val() || '00:00';
             var offTo = $("#offHECZ").val() || '00:00';
-
             var virtualRoomID = activeRoom.id;
-
             if (offFrom.length < 5) offFrom = '0' + offFrom;
             if (offTo.length < 5) offTo = '0' + offTo;
             if (tSet.length < 2) tSet = '0' + tSet;
@@ -1928,29 +1698,25 @@ function appComfortZone(){
             command += virtualRoomID + ':';
             command += 'R=' + fSet;
             command += 'T=' + tSet + '.00';
-
             if ($('input#powerOnSwCZ').is(':checked')) {
                 command += 'S=1';
             } else {
                 command += 'S=0';
             }
-
             if ($('input#modeSetCZ').is(':checked')) {
                 command += 'M=H';
             } else {
                 command += 'M=C';
             }
-
             if ($('input#offlineHoursModeSetCZ').is(':checked')) {
                 command += 'A=0';
             } else {
                 command += 'A=1';
             }
-
             command += 'O=' + offFrom + offTo;
-
             var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, command: command};
-            appCommandPost(commandToPost);
+
+            appCommandPost('token', commandToPost);
         }
 
         function appSave(postData) {
@@ -2065,179 +1831,91 @@ function appComfortZone(){
 
 
 
-// Green House control app v.1.0.1 (c) Vaidotas Gudaitis MIT license
+// Green House control app v.1.0.1 (c) Vaidotas Gudaitis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function appGreenHouse() {
 
+    $('h1#greenHouseAppHeader').html(activeRoom.label);
+
     $(document).on('pagebeforeshow', '#greenHouseApp', function(){
 
+        var sel = 'greenHouse' + activeRoom.id;
 
-        //alert($("#temperatureSet").val());
-        //var SliderValue = $('#temperatureSet').attr('value');
-        //alert(SliderValue);
+        if (window.localStorage.getItem(sel+'.wateringTimeSet1')) $('#wTbutton1').text("T1 " + window.localStorage.getItem(sel+'.wateringTimeSet1'));
+        if (window.localStorage.getItem(sel+'.wateringTimeSet2')) $('#wTbutton2').text("T2 " + window.localStorage.getItem(sel+'.wateringTimeSet2'));
+        if (window.localStorage.getItem(sel+'.wateringTimeSet3')) $('#wTbutton3').text("T3 " + window.localStorage.getItem(sel+'.wateringTimeSet3'));
+        if (window.localStorage.getItem(sel+'.wateringTimeSet4')) $('#wTbutton4').text("T4 " + window.localStorage.getItem(sel+'.wateringTimeSet4'));
+        if (window.localStorage.getItem(sel+'.wateringTimeSet5')) $('#wTbutton5').text("T5 " + window.localStorage.getItem(sel+'.wateringTimeSet5'));
+        if (window.localStorage.getItem(sel+'.lightFrom')) $('input#lightOnTime').val(window.localStorage.getItem(sel+'.lightFrom'));
+        if (window.localStorage.getItem(sel+'.lightTo')) $('input#lightOffTime').val(window.localStorage.getItem(sel+'.lightTo'));
+        if (window.localStorage.getItem(sel+'.setTemperature')) $("input#temperatureSet").val(window.localStorage.getItem(sel+'.setTemperature')).slider("refresh");
+        if (window.localStorage.getItem(sel+'.setHumidity')) $("input#humiditySet").val(window.localStorage.getItem(sel+'.setHumidity')).slider("refresh");
+        if (window.localStorage.getItem(sel+'.setWateringDuration')) $("input#wateringDurationSet").val(window.localStorage.getItem(sel+'.setWateringDuration')).slider("refresh");
 
-        if (window.localStorage.getItem('greenHouse.wateringTimeSet1')) $('#wTbutton1').text("T1 " + window.localStorage.getItem('greenHouse.wateringTimeSet1'));
-        if (window.localStorage.getItem('greenHouse.wateringTimeSet2')) $('#wTbutton2').text("T2 " + window.localStorage.getItem('greenHouse.wateringTimeSet2'));
-        if (window.localStorage.getItem('greenHouse.wateringTimeSet3')) $('#wTbutton3').text("T3 " + window.localStorage.getItem('greenHouse.wateringTimeSet3'));
-        if (window.localStorage.getItem('greenHouse.wateringTimeSet4')) $('#wTbutton4').text("T4 " + window.localStorage.getItem('greenHouse.wateringTimeSet4'));
-        if (window.localStorage.getItem('greenHouse.wateringTimeSet5')) $('#wTbutton5').text("T5 " + window.localStorage.getItem('greenHouse.wateringTimeSet5'));
-
-
-        if (window.localStorage.getItem('greenHouse.lightFrom')) $('input#lightOnTime').val(window.localStorage.getItem('greenHouse.lightFrom'));
-        if (window.localStorage.getItem('greenHouse.lightTo')) $('input#lightOffTime').val(window.localStorage.getItem('greenHouse.lightTo'));
-        if (window.localStorage.getItem('greenHouse.setTemperature')) $("input#temperatureSet").val(window.localStorage.getItem('greenHouse.setTemperature')).slider("refresh");
-        if (window.localStorage.getItem('greenHouse.setHumidity')) $("input#humiditySet").val(window.localStorage.getItem('greenHouse.setHumidity')).slider("refresh");
-        if (window.localStorage.getItem('greenHouse.setWateringDuration')) $("input#wateringDurationSet").val(window.localStorage.getItem('greenHouse.setWateringDuration')).slider("refresh");
-
-        if (window.localStorage.getItem('greenHouse.lightEnable') == 'true')   $('input#lightOnSw').prop("checked", true).flipswitch("refresh");
-        if (window.localStorage.getItem('greenHouse.fanEnable') == 'true')     $('input#fanOnSw').prop("checked", true).flipswitch("refresh");
-        if (window.localStorage.getItem('greenHouse.enableOnHours') == 'true') $('input#wateringTimerSW').prop("checked", true).flipswitch("refresh");
-        if (window.localStorage.getItem('greenHouse.lightTimer') == 'true')    $('input#lightTimerSW').prop("checked", true).flipswitch("refresh");
-
-
-        //$('#powerOnSw').prop('checked', true).flipswitch("refresh").flipswitch("disable");
-        //$('#powerOnSw').parent().addClass(' .ui-flipswitch-active');
-
+        if (window.localStorage.getItem(sel+'.lightEnable') == 'true')   {
+            $('input#lightOnSw').prop("checked", true).flipswitch("refresh");
+        }else{
+            $('input#lightOnSw').prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.fanEnable') == 'true')     {
+            $('input#fanOnSw').prop("checked", true).flipswitch("refresh");
+        }else{
+            $('input#fanOnSw').prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.enableOnHours') == 'true') {
+            $('input#wateringTimerSW').prop("checked", true).flipswitch("refresh");
+        }else{
+            $('input#wateringTimerSW').prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.lightTimer') == 'true')    {
+            $('input#lightTimerSW').prop("checked", true).flipswitch("refresh");
+        } else{
+            $('input#lightTimerSW').prop("checked", false).flipswitch("refresh");
+        }
     });
 
-    $(document).on('pagebeforeshow', '#wateringTimerSet1', function(){ $('#wateringTimeSet1').val(window.localStorage.getItem('greenHouse.wateringTimeSet1')); });
-    $(document).on('pagebeforeshow', '#wateringTimerSet2', function(){ $('#wateringTimeSet2').val(window.localStorage.getItem('greenHouse.wateringTimeSet2')); });
-    $(document).on('pagebeforeshow', '#wateringTimerSet3', function(){ $('#wateringTimeSet3').val(window.localStorage.getItem('greenHouse.wateringTimeSet3')); });
-    $(document).on('pagebeforeshow', '#wateringTimerSet4', function(){ $('#wateringTimeSet4').val(window.localStorage.getItem('greenHouse.wateringTimeSet4')); });
-    $(document).on('pagebeforeshow', '#wateringTimerSet5', function(){ $('#wateringTimeSet5').val(window.localStorage.getItem('greenHouse.wateringTimeSet5')); });
-
+    $(document).on('pagebeforeshow', '#wateringTimerSet1', function(){ $('#wateringTimeSet1').val(window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet1')); });
+    $(document).on('pagebeforeshow', '#wateringTimerSet2', function(){ $('#wateringTimeSet2').val(window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet2')); });
+    $(document).on('pagebeforeshow', '#wateringTimerSet3', function(){ $('#wateringTimeSet3').val(window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet3')); });
+    $(document).on('pagebeforeshow', '#wateringTimerSet4', function(){ $('#wateringTimeSet4').val(window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet4')); });
+    $(document).on('pagebeforeshow', '#wateringTimerSet5', function(){ $('#wateringTimeSet5').val(window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet5')); });
 
     $(document).on('pagehide', '#wateringTimerSet1', function(){
-        $('#wTbutton1').text("T1 " + window.localStorage.getItem('greenHouse.wateringTimeSet1'));
+        $('#wTbutton1').text("T1 " + window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet1'));
     });
     $(document).on('pagehide', '#wateringTimerSet2', function(){
-        $('#wTbutton2').text("T2 " + window.localStorage.getItem('greenHouse.wateringTimeSet2'));
+        $('#wTbutton2').text("T2 " + window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet2'));
     });
     $(document).on('pagehide', '#wateringTimerSet1', function(){
-        $('#wTbutton3').text("T3 " + window.localStorage.getItem('greenHouse.wateringTimeSet3'));
+        $('#wTbutton3').text("T3 " + window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet3'));
     });
     $(document).on('pagehide', '#wateringTimerSet1', function(){
-        $('#wTbutton4').text("T4 " + window.localStorage.getItem('greenHouse.wateringTimeSet4'));
+        $('#wTbutton4').text("T4 " + window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet4'));
     });
     $(document).on('pagehide', '#wateringTimerSet1', function(){
-        $('#wTbutton5').text("T5 " + window.localStorage.getItem('greenHouse.wateringTimeSet5'));
+        $('#wTbutton5').text("T5 " + window.localStorage.getItem('greenHouse' + activeRoom.id +'.wateringTimeSet5'));
     });
 
-    $(document).on('pagebeforeshow', '#greenHouseSettings', function(){
-        //if (window.localStorage.getItem('greenHouse.APIKEY')) $('#apiKeyInput').val(window.localStorage.getItem('greenHouse.APIKEY'));
-        if (window.localStorage.getItem('greenHouse.APPID')) $('#appIDInput').val(window.localStorage.getItem('greenHouse.APPID'));
-    });
-
-    $( document ).on( "tap", '#checkGreenHouseCommand', function() {
-
-        function emptyCallback() {}
-
-        var appID = window.localStorage.getItem('greenHouse.APPID') || 'noApiKey';
-        var url = 'http://smartsensors.io:8888/?cid=' + appID;
-
-        //alert('connecting to '+url);
-
-        $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'text',
-            crossDomain: true,
-            //contentType: "application/json",
-            success: function(res) {
-
-                if (res == "App-ID-Error") {
-                    toast.showShort(" Incorrect Green House App ID! \n Check App ID entered or use Demo ID");
-                } else {
-
-                    navigator.notification.alert(
-                            res,
-                            emptyCallback,
-                            'Controller command:',
-                            'OK'
-                    );
-                }
-
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-
-                toast.showShort("Network error ");
-                toast.showShort(xhr.status);
-                toast.showShort(thrownError);
-
-            }
-        });
-
-    });
-
-    $( document ).on( "tap", '#demoAPI', function() {
-        var CID =   '29f52919691faf8abb';
-        //var apiKEY = '';
-        //$("#apiKeyInput").val(apiKEY);
-        $("#appIDInput").val(CID);
-        window.localStorage.setItem('greenHouse.APPID', CID);
-        //window.localStorage.setItem('greenHouse.APIKEY', apiKEY);
-    });
-
-    $( document ).on( "tap", '#resetAPI', function() {
-        var CID =   '';
-        //var apiKEY = '';
-        //$("#apiKeyInput").val(apiKEY);
-        $("#appIDInput").val(CID);
-    });
-
-    $(document).on('pagecreate', function () {
 
 
-        function appCommandPost(postData) {
-            $.ajax({
-                type: "POST",
-                async: true,
-                url: 'https://smartsensors.io/appGreenHouse',
-                data: postData,
-                success: function (response) {
-                    var answer = JSON.parse(response);
-
-                    if (answer.status == 'welcome') {
-
-                        //alert('App settings accepted by server!');
-                        //console.log('App settings accepted by server!');
-
-                    } else if (answer.status == 'noApiKey') {
-
-                        //alert('Please set API Key first!');
-
-                        toast.showShort(" Please set correct APP ID in settings tab first!");
-
-
-                    } else {
-
-                        //alert('App settings not accepted by server!');
-
-                        toast.showShort(" Incorrect Green House App ID! \n Please set correct APP ID in Settings tab.");
-
-                    }
-                }
-            });
-        }
+    $(document).on('pagecreate', '#greenHouseApp', function () {
 
         function buildCommandGreenHouse() {
-
-            var CID = window.localStorage.getItem('greenHouse.APPID') || 'noApiKey';
+            var sel = 'greenHouse' + activeRoom.id;
+            var CID = window.localStorage.getItem('greenHouse.APPID') || 'oa';
             var tSet = $("input#temperatureSet").val() || '00';
             var hSet = $("input#humiditySet").val() || '00';
-
             var lFrom = $("input#lightOnTime").val() || '00:00';
             var lTo = $("input#lightOffTime").val() || '00:00';
 
-            var virtualRoomID = '0';
+            var virtualRoomID = activeRoom.id;
             var timerCount = '5';
 
-            var t1Val = window.localStorage.getItem('greenHouse.wateringTimeSet1') || '00:00';
-            var t2Val = window.localStorage.getItem('greenHouse.wateringTimeSet2') || '00:00';
-            var t3Val = window.localStorage.getItem('greenHouse.wateringTimeSet3') || '00:00';
-            var t4Val = window.localStorage.getItem('greenHouse.wateringTimeSet4') || '00:00';
-            var t5Val = window.localStorage.getItem('greenHouse.wateringTimeSet5') || '00:00';
-
+            var t1Val = window.localStorage.getItem(sel+'.wateringTimeSet1') || '00:00';
+            var t2Val = window.localStorage.getItem(sel+'.wateringTimeSet2') || '00:00';
+            var t3Val = window.localStorage.getItem(sel+'.wateringTimeSet3') || '00:00';
+            var t4Val = window.localStorage.getItem(sel+'.wateringTimeSet4') || '00:00';
+            var t5Val = window.localStorage.getItem(sel+'.wateringTimeSet5') || '00:00';
 
             if (lFrom.length < 5) lFrom = '0' + lFrom;
             if (lTo.length < 5) lTo = '0' + lTo;
@@ -2250,169 +1928,145 @@ function appGreenHouse() {
             command += 'T=' + tSet + '.00';
             command += 'H=' + hSet;
 
-
             if ($("#lightOnSw").is(":checked")) {
                 command += 'L=1';
-
             } else {
-
                 if ($('#lightTimerSW').is(':checked')) {
                     command += 'L=T';
                 } else {
                     command += 'L=0';
                 }
-
             }
-
             if ($('input#wateringTimerSW').is(':checked')) {
                 command += 'A=0';
-
             } else {
                 command += 'A=1';
             }
-
             if ($('input#fanOnSw').is(':checked')) {
                 command += 'R=1';
             } else {
                 command += 'R=0';
             }
-
             command += 'L=' + lFrom + lTo;
-
             var timerSeconds = $('input#wateringDurationSet').val();
-
             command += 'I=B' + timerCount + '0' + timerSeconds + 't';
-
             command += t1Val + t2Val + t3Val + t4Val + t5Val;
 
-            //alert('Command: ' + command);
-            //window.localStorage.setItem('greenHouse.Command', command);
-            //$('#greenHouseOutput').html('a' + command);
+            var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, command: command};
 
-            var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, CID: CID, command: command, CommandCount: 1};
-            appCommandPost(commandToPost);
+            appCommandPost('token', commandToPost);
 
         }
 
         function appSave(postData) {
 
-            var key = '';
+            var key = 'greenHouse' + activeRoom.id + '.';
             var value = '';
 
             if (postData.decision === 'setTemperature') {
-                key = 'greenHouse.' + postData.decision;
+                key +=  postData.decision;
                 value = postData.temperature;
                 window.localStorage.setItem(key, value);
                 buildCommandGreenHouse();
-                //alert ('Saved ' + postData.decision + ' ' + value);
             }
 
             if (postData.decision === 'setHumidity') {
-                key = 'greenHouse.' + postData.decision;
+                key +=  postData.decision;
                 value = postData.humidity;
                 window.localStorage.setItem(key, value);
-                //alert ('Saved ' + postData.decision + ' ' + value);
                 buildCommandGreenHouse();
             }
 
             if (postData.decision === 'lightEnable') {
-                key = 'greenHouse.' + postData.decision;
+                key +=  postData.decision;
                 value = postData.SW;
                 window.localStorage.setItem(key, value);
-                //alert ('Saved ' + postData.decision + ' ' + value);
                 buildCommandGreenHouse();
 
             }
 
             if (postData.decision === 'fanEnable') {
-                key = 'greenHouse.' + postData.decision;
+                key +=  postData.decision;
                 value = postData.SW;
                 window.localStorage.setItem(key, value);
-                //alert ('Saved ' + postData.decision + ' ' + value);
                 buildCommandGreenHouse();
             }
 
             if (postData.decision === 'lightTimer') {
-                key = 'greenHouse.' + postData.decision;
+                key +=  postData.decision;
                 value = postData.SW;
                 window.localStorage.setItem(key, value);
-                //alert ('Saved ' + postData.decision + ' ' + value);
                 buildCommandGreenHouse();
             }
 
             if (postData.decision === 'lightFrom') {
-                key = 'greenHouse.' + postData.decision;
+                key +=  postData.decision;
                 value = postData.lightFrom;
                 window.localStorage.setItem(key, value);
                 buildCommandGreenHouse();
             }
 
             if (postData.decision === 'lightTo') {
-                key = 'greenHouse.' + postData.decision;
+                key +=  postData.decision;
                 value = postData.lightTo;
                 window.localStorage.setItem(key, value);
                 buildCommandGreenHouse();
             }
 
             if (postData.decision === 'enableOnHours') {
-                key = 'greenHouse.' + postData.decision;
+                key += postData.decision;
                 value = postData.SW;
                 window.localStorage.setItem(key, value);
-                //alert ('Saved ' + postData.decision + ' ' + value);
                 buildCommandGreenHouse();
             }
 
             if (postData.decision === 'setWateringDuration') {
-                key = 'greenHouse.' + postData.decision;
+                key +=  postData.decision;
                 value = postData.duration;
                 window.localStorage.setItem(key, value);
                 buildCommandGreenHouse();
             }
-
-
         }
 
         $("#temperatureSet").change(function () {
             var tVal = $(this).val();
             $('#tSetLabel').text('Temperature set to ' + tVal  + ' °C');
-            var postData = {decision: 'setTemperature', CID: 'appSave', virtualRoomID: '0', temperature: tVal, timerCount: 5};
+            var postData = {decision: 'setTemperature', temperature: tVal};
             appSave(postData);
         });
 
         $("#humiditySet").change(function () {
             var hVal = $(this).val();
             $('#hSetLabel').text('Humidity set to ' + hVal + ' %');
-            var postData = {decision: 'setHumidity', CID: 'appSave', virtualRoomID: '0', humidity: hVal, timerCount: 5};
+            var postData = {decision: 'setHumidity', humidity: hVal};
             appSave(postData);
         });
 
         $("#wateringDurationSet").change(function () {
             var wVal = $(this).val();
             $('#wSetLabel').text('Watering duration set to ' + wVal + ' s');
-            var postData = {decision: 'setWateringDuration', CID: 'appSave', virtualRoomID: '0', duration: wVal, timerCount: 5};
+            var postData = {decision: 'setWateringDuration', duration: wVal};
             appSave(postData);
         });
 
         $("#lightOnSw").on("change", function () {
             var postData = {};
             if ($(this).is(":checked")) {
-                postData = {decision: 'lightEnable', CID: 'appSave', virtualRoomID: '0', SW: true, timerCount: 5};
+                postData = {decision: 'lightEnable', SW: true};
                 appSave(postData);
             } else {
-                postData = {decision: 'lightEnable', CID: 'appSave', virtualRoomID: '0', SW: false, timerCount: 5};
+                postData = {decision: 'lightEnable', SW: false};
                 appSave(postData);
             }
-
-
         });
 
         $("#fanOnSw").change(function () {
             var postData = {};
             if ($(this).is(":checked")) {
-                postData = {decision: 'fanEnable', CID: 'appSave', virtualRoomID: '0', SW: true, timerCount: 5};
+                postData = {decision: 'fanEnable', SW: true};
                 appSave(postData);
             } else {
-                postData = {decision: 'fanEnable', CID: 'appSave', virtualRoomID: '0', SW: false, timerCount: 5};
+                postData = {decision: 'fanEnable', SW: false};
                 appSave(postData);
             }
         });
@@ -2420,10 +2074,10 @@ function appGreenHouse() {
         $("#wateringTimerSW").change(function () {
             var postData = {};
             if ($(this).is(":checked")) {
-                postData = {decision: 'enableOnHours', CID: 'appSave', virtualRoomID: '0', SW: true, timerCount: 5};
+                postData = {decision: 'enableOnHours', SW: true};
                 appSave(postData);
             } else {
-                postData = {decision: 'enableOnHours', CID: 'appSave', virtualRoomID: '0', SW: false, timerCount: 5};
+                postData = {decision: 'enableOnHours', SW: false};
                 appSave(postData);
             }
         });
@@ -2431,57 +2085,44 @@ function appGreenHouse() {
         $("#lightTimerSW").change(function () {
             var postData = {};
             if ($(this).is(":checked")) {
-                postData = {decision: 'lightTimer', CID: 'appSave', virtualRoomID: '0', SW: true, timerCount: 5};
+                postData = {decision: 'lightTimer', SW: true};
                 appSave(postData);
             } else {
-                postData = {decision: 'lightTimer', CID: 'appSave', virtualRoomID: '0', SW: false, timerCount: 5};
+                postData = {decision: 'lightTimer', SW: false};
                 appSave(postData);
             }
         });
 
-
         $("#wateringTimeSet1").bind("change", function (event, ui) {
-            window.localStorage.setItem('greenHouse.wateringTimeSet1', $("#wateringTimeSet1").val());
+            window.localStorage.setItem('greenHouse' + activeRoom.id +'.wateringTimeSet1', $("#wateringTimeSet1").val());
             buildCommandGreenHouse();
         });
         $("#wateringTimeSet2").bind("change", function (event, ui) {
-            window.localStorage.setItem('greenHouse.wateringTimeSet2', $("#wateringTimeSet2").val());
+            window.localStorage.setItem('greenHouse' + activeRoom.id +'.wateringTimeSet2', $("#wateringTimeSet2").val());
             buildCommandGreenHouse();
         });
         $("#wateringTimeSet3").bind("change", function (event, ui) {
-            window.localStorage.setItem('greenHouse.wateringTimeSet3', $("#wateringTimeSet3").val());
+            window.localStorage.setItem('greenHouse' + activeRoom.id +'.wateringTimeSet3', $("#wateringTimeSet3").val());
             buildCommandGreenHouse();
         });
         $("#wateringTimeSet4").bind("change", function (event, ui) {
-            window.localStorage.setItem('greenHouse.wateringTimeSet4', $("#wateringTimeSet4").val());
+            window.localStorage.setItem('greenHouse' + activeRoom.id +'.wateringTimeSet4', $("#wateringTimeSet4").val());
             buildCommandGreenHouse();
         });
         $("#wateringTimeSet5").bind("change", function (event, ui) {
-            window.localStorage.setItem('greenHouse.wateringTimeSet5', $("#wateringTimeSet5").val());
+            window.localStorage.setItem('greenHouse' + activeRoom.id +'.wateringTimeSet5', $("#wateringTimeSet5").val());
             buildCommandGreenHouse();
         });
-
-
         $("#lightOnTime").bind("change", function (event, ui) {
-            window.localStorage.setItem('greenHouse.lightFrom', $("#lightOnTime").val());
+            window.localStorage.setItem('greenHouse' + activeRoom.id +'.lightFrom', $("#lightOnTime").val());
             buildCommandGreenHouse();
         });
         $("#lightOffTime").bind("change", function (event, ui) {
-            window.localStorage.setItem('greenHouse.lightTo', $("#lightOffTime").val());
+            window.localStorage.setItem('greenHouse' + activeRoom.id +'.lightTo', $("#lightOffTime").val());
             buildCommandGreenHouse();
         });
 
-
-        //$("#apiKeyInput").bind("change", function (event, ui) {
-        //    window.localStorage.setItem('greenHouse.APIKEY', $("#apiKeyInput").val());
-        //});
-
-        $("#appIDInput").bind("change", function (event, ui) {
-            window.localStorage.setItem('greenHouse.APPID', $("#appIDInput").val());
-        });
-
     });
-
 }
 
 
