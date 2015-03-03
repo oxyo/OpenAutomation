@@ -30,8 +30,10 @@ var programVersion = '0.0.1';
 var notokenMode = false;                    // disable HOTP authentication
 var debugMode = false;                      // enable debug mode
 var saveSensorsToDisk = false;              // enable persistent sensors datastore with automatic loading
-var checkSensorsActivityInterval = 20000;   // set sensors activity check on serial port, if no data received in time
+var checkSensorsActivityInterval = 120000;  // set sensors activity check on serial port, if no data received in time
                                             // interval - application process killed
+var isEdison = true;                        // set platform type to Intel Edison
+var isBBB = false;                          // set platform type to Beaglebone Black
 
 
 
@@ -99,7 +101,6 @@ var oaSetup = {
     var speakeasy = require('speakeasy');
     var hat = require('hat');
     var os = require('os');
-    var logo = require('ascii-art');
     var SerialPort = require('serialport').SerialPort;
     var path = require('path');
     var url = require('url');
@@ -115,6 +116,7 @@ var oaSetup = {
     var major = nodeVersion.split('.')[0];
         major = major.split('v')[1];
     var minor = nodeVersion.split('.')[1];
+    var hardwareType = 'Linux board';
 
 
 
@@ -140,13 +142,35 @@ var oaSetup = {
     if (program.savetodisk) saveSensorsToDisk = true;
 
 
-// STEP-02 Edison or BBB?
-    var mraa = require('mraa');
-    var led = new mraa.Gpio(13);
-    led.dir(mraa.DIR_OUT); //tell pin 13 that it should act as an output pin for now
-    led.write(1); //turn the LED on
-    led.write(0); //turn the LED off
+// STEP-02 Platform check
 
+  if (platform != 'win32') {
+
+    var mraa;
+    try {
+        mraa = require('mraa');
+    }
+    catch( e ) {
+        if ( e.code === 'MODULE_NOT_FOUND' ) {
+            isEdison = false;
+        }
+    }
+
+    if (isEdison){
+      if (mraa.getPlatformType() == 2){
+        hardwareType = 'Intel Edison';
+        var led = new mraa.Gpio(13);
+        led.dir(mraa.DIR_OUT); //tell pin 13 that it should act as an output pin for now
+        led.write(1); //turn the LED on
+        led.write(0); //turn the LED off
+      }
+    }
+
+  } else {
+
+    hardwareType = 'Windows PC';
+
+  }
 
 
 // STEP-03 Configure sensors communication port
@@ -896,19 +920,13 @@ app.get('/dbreset/:sid', function(req, res){
 
 
 app.listen(app.get('port'), function(){
-    logo.font('Open Automation', 'chunky', function(rendered){ console.log(logo.style(rendered, 'cyan')); });
+
     console.log("Open Automation Center ".green + programVersion.warn + " listening on port: ".green + app.get('port'));
     console.log('Running on '.green + platform + ' ' + kernel);
-    console.log('MRAA Version: '.green + mraa.getVersion());
+    console.log('Hardware board: '.green + hardwareType);
     console.log('HOTP RFC4226 Authentication: '.green + !notokenMode);
     console.log('Debug Mode: '.green + debugMode);
     console.log('Persistent datastore: '.green + saveSensorsToDisk);
     console.log('IP address on LAN: '.green + getIPAddress() + '\n');
+
 });
-
-
-
-
-
-
-

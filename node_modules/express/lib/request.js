@@ -63,12 +63,12 @@ req.header = function(name){
  * the best match when true, otherwise `undefined`, in which
  * case you should respond with 406 "Not Acceptable".
  *
- * The `type` value may be a single mime type string
- * such as "application/json", the extension name
- * such as "json", a comma-delimted list such as "json, html, text/plain",
+ * The `type` value may be a single MIME type string
+ * such as "application/json", an extension name
+ * such as "json", a comma-delimited list such as "json, html, text/plain",
  * an argument list such as `"json", "html", "text/plain"`,
  * or an array `["json", "html", "text/plain"]`. When a list
- * or array is given the _best_ match, if any is returned.
+ * or array is given, the _best_ match, if any is returned.
  *
  * Examples:
  *
@@ -268,7 +268,7 @@ defineGetter(req, 'protocol', function protocol(){
     : 'http';
   var trust = this.app.get('trust proxy fn');
 
-  if (!trust(this.connection.remoteAddress)) {
+  if (!trust(this.connection.remoteAddress, 0)) {
     return proto;
   }
 
@@ -378,7 +378,7 @@ defineGetter(req, 'hostname', function hostname(){
   var trust = this.app.get('trust proxy fn');
   var host = this.get('X-Forwarded-Host');
 
-  if (!host || !trust(this.connection.remoteAddress)) {
+  if (!host || !trust(this.connection.remoteAddress, 0)) {
     host = this.get('Host');
   }
 

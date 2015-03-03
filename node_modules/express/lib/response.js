@@ -1,5 +1,13 @@
+/*!
+ * express
+ * Copyright(c) 2009-2013 TJ Holowaychuk
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
 /**
  * Module dependencies.
+ * @api private
  */
 
 var contentDisposition = require('content-disposition');
@@ -159,15 +167,12 @@ res.send = function send(body) {
     this.set('Content-Length', len);
   }
 
-  // method check
-  var isHead = req.method === 'HEAD';
-
-  // ETag support
-  if (len !== undefined && (isHead || req.method === 'GET')) {
-    var etag = app.get('etag fn');
-    if (etag && !this.get('ETag')) {
-      etag = etag(chunk, encoding);
-      etag && this.set('ETag', etag);
+  // populate ETag
+  var etag;
+  var generateETag = len !== undefined && app.get('etag fn');
+  if (typeof generateETag === 'function' && !this.get('ETag')) {
+    if ((etag = generateETag(chunk, encoding))) {
+      this.set('ETag', etag);
     }
   }
 
@@ -182,7 +187,7 @@ res.send = function send(body) {
     chunk = '';
   }
 
-  if (isHead) {
+  if (req.method === 'HEAD') {
     // skip body for HEAD
     this.end();
   } else {
@@ -399,7 +404,7 @@ res.sendFile = function sendFile(path, options, fn) {
     if (err && err.code === 'EISDIR') return next();
 
     // next() all but write errors
-    if (err && err.code !== 'ECONNABORT' && err.syscall !== 'write') {
+    if (err && err.code !== 'ECONNABORTED' && err.syscall !== 'write') {
       next(err);
     }
   });
@@ -944,7 +949,7 @@ function sendfile(res, file, options, callback) {
     done = true;
 
     var err = new Error('Request aborted');
-    err.code = 'ECONNABORT';
+    err.code = 'ECONNABORTED';
     callback(err);
   }
 
@@ -979,6 +984,7 @@ function sendfile(res, file, options, callback) {
 
   // finished
   function onfinish(err) {
+    if (err && err.code === 'ECONNRESET') return onaborted();
     if (err) return onerror(err);
     if (done) return;
 
