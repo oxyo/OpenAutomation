@@ -56,13 +56,10 @@ All documentation and tutorials are available here.
 ## Credits
 
 HTML5 Canvas gauges - https://github.com/Mikhus/canv-gauge
-
 HOTP implementation - https://www.gitorious.org/hotp-js
-
 Icons by Adam Whitcroft - http://adamwhitcroft.com/batch/
-
 Charts - http://www.chartjs.org/
-
+Digital-7 font - http://www.styleseven.com/php/get_product.php?product=Digital-7
 
 
 
