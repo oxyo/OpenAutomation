@@ -1,5 +1,6 @@
-#eclude db files
+/node_modules
 *.db
 serverID.txt
 settings.txt
 .idea
+clipboard.js
