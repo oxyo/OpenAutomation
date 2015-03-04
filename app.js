@@ -193,7 +193,7 @@ var oaSetup = {
 // WEB Server Set-Up
     var express = require('express');
     var bodyParser = require('body-parser');
-    //var logger = require('morgan');
+    var logger = require('morgan');
     var favicon = require('serve-favicon');
     var compression = require('compression');
     var app = express();
