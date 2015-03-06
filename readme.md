@@ -1,36 +1,44 @@
 # openautomation.center
 
 ```
- _______                        _______         __                            __    __
-|       |.-----..-----..-----. |   _   |.--.--.|  |_ .-----..--------..---.-.|  |_ |__|.-----..-----.
-|   -   ||  _  ||  -__||     | |       ||  |  ||   _||  _  ||        ||  _  ||   _||  ||  _  ||     |
-|_______||   __||_____||__|__| |___|___||_____||____||_____||__|__|__||___._||____||__||_____||__|__|
-         |__|
+    .-'''-.                                                        
+   '   _    \                                                      
+ /   /` '.   _________   _...._           __.....__       _..._    
+.   |     \  \        |.'      '-.    .-''         '.   .'     '.  
+|   '      |  \        .'```'.    '. /     .-''"'-.  `..   .-.   . 
+\    \     / / \      |       \     /     /________\   |  '   '  | 
+ `.   ` ..' /   |     |        |    |                  |  |   |  | 
+    '-...-'`    |      \      /    .\    .-------------|  |   |  | 
+                |     |\`'-.-'   .'  \    '-.____...---|  |   |  | 
+                |     | '-....-'`     `.             .'|  |   |  | 
+               .'     '.                `''-...... -'  |  |   |  | 
+             '-----------'                             |  |   |  | 
+                                                       '--'   '--' 
+  ,---.          ,--.                         ,--. ,--.              
+ /  O  \,--.,--,-'  '-.,---.,--,--,--.,--,--,-'  '-`--',---.,--,--,  
+|  .-.  |  ||  '-.  .-| .-. |        ' ,-.  '-.  .-,--| .-. |      \ 
+|  | |  '  ''  ' |  | ' '-' |  |  |  \ '-'  | |  | |  ' '-' |  ||  | 
+`--' `--'`----'  `--'  `---'`--`--`--'`--`--' `--' `--'`---'`--''--' 
 
 ```
 
-Open Automation server for Intel Edison &amp; Beaglebone Black.
+Open Automation server for Intel Edison
+
+Full featured home automation system with wireless control functionality based on Open source hardware. Designed for Intel Edison, but can be easilly installed on any platform. Pure JavaScript implimentation based on Node.js.   
 All documentation and tutorials are available here.
+
 
 ## Features
 
-* Simple Home automation center
-* Designed for Intel Edison & Beagle Bone Black, but can be easilly installed on any platform
-* Touch friendly user Interface based on jQuery Mobile
+* 100% in House control - no cloud services required!
 * Implemented Temperature, Humidity, CO2 and Energy metering
 * Up to 9 sensors support in one room
+* Touch friendly user Interface based on jQuery Mobile
 * Simple JSON Configuration
-* Pure JavaScript implimentation based on Node.js
-* 
 * Runs without any database backend - sensors data stored in easilly readable text files
-* 100% control - no Cloud services required!
 * Strong Security - implemented HOTP RFC4226 token authentication
 * Ciseco LLAP protocol compatible
-* Easily extendable and customizable platform
-* Tested on these browsews IE10+, Firefox 30+, Chrome 40+, Windows Phone, Chrome for Android
-* Have some isues on Firefox for Android
-* Availabe mobile App on google Play
-
+* Mobile App awailable on google Play
 
 
 ## Installation
@@ -51,6 +59,10 @@ All documentation and tutorials are available here.
 
 
 ## Changelog
+
+
+
+
 
 
 ## Credits
