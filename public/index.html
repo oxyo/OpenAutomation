@@ -138,7 +138,6 @@
         <div data-role="content">
             <div data-role="fieldcontainer">
                 <label >Please enter OA Server ID:</label>
-
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <input type="text" id="oaKeyInput" >
@@ -147,11 +146,9 @@
                         <a id="clearOAKey" href="#" data-role="button" data-inline="true" data-theme="b" >Clear</a>
                     </div>
                 </div>
-
             </div>
 
             <p>
-
             </p>
 
             <div data-role="fieldcontainer">
@@ -167,9 +164,6 @@
                         <a id="clearOAIP" href="#" data-role="button" data-inline="true" data-theme="b" >Clear</a>
                     </div>
                 </div>
-
-
-
             </div>
             <p>For more information please visit
                 <a class="ui-link" onclick='window.open("http://openautomation.center","_system", "location=yes")' href='javascript:void(0)' >http://openautomation.center</a>
@@ -178,7 +172,7 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
+                    <li><a id="connectionSetupClose" href="#" data-icon="back" data-role="button" data-theme="b">Close</a>
                 </ul>
             </div>
         </div>
@@ -226,43 +220,6 @@
     <!-- toolsListPage END -->
 
 
-    <!-- set-UpPage START -->
-    <div data-role="page" id="set-up" data-theme="b" data-content-theme="b">
-        <div data-role="header" data-position="fixed" data-tap-toggle="false">
-            <h1>Set-Up</h1>
-        </div>
-        <div data-role="content">
-            <ul data-role="listview" data-inset="true">
-
-                <li><a href="#roomsSettings">
-                    <img src="img/smartList.png" />
-                    Rooms Set-Up
-                    <p>Manage Rooms list</p></a>
-                </li>
-
-                <li><a href="#sensorsSettings">
-                    <img src="img/smartList.png" />
-                    Sensors Set-Up
-                    <p>Manage Sensors</p></a>
-                </li>
-
-                <li><a href="#timersSettings">
-                    <img src="img/smartList.png" />
-                    Timers Set-Up
-                    <p>Manage Timers</p></a>
-                </li>
-
-            </ul>
-        </div>
-        <div data-role="footer" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#" data-icon="back" data-role="button" data-rel="back" data-theme="b">Close</a>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- set-UpPage END -->
 
 
     <!-- appsPage START -->
@@ -274,24 +231,29 @@
         <div data-role="content">
             <ul data-role="listview" data-inset="true">
 
-                <li><a href="#greenHouseApp">
+                <li><a href="#Green-House">
                     <img src="img/smartListGH.png" />
                     Green House
                     <p>Control green house: temperature, humidity and light</p></a>
                 </li>
 
-                <li><a href="#co2FreeApp">
+                <li><a href="#CO2">
                     <img src="img/smartListCo22.png" />
                     CO2 Free
                     <p>Enable functions to control CO2 level in room</p></a>
                 </li>
 
-                <li><a href="#comfortZoneApp">
+                <li><a href="#Comfort-Zone">
                     <img src="img/smartListCZ.png" />
                     Comfort Zone
                     <p>Enable functions to control temperature</p></a>
                 </li>
 
+                <li><a href="#Switch-Box">
+                    <img src="img/smartList.png" />
+                    Switch Box
+                    <p>9 switches with timers control board</p></a>
+                </li>
 
             </ul>
         </div>
@@ -336,14 +298,164 @@
 
 
 
-<!-- Apps section START -->
+<!-- Apps section  -->
 
 
-    <!-- co2FreeAppPage START -->
-    <div data-role="page" id="co2FreeApp" data-cache="false" data-title="Comfort Zone Control" data-theme="b" data-content-theme="b">
+    <!-- Switch-Box START -->
+    <div data-role="page" id="Switch-Box" data-cache="false" data-title="Switch Box Control" data-theme="b" data-content-theme="b">
 
         <div data-role="header" data-position="fixed" data-tap-toggle="false">
-            <h1 id="co2FreeAppHeader">CO2 Free</h1>
+            <h1 id="appSwitchBoxHeader">Switch Box</h1>
+        </div>
+
+        <div data-role="content">
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <label >SW1</label>
+                    <input type="checkbox" id="SW01SB" data-role="flipswitch">
+                </div>
+
+                <div class="ui-block-b">
+                    <label >SW2</label>
+                    <input type="checkbox" id="SW02SB" data-role="flipswitch">
+                </div>
+
+                <div class="ui-block-c">
+                    <label >SW3</label>
+                    <input type="checkbox" id="SW03SB" data-role="flipswitch">
+                </div>
+            </div>
+
+            <br>
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <label >SW4</label>
+                    <input type="checkbox" id="SW04SB" data-role="flipswitch">
+                </div>
+
+                <div class="ui-block-b">
+                    <label >SW5</label>
+                    <input type="checkbox" id="SW05SB" data-role="flipswitch">
+                </div>
+
+                <div class="ui-block-c">
+                    <label >SW6</label>
+                    <input type="checkbox" id="SW06SB" data-role="flipswitch">
+                </div>
+            </div>
+
+            <div data-role="collapsible-set">
+                <div data-role="collapsible" data-collapsed="true" data-theme="b">
+                    <h4>Timers </h4>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a">
+                            <label > SW1 timer</label>
+                            <input type="checkbox" id="TSW01SB" data-role="flipswitch">
+                        </div>
+                        <div class="ui-block-b">
+                            <label >Time ON:</label>
+                            <input type="time" id="T01ONSB"  placeholder="00:00">
+                        </div>
+                        <div class="ui-block-c">
+                            <label >Time OFF:</label>
+                            <input type="time" id="T01OFFSB"  placeholder="00:00">
+                        </div>
+                    </div>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a">
+                            <label >SW2 timer</label>
+                            <input type="checkbox" id="TSW02SB" data-role="flipswitch">
+                        </div>
+                        <div class="ui-block-b">
+                            <label >Time ON:</label>
+                            <input type="time" id="T02ONSB"  placeholder="00:00">
+                        </div>
+                        <div class="ui-block-c">
+                            <label >Time OFF:</label>
+                            <input type="time" id="T02OFFSB"  placeholder="00:00">
+                        </div>
+                    </div>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a">
+                            <label >SW3 timer</label>
+                            <input type="checkbox" id="TSW03SB" data-role="flipswitch">
+                        </div>
+                        <div class="ui-block-b">
+                            <label >Time ON:</label>
+                            <input type="time" id="T03ONSB"  placeholder="00:00">
+                        </div>
+                        <div class="ui-block-c">
+                            <label >Time OFF:</label>
+                            <input type="time" id="T03OFFSB"  placeholder="00:00">
+                        </div>
+                    </div>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a">
+                            <label >SW4 timer</label>
+                            <input type="checkbox" id="TSW04SB" data-role="flipswitch">
+                        </div>
+                        <div class="ui-block-b">
+                            <label >Time ON:</label>
+                            <input type="time" id="T04ONSB"  placeholder="00:00">
+                        </div>
+                        <div class="ui-block-c">
+                            <label >Time OFF:</label>
+                            <input type="time" id="T04OFFSB"  placeholder="00:00">
+                        </div>
+                    </div>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a">
+                            <label >SW5 timer</label>
+                            <input type="checkbox" id="TSW05SB" data-role="flipswitch">
+                        </div>
+                        <div class="ui-block-b">
+                            <label >Time ON:</label>
+                            <input type="time" id="T05ONSB"  placeholder="00:00">
+                        </div>
+                        <div class="ui-block-c">
+                            <label >Time OFF:</label>
+                            <input type="time" id="T05OFFSB"  placeholder="00:00">
+                        </div>
+                    </div>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a">
+                            <label >SW6 timer</label>
+                            <input type="checkbox" id="TSW06SB" data-role="flipswitch">
+                        </div>
+                        <div class="ui-block-b">
+                            <label >Time ON:</label>
+                            <input type="time" id="T06ONSB"  placeholder="00:00">
+                        </div>
+                        <div class="ui-block-c">
+                            <label >Time OFF:</label>
+                            <input type="time" id="T06OFFSB"  placeholder="00:00">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" class="ui-btn ui-icon-bullets ui-btn-icon-top">Home</a>
+                    <li><a href="#appsList" class="ui-btn ui-icon-grid ui-btn-icon-top">App list</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Switch-Box END -->
+
+
+    <!-- CO2 START -->
+    <div data-role="page" id="CO2" data-cache="false" data-title="CO2 Control" data-theme="b" data-content-theme="b">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <h1 id="appCO2FreeHeader">CO2 Free</h1>
         </div>
 
         <div data-role="content">
@@ -401,16 +513,14 @@
             </div>
         </div>
     </div>
+    <!-- CO2 END -->
 
 
-    <!-- co2FreeAppPage END -->
-
-
-    <!-- comfortZoneAppPage START -->
-    <div data-role="page" id="comfortZoneApp" data-cache="false" data-title="Comfort Zone Control" data-theme="b" data-content-theme="b">
+    <!-- Comfort-Zone START -->
+    <div data-role="page" id="Comfort-Zone" data-cache="false" data-title="Temperature Control" data-theme="b" data-content-theme="b">
 
         <div data-role="header" data-position="fixed" data-tap-toggle="false">
-            <h1 id="comfortZoneAppHeader">Comfort Zone</h1>
+            <h1 id="appComfortZoneHeader">Comfort Zone</h1>
         </div>
 
         <div data-role="content">
@@ -486,16 +596,14 @@
             </div>
         </div>
     </div>
+    <!-- Comfort-Zone END -->
 
 
-    <!-- comfortZoneAppPage END -->
-
-
-    <!-- greenHouseAppPage START -->
-    <div data-role="page" id="greenHouseApp" data-cache="false" data-title="Green House Control" data-theme="b" data-content-theme="b">
+    <!-- Green-House START -->
+    <div data-role="page" id="Green-House" data-cache="false" data-title="Green House Control" data-theme="b" data-content-theme="b">
 
 		<div data-role="header" data-position="fixed" data-tap-toggle="false">
-			<h1 id="greenHouseAppHeader">Green House Control</h1>
+			<h1 id="appGreenHouseHeader">Green House Control</h1>
 
 		</div>
 
@@ -589,8 +697,6 @@
 			</div>
 		</div>
 	</div>
-
-
     <div data-role="page" id="wateringTimerSet1" data-dialog="true" data-overlay-theme="b" data-theme="b">
 		<div data-role="header">
 			<h1>Watering Timer 1</h1>
@@ -661,21 +767,23 @@
 			<a href="#" data-rel="back"  data-theme="b">Close</a>
 		</div>
 	</div>
-    <!-- greenHouseAppPage END -->
-
-
-<!-- Apps section END -->
+    <!-- Green-House END -->
 
 
 
 <script type="text/javascript">
 
+
 // Main parameters
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+jQuery.support.cors = true;
+
 var UTCTimeShift = 2;
 var acceptableSensorTimeShiftMinutes = 2;
 var debugMode = false;
-jQuery.support.cors = true;
+var tokenLink = 'token';
+var infoLink = 'info';
+
 
 
 // Functions
@@ -734,6 +842,15 @@ function handleConnectionSetup() {
             $('input#oaIPAddressInput').val('');
         });
 
+        $( document ).on( "tap", '#connectionSetupClose', function( event ) {
+            event.preventDefault();
+            getOA(tokenLink, infoLink, getRoomList);
+
+            $.mobile.navigate('#home');
+        });
+
+
+
 }
 
 
@@ -761,7 +878,7 @@ function handleSensors() {
 
         $('h1#sensorsView').html(sensorsLabel);
 
-        getOA('token','info', function(){
+        getOA(tokenLink, infoLink, function(){
 
             var sensorCount = oa.oa.sensors.length;
             var tableConstruction = '';
@@ -950,15 +1067,13 @@ function showSensors(sensorType, sensorID){
             units: '%',
             minValue: 0,
             maxValue: 100,
-
-             majorTicks  : ['0','10','20','30','40','50','60','70','80','100'],
-             minorTicks  : 2,
-             strokeTicks : false,
-             highlights  : [
-             { from : 0, to : 40,   color : 'rgba(0, 0,  255, .25)' },
-             { from : 40, to : 80,  color : 'rgba(255, 30,  0, .25)' }
-             ],
-
+            majorTicks  : ['0','10','20','30','40','50','60','70','80','100'],
+            minorTicks  : 2,
+            strokeTicks : false,
+            highlights  : [
+            { from : 0, to : 50,  color : 'rgba(255, 30,  0, .25)' },
+            { from : 50, to : 100,   color : 'rgba(0, 0,  255, .25)' }
+            ],
             colors      : {
                 plate      : '#222',
                 majorTicks : '#f5f5f5',
@@ -968,7 +1083,6 @@ function showSensors(sensorType, sensorID){
                 numbers    : '#eee',
                 needle     : { start:'rgba(240, 128, 128, 1)', end :'rgba(255, 160, 122, .9)' }
             },
-
             animation : {
                 delay : 25,
                 duration: 600,
@@ -1124,7 +1238,7 @@ function drawCanvas(gauge, sensorType){
 
     gauge.onready = function() {
 
-        getOA('token','info', function(){
+        getOA(tokenLink, infoLink, function(){
 
                 var sensorValue = '0';
                 var sensorTimeStr = '';
@@ -1163,8 +1277,13 @@ function handleCanvasClicks(){
 
     $( document ).on( "tap", '#chartCloseButton', function( event ) {
         event.preventDefault();
-        if (!!lineChart) lineChart.destroy();
-        $.mobile.navigate('#roomPage0');
+        try {
+            lineChart.destroy();
+            $.mobile.navigate('#roomPage0');
+        } catch(e) {
+            console.log('lineChart Object not found!')
+            $.mobile.navigate('#roomPage0');
+        }
     });
 
     var sensorChartSelect = '';
@@ -1225,7 +1344,7 @@ function handleCanvasClicks(){
 
             $('#chartPage h1').text(activeRoom.label + ' ' + sensorChartSelect);
 
-                var tokenLink = 'token';
+                var tokenLink = tokenLink;
                 console.log('lineChart > ' + tokenLink+ ' loading...');
                 $.getJSON(tokenLink, function(token) {
                     if (token) {
@@ -1315,7 +1434,7 @@ function getRoomList(){
         for (var i = 0; i < oa.oa.rooms.length; i++) {
 
             liStr += '<li><a href="" data-id="' + i
-            + '"> <img src="img/room.png" />' + oa.oa.rooms[i].label + '<p>Control ' + oa.oa.rooms[i].label
+            + '"> <img src="img/room.png" />' + oa.oa.rooms[i].label + '<p>Control ' + oa.oa.rooms[i].label + ' ' + oa.oa.rooms[i].app
             + '</p></a></li>'
         }
         return liStr;
@@ -1428,9 +1547,11 @@ function handleRoom(){
 // Step-03 Applications Start-Up
 function handleApps() {
 
+    appSwitchBox();
     appComfortZone();
     appGreenHouse();
     appCO2Free();
+
 }
 
 
@@ -1448,7 +1569,7 @@ $(document).on('pagecreate', '#home', function() {
     };
 
     // STEP-00 - Getting config from OA server
-    getOA('token', 'info', getRoomList);
+    getOA(tokenLink, infoLink, getRoomList);
 
     handleSensors();
     handleRoom();
@@ -1466,13 +1587,300 @@ $(document).on('pagecreate', '#home', function() {
 // Place installed apps here. Include app function in handleApps().
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// appCO2Free CO2 level control app v.1.0.1 (c) Vaidotas Gudaitis
+
+// Switch-Box - 6 switches app v.1.0.1 (c) Vaidotas Gudaitis
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function appSwitchBox(){
+
+    $(document).on('pagebeforeshow', '#Switch-Box', function(){
+
+        $('h1#appSwitchBoxHeader').html(activeRoom.label);
+
+        var sel = 'switchBox' + activeRoom.id;
+
+        if (window.localStorage.getItem(sel+'.SW01SB') == 'true')     {
+            $("input#SW01SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#SW01SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.SW02SB') == 'true')     {
+            $("input#SW02SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#SW02SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.SW03SB') == 'true')     {
+            $("input#SW03SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#SW03SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.SW04SB') == 'true')     {
+            $("input#SW04SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#SW04SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.SW05SB') == 'true')     {
+            $("input#SW05SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#SW05SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.SW06SB') == 'true')     {
+            $("input#SW06SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#SW06SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.TSW01SB') == 'true')     {
+            $("input#TSW01SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#TSW01SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.TSW02SB') == 'true')     {
+            $("input#TSW02SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#TSW02SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.TSW03SB') == 'true')     {
+            $("input#TSW03SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#TSW03SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.TSW04SB') == 'true')     {
+            $("input#TSW04SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#TSW04SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.TSW05SB') == 'true')     {
+            $("input#TSW05SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#TSW05SB").prop("checked", false).flipswitch("refresh");
+        }
+        if (window.localStorage.getItem(sel+'.TSW06SB') == 'true')     {
+            $("input#TSW06SB").prop("checked", true).flipswitch("refresh");
+        } else{
+            $("input#TSW06SB").prop("checked", false).flipswitch("refresh");
+        }
+
+        if (window.localStorage.getItem(sel+'.T01ONSB')) $('input#T01ONSB').val(window.localStorage.getItem(sel+'.T01ONSB'));
+        if (window.localStorage.getItem(sel+'.T01OFFSB')) $('input#T01OFFSB').val(window.localStorage.getItem(sel+'.T01OFFSB'));
+        if (window.localStorage.getItem(sel+'.T02ONSB')) $('input#T02ONSB').val(window.localStorage.getItem(sel+'.T02ONSB'));
+        if (window.localStorage.getItem(sel+'.T02OFFSB')) $('input#T02OFFSB').val(window.localStorage.getItem(sel+'.T02OFFSB'));
+        if (window.localStorage.getItem(sel+'.T03ONSB')) $('input#T03ONSB').val(window.localStorage.getItem(sel+'.T03ONSB'));
+        if (window.localStorage.getItem(sel+'.T03OFFSB')) $('input#T03OFFSB').val(window.localStorage.getItem(sel+'.T03OFFSB'));
+        if (window.localStorage.getItem(sel+'.T04ONSB')) $('input#T04ONSB').val(window.localStorage.getItem(sel+'.T04ONSB'));
+        if (window.localStorage.getItem(sel+'.T04OFFSB')) $('input#T04OFFSB').val(window.localStorage.getItem(sel+'.T04OFFSB'));
+        if (window.localStorage.getItem(sel+'.T05ONSB')) $('input#T05ONSB').val(window.localStorage.getItem(sel+'.T05ONSB'));
+        if (window.localStorage.getItem(sel+'.T05OFFSB')) $('input#T05OFFSB').val(window.localStorage.getItem(sel+'.T05OFFSB'));
+        if (window.localStorage.getItem(sel+'.T06ONSB')) $('input#T06ONSB').val(window.localStorage.getItem(sel+'.T06ONSB'));
+        if (window.localStorage.getItem(sel+'.T06OFFSB')) $('input#T06OFFSB').val(window.localStorage.getItem(sel+'.T06OFFSB'));
+
+    });
+
+    $(document).on('pagecreate', '#Switch-Box', function () {
+
+        function buildCommandSwitchBox() {
+
+            var t01ON = $("#T01ONSB").val() || '00:00', t01OFF = $("#T01OFFSB").val() || '00:00';
+            var t02ON = $("#T02ONSB").val() || '00:00', t02OFF = $("#T02OFFSB").val() || '00:00';
+            var t03ON = $("#T03ONSB").val() || '00:00', t03OFF = $("#T03OFFSB").val() || '00:00';
+            var t04ON = $("#T04ONSB").val() || '00:00', t04OFF = $("#T04OFFSB").val() || '00:00';
+            var t05ON = $("#T05ONSB").val() || '00:00', t05OFF = $("#T05OFFSB").val() || '00:00';
+            var t06ON = $("#T06ONSB").val() || '00:00', t06OFF = $("#T06OFFSB").val() || '00:00';
+
+            if (t01ON.length < 5) t01ON = '0' + t01ON;
+            if (t01OFF.length < 5) t01OFF = '0' + t01OFF;
+            if (t02ON.length < 5) t02ON = '0' + t02ON;
+            if (t02OFF.length < 5) t02OFF = '0' + t02OFF;
+            if (t03ON.length < 5) t03ON = '0' + t03ON;
+            if (t03OFF.length < 5) t03OFF = '0' + t03OFF;
+            if (t04ON.length < 5) t04ON = '0' + t04ON;
+            if (t04OFF.length < 5) t04OFF = '0' + t04OFF;
+            if (t05ON.length < 5) t05ON = '0' + t05ON;
+            if (t05OFF.length < 5) t05OFF = '0' + t05OFF;
+            if (t06ON.length < 5) t06ON = '0' + t06ON;
+            if (t06OFF.length < 5) t06OFF = '0' + t06OFF;
+
+            var command = 'F' + activeRoom.id + ':';
+
+            if($("input#SW01SB").is(":checked")){command+='S1=1';}else{if($('input#TSW01SB').is(':checked')){command+='S1=T';}else{command+='S1=0';}}
+            if($("input#SW02SB").is(":checked")){command+='S2=1';}else{if($('input#TSW02SB').is(':checked')){command+='S2=T';}else{command+='S2=0';}}
+            if($("input#SW03SB").is(":checked")){command+='S3=1';}else{if($('input#TSW03SB').is(':checked')){command+='S3=T';}else{command+='S3=0';}}
+            if($("input#SW04SB").is(":checked")){command+='S4=1';}else{if($('input#TSW04SB').is(':checked')){command+='S4=T';}else{command+='S4=0';}}
+            if($("input#SW05SB").is(":checked")){command+='S5=1';}else{if($('input#TSW05SB').is(':checked')){command+='S5=T';}else{command+='S5=0';}}
+            if($("input#SW06SB").is(":checked")){command+='S6=1';}else{if($('input#TSW06SB').is(':checked')){command+='S6=T';}else{command+='S6=0';}}
+            
+            command += 'T1=' + t01ON + t01OFF;
+            command += 'T2=' + t02ON + t02OFF;
+            command += 'T3=' + t03ON + t03OFF;
+            command += 'T4=' + t04ON + t04OFF;
+            command += 'T5=' + t05ON + t05OFF;
+            command += 'T6=' + t06ON + t06OFF;
+            
+            var commandToPost = {decision: 'setCommand', roomID: activeRoom.id, command: command};
+
+            appCommandPost(tokenLink, commandToPost);
+        }
+
+        $("input#SW01SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id + '.SW01SB';
+            if($(this).is(":checked")){window.localStorage.setItem(sel,'true');buildCommandSwitchBox();}else{window.localStorage.setItem(sel,'false');buildCommandSwitchBox();}
+        });
+        $("input#SW02SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id + '.SW02SB';
+            if($(this).is(":checked")){window.localStorage.setItem(sel,'true');buildCommandSwitchBox();}else{window.localStorage.setItem(sel,'false');buildCommandSwitchBox();}
+        });
+        $("input#SW03SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id + '.SW03SB';
+            if($(this).is(":checked")){window.localStorage.setItem(sel,'true');buildCommandSwitchBox();}else{window.localStorage.setItem(sel,'false');buildCommandSwitchBox();}
+        });
+        $("input#SW04SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id + '.SW04SB';
+            if($(this).is(":checked")){window.localStorage.setItem(sel,'true');buildCommandSwitchBox();}else{window.localStorage.setItem(sel,'false');buildCommandSwitchBox();}
+        });
+        $("input#SW05SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id + '.SW05SB';
+            if($(this).is(":checked")){window.localStorage.setItem(sel,'true');buildCommandSwitchBox();}else{window.localStorage.setItem(sel,'false');buildCommandSwitchBox();}
+        });
+        $("input#SW06SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id + '.SW06SB';
+            if($(this).is(":checked")){window.localStorage.setItem(sel,'true');buildCommandSwitchBox();}else{window.localStorage.setItem(sel,'false');buildCommandSwitchBox();}
+        });
+
+
+        $("input#TSW01SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id;
+            if ($(this).is(":checked")) {
+                window.localStorage.setItem(sel+'.TSW01SB', 'true');
+                buildCommandSwitchBox();
+            } else {
+                window.localStorage.setItem(sel+'.TSW01SB', 'false');
+                buildCommandSwitchBox();
+            }
+        });
+        $("input#TSW02SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id;
+            if ($(this).is(":checked")) {
+                window.localStorage.setItem(sel+'.TSW02SB', 'true');
+                buildCommandSwitchBox();
+            } else {
+                window.localStorage.setItem(sel+'.TSW02SB', 'false');
+                buildCommandSwitchBox();
+            }
+        });
+        $("input#TSW03SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id;
+            if ($(this).is(":checked")) {
+                window.localStorage.setItem(sel+'.TSW03SB', 'true');
+                buildCommandSwitchBox();
+            } else {
+                window.localStorage.setItem(sel+'.TSW03SB', 'false');
+                buildCommandSwitchBox();
+            }
+        });
+        $("input#TSW04SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id;
+            if ($(this).is(":checked")) {
+                window.localStorage.setItem(sel+'.TSW04SB', 'true');
+                buildCommandSwitchBox();
+            } else {
+                window.localStorage.setItem(sel+'.TSW04SB', 'false');
+                buildCommandSwitchBox();
+            }
+        });
+        $("input#TSW05SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id;
+            if ($(this).is(":checked")) {
+                window.localStorage.setItem(sel+'.TSW05SB', 'true');
+                buildCommandSwitchBox();
+            } else {
+                window.localStorage.setItem(sel+'.TSW05SB', 'false');
+                buildCommandSwitchBox();
+            }
+        });
+        $("input#TSW06SB").change(function () {
+            var sel = 'switchBox' + activeRoom.id;
+            if ($(this).is(":checked")) {
+                window.localStorage.setItem(sel+'.TSW06SB', 'true');
+                buildCommandSwitchBox();
+            } else {
+                window.localStorage.setItem(sel+'.TSW06SB', 'false');
+                buildCommandSwitchBox();
+            }
+        });
+
+
+        $("input#T01ONSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T01ONSB', $("input#T01ONSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T01OFFSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T01OFFSB', $("input#T01OFFSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T02ONSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T02ONSB', $("input#T02ONSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T02OFFSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T02OFFSB', $("input#T02OFFSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T03ONSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T03ONSB', $("input#T03ONSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T03OFFSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T03OFFSB', $("input#T03OFFSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T04ONSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T04ONSB', $("input#T04ONSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T04OFFSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T04OFFSB', $("input#T04OFFSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T05ONSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T05ONSB', $("input#T05ONSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T05OFFSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T05OFFSB', $("input#T05OFFSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T06ONSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T06ONSB', $("input#T06ONSB").val());
+            buildCommandSwitchBox();
+        });
+        $("input#T06OFFSB").bind("change", function (event, ui) {
+            var sel = 'switchBox' + activeRoom.id;
+            window.localStorage.setItem(sel+'.T06OFFSB', $("input#T06OFFSB").val());
+            buildCommandSwitchBox();
+        });
+
+    });
+
+}
+
+
+
+// appCO2Free CO2 level control app v.0.0.2 (c) Vaidotas Gudaitis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function appCO2Free(){
 
-    $(document).on('pagebeforeshow', '#co2FreeApp', function(){
+    $(document).on('pagebeforeshow', '#CO2', function(){
 
-        $('h1#co2FreeAppHeader').html(activeRoom.label);
+        $('h1#appCO2FreeHeader').html(activeRoom.label);
 
         var sel = 'co2Free' + activeRoom.id;
 
@@ -1500,7 +1908,7 @@ function appCO2Free(){
 
     });
 
-    $(document).on('pagecreate', '#co2FreeApp', function () {
+    $(document).on('pagecreate', '#CO2', function () {
 
         function buildCommandCo2Free() {
 
@@ -1509,7 +1917,7 @@ function appCO2Free(){
             var cSet = $("input#co2LevelSetCO2").val() || '400';
             var fanFrom = $("#fanFromCO2").val() || '00:00';
             var fanTo = $("#fanToCO2").val() || '00:00';
-            var virtualRoomID = activeRoom.id;
+            var roomID = activeRoom.id;
 
             if (fanFrom.length < 5) fanFrom = '0' + fanFrom;
             if (fanTo.length < 5) fanTo = '0' + fanTo;
@@ -1517,7 +1925,7 @@ function appCO2Free(){
 
             var command = '';
             command = 'F';
-            command += virtualRoomID + ':';
+            command += roomID + ':';
             command += 'T=' + tSet + '.00';
             command += 'C=' + cSet;
 
@@ -1536,9 +1944,9 @@ function appCO2Free(){
             } else {
                 command += 'M=C';
             }
-            var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, command: command};
+            var commandToPost = {decision: 'setCommand', roomID: roomID, command: command};
 
-            appCommandPost('token', commandToPost);
+            appCommandPost(tokenLink, commandToPost);
         }
 
         function appSave(postData) {
@@ -1631,12 +2039,14 @@ function appCO2Free(){
         });
 
         $("input#fanFromCO2").bind("change", function (event, ui) {
-            window.localStorage.setItem('co2Free.fanFrom', $("input#fanFromCO2").val());
+            var sel = 'co2Free' + activeRoom.id;
+            window.localStorage.setItem(sel+'.fanFrom', $("input#fanFromCO2").val());
             buildCommandCo2Free();
         });
 
         $("input#fanToCO2").bind("change", function (event, ui) {
-            window.localStorage.setItem('co2Free.fanTo', $("input#fanToCO2").val());
+            var sel = 'co2Free' + activeRoom.id;
+            window.localStorage.setItem(sel+'.fanTo', $("input#fanToCO2").val());
             buildCommandCo2Free();
         });
     });
@@ -1645,13 +2055,13 @@ function appCO2Free(){
 
 
 
-// appComfortZone Temperature control for fancoils v.0.0.1 (c) Vaidotas Gudaitis greituolis@gmail.com
+// appComfortZone Temperature control for fancoils v.0.0.1 (c) Vaidotas Gudaitis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function appComfortZone(){
 
-    $(document).on('pagebeforeshow', '#comfortZoneApp', function(){
+    $(document).on('pagebeforeshow', '#Comfort-Zone', function(){
 
-        $('h1#comfortZoneAppHeader').html(activeRoom.label);
+        $('h1#appComfortZoneHeader').html(activeRoom.label);
 
         var sel = 'comfortZone' + activeRoom.id;
 
@@ -1681,7 +2091,7 @@ function appComfortZone(){
 
     });
 
-    $(document).on('pagecreate', '#comfortZoneApp',  function () {
+    $(document).on('pagecreate', '#Comfort-Zone',  function () {
 
         function buildCommandComfortZone() {
             var CID = window.localStorage.getItem('comfortZone.APPID') || 'oa';
@@ -1689,13 +2099,13 @@ function appComfortZone(){
             var fSet = $("#fanSpeedSetCZ").val() || '4';
             var offFrom = $("#offHBCZ").val() || '00:00';
             var offTo = $("#offHECZ").val() || '00:00';
-            var virtualRoomID = activeRoom.id;
+            var roomID = activeRoom.id;
             if (offFrom.length < 5) offFrom = '0' + offFrom;
             if (offTo.length < 5) offTo = '0' + offTo;
             if (tSet.length < 2) tSet = '0' + tSet;
             var command = '';
             command = 'F';
-            command += virtualRoomID + ':';
+            command += roomID + ':';
             command += 'R=' + fSet;
             command += 'T=' + tSet + '.00';
             if ($('input#powerOnSwCZ').is(':checked')) {
@@ -1714,9 +2124,9 @@ function appComfortZone(){
                 command += 'A=1';
             }
             command += 'O=' + offFrom + offTo;
-            var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, command: command};
+            var commandToPost = {decision: 'setCommand', roomID: roomID, command: command};
 
-            appCommandPost('token', commandToPost);
+            appCommandPost(tokenLink, commandToPost);
         }
 
         function appSave(postData) {
@@ -1831,13 +2241,13 @@ function appComfortZone(){
 
 
 
-// Green House control app v.1.0.1 (c) Vaidotas Gudaitis
+// Green House control app v.0.0.1 (c) Vaidotas Gudaitis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function appGreenHouse() {
 
-    $('h1#greenHouseAppHeader').html(activeRoom.label);
+    $('h1#appGreenHouseHeader').html(activeRoom.label);
 
-    $(document).on('pagebeforeshow', '#greenHouseApp', function(){
+    $(document).on('pagebeforeshow', '#Green-House', function(){
 
         var sel = 'greenHouse' + activeRoom.id;
 
@@ -1898,7 +2308,7 @@ function appGreenHouse() {
 
 
 
-    $(document).on('pagecreate', '#greenHouseApp', function () {
+    $(document).on('pagecreate', '#Green-House', function () {
 
         function buildCommandGreenHouse() {
             var sel = 'greenHouse' + activeRoom.id;
@@ -1908,7 +2318,7 @@ function appGreenHouse() {
             var lFrom = $("input#lightOnTime").val() || '00:00';
             var lTo = $("input#lightOffTime").val() || '00:00';
 
-            var virtualRoomID = activeRoom.id;
+            var roomID = activeRoom.id;
             var timerCount = '5';
 
             var t1Val = window.localStorage.getItem(sel+'.wateringTimeSet1') || '00:00';
@@ -1924,7 +2334,7 @@ function appGreenHouse() {
 
             var command = '';
             command = 'F';
-            command += virtualRoomID + ':';
+            command += roomID + ':';
             command += 'T=' + tSet + '.00';
             command += 'H=' + hSet;
 
@@ -1952,9 +2362,9 @@ function appGreenHouse() {
             command += 'I=B' + timerCount + '0' + timerSeconds + 't';
             command += t1Val + t2Val + t3Val + t4Val + t5Val;
 
-            var commandToPost = {decision: 'setCommand', virtualRoomID: virtualRoomID, command: command};
+            var commandToPost = {decision: 'setCommand', roomID: roomID, command: command};
 
-            appCommandPost('token', commandToPost);
+            appCommandPost(tokenLink, commandToPost);
 
         }
 

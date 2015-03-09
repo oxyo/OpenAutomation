@@ -26,14 +26,13 @@
 
 // Main parameters - can be set from command shell
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var programVersion = '0.0.1';
+var programVersion = '0.0.2';
 var notokenMode = false;                    // disable HOTP authentication
 var debugMode = false;                      // enable debug mode
 var saveSensorsToDisk = false;              // enable persistent sensors datastore with automatic loading
 var checkSensorsActivityInterval = 120000;  // set sensors activity check on serial port, if no data received in time
                                             // interval - application process killed
 var isEdison = true;                        // set platform type to Intel Edison
-var isBBB = false;                          // set platform type to Beaglebone Black
 
 
 
@@ -67,22 +66,22 @@ var oaSetup = {
         {//Room Config start
             label: 'Work studio',           //Room label
             sensors: ['T0', 'E1', 'P1'],    //Sensors placed in this room
-            app: 'comfortZoneApp'           //Control application
+            app: 'Comfort-Zone'             //Control application
         },//Room config end
         {
             label: 'Bedroom',
             sensors: ['T1','H0'],
-            app: 'comfortZoneApp'
+            app: 'Comfort-Zone'
         },
         {
             label: 'Kitchen',
             sensors: ['T2'],
-            app: 'comfortZoneApp'
+            app: 'CO2'
         },
         {
             label: 'Outdoors',
             sensors: ['T3'],
-            app: 'comfortZoneApp'
+            app: 'Switch-Box'
         }
 
     ]
@@ -303,7 +302,7 @@ function stringToHex (tmp) {
 // No sensors data handler to handle Serial port faults
 function checkSensorsActivity(){
     if (communicationProblem) {
-        console.log("OA > No sensors signal detected. Service terminated. Please restart Open Automation Server".cyan);
+        console.log("OA > No sensors signal detected. Service terminated. Please restart Open Automation Center".cyan);
         compactDB(terminateOA);
     } else{
         if(debugMode) console.log("OA > sensors communication check completed successfully".cyan);
@@ -580,7 +579,7 @@ function oaListening() {
                         if (debugMode) console.log("OA Set-UP: New Server Config created: ".cyan + JSON.stringify(oaSetup));
 
                         dbCID.insert(serverID, function () {
-                            console.log("OA Set-UP: New Server ID created: ".cyan + serverID.cid + " Please restart Open Automation Server".cyan);
+                            console.log("OA Set-UP: New Server ID created: ".cyan + serverID.cid + " Please restart Open Automation Center".cyan);
                             console.log('');
                             process.exit(0);
                         });
@@ -921,7 +920,7 @@ app.get('/dbreset/:sid', function(req, res){
 
 app.listen(app.get('port'), function(){
 
-    console.log("Open Automation Center ".green + programVersion.warn + " listening on port: ".green + app.get('port'));
+    console.log('Open Automation Center v.'.green + programVersion.warn + ' listening on port: '.green + app.get('port'));
     console.log('Running on '.green + platform + ' ' + kernel);
     console.log('Hardware board: '.green + hardwareType);
     console.log('HOTP RFC4226 Authentication: '.green + !notokenMode);
