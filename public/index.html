@@ -1344,7 +1344,6 @@ function handleCanvasClicks(){
 
             $('#chartPage h1').text(activeRoom.label + ' ' + sensorChartSelect);
 
-                var tokenLink = tokenLink;
                 console.log('lineChart > ' + tokenLink+ ' loading...');
                 $.getJSON(tokenLink, function(token) {
                     if (token) {
