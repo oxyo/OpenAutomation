@@ -3,7 +3,7 @@
 Full featured home automation system with wireless control functionality based on Open source hardware. Can be installed on any computer, but specially designed for Intel Edison. Pure JavaScript implimentation based on Node.js.   
 [Documentation and tutorials are available here](http://openautomation.center).
 
-##### Features 
+### Features 
 * Monitoring solution implimentation without wires 
 * Easy installation and configuration
 * 100% in House control - no cloud services required!
@@ -16,13 +16,13 @@ Full featured home automation system with wireless control functionality based o
 * Ciseco LLAP protocol compatible
 
 
-## Installation
+### Installation
 
     $ npm install openautomation
 
 
 
-## Command line arguents
+### Command line arguents
 ```
    -h, --help           output usage information
    -V, --version        output the version number
@@ -31,9 +31,32 @@ Full featured home automation system with wireless control functionality based o
    -n, --notoken        Disable HOTP RFC4226 authentication
 ```
 
+### How it works
+
+Open Automation key hardware elements are wireless sensors, controllers and Control Center. For wireless data transfer between devices there are used [Ciseco XRF radio modules](http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/).
+
+##### Wireless sensors
+Wireless sensors measure environment values such as temperature, CO2, humidity and sends data to Control Center device over serial radio channel in simple LLAP text message like `aT0TMPA20.21`. 
+
+This means: `a` - message begin, sensor `T0` sends temperature value `20.21`. 
+
+For this purpose can be used any open hardware - Arduino, Mbed, Espruino, Raspberry Pi, Beaglebone or any other MCU. How to build wireless sensor please read here.    
+
+##### Open Automation Control Center
+This device can manage unlimited number of [End-Point Controllers](https://github.com/oxyo/oa-controller) and up to 30 wireless sensors. It runs node.js web server on small board computer such as Intel Edison, Beagle Bone Black or any other. It can be accessed trough browser or mobile app. This computer should have serial port to communicate with sensors and controllers over wireless radio channel.
+
+##### End-Point controller
+This is [end-point device](https://github.com/oxyo/oa-controller), that gets wireless sensors data and use it for control functions, such as enable relays to control heating, cooling, light, humidity and CO2. It also gets commands from Control Center to set-up control parameters.  
 
 
-## Credits
+##### How to start
+* Install OA Control Center on any computer, best suited for this - `Intel Edison`,  `BeagleBone Black` or `Raspberry Pi 2`.
+* Build or get your environment sensors - temperature, humidity and CO2.  
+
+  
+  
+
+### Credits
 
 HTML5 Canvas gauges - https://github.com/Mikhus/canv-gauge
 
@@ -48,8 +71,9 @@ Digital-7 font - http://www.styleseven.com/php/get_product.php?product=Digital-7
 
 
 
-
-## License
+  
+  
+### License
 
 MIT License
 
