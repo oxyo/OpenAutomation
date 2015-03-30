@@ -33,20 +33,18 @@ Full featured home automation system with wireless control functionality based o
 
 ### How it works
 
-Open Automation system key hardware elements are wireless sensors, controllers and Control Center. For wireless data transfer between devices there are used [Ciseco XRF radio modules](http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/).
+Open Automation system main hardware elements are Wireless Sensors, Controllers and Control Center. For wireless data transfer between devices there are used [Ciseco XRF radio modules](http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/).
 
 ###### Wireless sensors
-Wireless sensors measure environment values such as temperature, CO2, humidity and sends data to Control Center device over serial radio channel in simple LLAP text message like `aT0TMPA20.21`. 
+Wireless sensors measure environment values such as temperature, CO2, humidity and sends data to Control Center device over serial radio channel in simple LLAP text message like `aT0TMPA20.21`. This means: `a` - message begin, sensor `T0` sends temperature value `20.21`. 
 
-This means: `a` - message begin, sensor `T0` sends temperature value `20.21`. 
-
-For this purpose can be used any open hardware - Arduino, Mbed, Espruino, Raspberry Pi, Beaglebone or any other MCU. How to build wireless sensor please read here.    
+For this purpose can be used any open hardware - Arduino, Mbed, Espruino, Raspberry Pi, Beaglebone or there provided Arduino compatible boards with Open Automation firmware - [oa-t-sensor](https://github.com/oxyo/oa-t-sensor), [oa-h-sensor](https://github.com/oxyo/oa-h-sensor), [oa-co2-sensor]() 
 
 ###### End-Point controller
 This is [end-point device](https://github.com/oxyo/oa-controller), that gets wireless sensors data and use it for control functions, such as enable relays to control heating, cooling, light, humidity and CO2. It also gets commands from Control Center to set-up control parameters.  
 
 ###### Open Automation Control Center
-This device can manage unlimited number of [End-Point Controllers](https://github.com/oxyo/oa-controller) and up to 30 wireless sensors. It runs node.js web server on small board computer such as Intel Edison, Beagle Bone Black or any other. It can be accessed trough browser or mobile app. This computer should have serial port to communicate with sensors and controllers over wireless radio channel.  
+This device can manage unlimited number of [End-Point Controllers](https://github.com/oxyo/oa-controller) and up to 30 wireless sensors. It runs node.js web server on a small board computer such as Intel Edison, Beagle Bone Black or any other. It can be accessed trough browser or mobile app. This computer should have serial port to communicate with sensors and controllers over wireless radio channel.  
   
   
 
