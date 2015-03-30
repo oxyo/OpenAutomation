@@ -31,31 +31,12 @@ Full featured home automation system with wireless control functionality based o
    -n, --notoken        Disable HOTP RFC4226 authentication
 ```
 
-### How it works
-
-Open Automation system main hardware elements are Wireless Sensors, Controllers and Control Center. For wireless data transfer between devices there are used [Ciseco XRF radio modules](http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/).
-
-###### Wireless Sensors
-Wireless sensors measure environment values such as temperature, CO2, humidity and sends data to Control Center device over serial radio channel in simple LLAP text message like `aT0TMPA20.21`. This means: `a` - message begin, sensor `T0` sends temperature value `20.21`. 
-
-For this purpose can be used any open hardware - Arduino, Mbed, Espruino, Raspberry Pi, Beaglebone or there provided Arduino compatible boards with Open Automation firmware - [oa-t-sensor](https://github.com/oxyo/oa-t-sensor), [oa-h-sensor](https://github.com/oxyo/oa-h-sensor), [oa-co2-sensor](https://github.com/oxyo/oa-co2-sensor). 
-
-###### End-Point Controller
-This [End-Point device](https://github.com/oxyo/oa-controller) gets wireless sensors data and use it for control functions, such as enable relays to control heating, cooling, light, humidity or CO2. It also gets commands from Open Automation Center to set-up control parameters.  
-
-###### Open Automation Center
-This device can manage unlimited number of [End-Point Controllers](https://github.com/oxyo/oa-controller) and up to 30 wireless sensors. It runs node.js web server on a small board computer such as Intel Edison, Beagle Bone Black or any other. It can be accessed trough browser or mobile app. This computer should have serial port to communicate with sensors and controllers over wireless radio channel.  
+For more info how to start please read in [Project Wiki](https://github.com/oxyo/OpenAutomation/wiki/).  
   
   
-
-### How to start
-* Get minimum 2 or 3 units [Ciseco XRF wireless RF radio modules](http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/) One for sensor, one for controller and one for OA Center.
-* Build or get your wireless sensors boards - temperature, humidity and CO2. 
-* Connect XRF radio module to your OA Center computer trough [USB-TTL adapter](http://imall.iteadstudio.com/im120525005.html). No adapter required for Intel Edison, BeagleBone or Raspberry Pi.  
-* Install Open Automation Center on your computer, best suited for this `Intel Edison`, `BeagleBone Black`, `Raspberry Pi2`.
-* Start Open Automation Center
-
-
+  
+  
+ 
   
   
 
