@@ -1,44 +1,19 @@
 # openautomation.center
 
-```
-    .-'''-.                                                        
-   '   _    \                                                      
- /   /` '.   _________   _...._           __.....__       _..._    
-.   |     \  \        |.'      '-.    .-''         '.   .'     '.  
-|   '      |  \        .'```'.    '. /     .-''"'-.  `..   .-.   . 
-\    \     / / \      |       \     /     /________\   |  '   '  | 
- `.   ` ..' /   |     |        |    |                  |  |   |  | 
-    '-...-'`    |      \      /    .\    .-------------|  |   |  | 
-                |     |\`'-.-'   .'  \    '-.____...---|  |   |  | 
-                |     | '-....-'`     `.             .'|  |   |  | 
-               .'     '.                `''-...... -'  |  |   |  | 
-             '-----------'                             |  |   |  | 
-                                                       '--'   '--' 
-  ,---.          ,--.                         ,--. ,--.              
- /  O  \,--.,--,-'  '-.,---.,--,--,--.,--,--,-'  '-`--',---.,--,--,  
-|  .-.  |  ||  '-.  .-| .-. |        ' ,-.  '-.  .-,--| .-. |      \ 
-|  | |  '  ''  ' |  | ' '-' |  |  |  \ '-'  | |  | |  ' '-' |  ||  | 
-`--' `--'`----'  `--'  `---'`--`--`--'`--`--' `--' `--'`---'`--''--' 
+Full featured home automation system with wireless control functionality based on Open source hardware. Can be installed on any computer, but specially designed for Intel Edison. Pure JavaScript implimentation based on Node.js.   
+[Documentation and tutorials are available here](http://openautomation.center).
 
-```
-
-Open Automation server for Intel Edison
-
-Full featured home automation system with wireless control functionality based on Open source hardware. Designed for Intel Edison, but can be easilly installed on any platform. Pure JavaScript implimentation based on Node.js.   
-All documentation and tutorials are available here.
-
-
-## Features
-
+##### Features 
+* Monitoring solution implimentation without wires 
+* Easy installation and configuration
 * 100% in House control - no cloud services required!
-* Implemented Temperature, Humidity, CO2 and Energy metering
+* Implemented Temperature, Humidity, CO2, Energy metering applications with all modern house control functions
 * Up to 9 sensors support in one room
 * Touch friendly user Interface based on jQuery Mobile
 * Simple JSON Configuration
 * Runs without any database backend - sensors data stored in easilly readable text files
 * Strong Security - implemented HOTP RFC4226 token authentication
 * Ciseco LLAP protocol compatible
-* Mobile App awailable on google Play
 
 
 ## Installation
@@ -55,13 +30,6 @@ All documentation and tutorials are available here.
    -p, --port [port]    Set TCP port for management interface, Default - 8000
    -n, --notoken        Disable HOTP RFC4226 authentication
 ```
-
-
-
-## Changelog
-
-
-
 
 
 
@@ -85,7 +53,7 @@ Digital-7 font - http://www.styleseven.com/php/get_product.php?product=Digital-7
 
 MIT License
 
-Copyright (c) 2015 Vaidotas Gudaitis &lt;greituolis@gmail.com&gt;
+Copyright (c) 2015 Vaidotas Gudaitis (greituolis@gmail.com)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
