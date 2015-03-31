@@ -1,5 +1,5 @@
 {
-  "name": "OpenAutomation",
+  "name": "openautomation",
   "version": "0.0.1",
   "description": "Full featured home automation system with wireless control functionality based on Open source hardware. Can be installed on any computer, but specially designed for Intel Edison.",
   "main": "app.js",
