@@ -39,7 +39,7 @@ Full featured home automation system with wireless control functionality based o
    -n, --notoken        Disable HOTP RFC4226 authentication
 ```
 
-For more info how to start please read in [Project Wiki](https://github.com/oxyo/OpenAutomation/wiki/).  
+For more information please read [Project Wiki](https://github.com/oxyo/OpenAutomation/wiki/).  
   
   
   
