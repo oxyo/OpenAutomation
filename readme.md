@@ -30,7 +30,7 @@ Full featured home automation system with wireless control functionality based o
 
 
 
-### Command line arguents
+### Command line arguments
 ```
    -h, --help           output usage information
    -V, --version        output the version number
