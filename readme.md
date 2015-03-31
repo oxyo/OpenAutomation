@@ -19,6 +19,14 @@ Full featured home automation system with wireless control functionality based o
 ### Installation
 
     $ npm install openautomation
+    $ cd node_modules\openautomation
+
+Start-Up on Intel Edison: ```    $ node app.js -p 80 ``` 
+
+Start-Up on Linux board: ```   node app.js -p 80 -s /dev/ttyUSB0```
+
+Start-Up on Windows box: ```   node app.js -p 80 -s COM23```
+
 
 
 
