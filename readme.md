@@ -1,7 +1,7 @@
 # Open Automation
 
 Full featured home automation system with wireless control functionality based on Open source hardware. Can be installed on any computer, but specially designed for Intel Edison. Pure JavaScript implimentation based on Node.js.   
-[Documentation and tutorials are available here](http://openautomation.center).
+[Documentation and demo are available here](http://openautomation.center).
 
 ### Features 
 * Monitoring solution without wires 
@@ -42,14 +42,14 @@ Full featured home automation system with wireless control functionality based o
 ### First time Set-Up
 
 1. Start node application ```node app.js```
-2. In first Start-Up this app will create initial configuration stored in files `settings.txt` and `serverID.txt` 
+2. In first Start-Up this app will create an initial configuration stored in files `settings.txt` and `serverID.txt` 
 3. Start this app again.
 4. Write down 8 symbols **Server ID** displayed in app terminal ```OA > Server ID: 00000000```  
-5. Open web application in browser. First time You should get authentication Error message.
+5. Open web application in browser. First time, You should get the authentication Error message.
 6. Press **ToolBox** --> **Connection Set-Up**, Enter OA Server ID and press **Close**.
 7. Have a Fun :) 
 
-P.S. To set initial rooms configuration to your home structure please modify **app.js oaSetup** section and delete `settings.txt` file.
+P.S. To chenge initial rooms configuration to represent your home structure please modify **app.js oaSetup** section and delete `settings.txt` file.
 
 ### Little about Sensors 
 
