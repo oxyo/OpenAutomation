@@ -18,7 +18,7 @@ Full featured home automation system with wireless control functionality based o
 
 ### DEMO
 
-[Check out the demo](http://demo.opeanautomation.center) to see it in action on your mobile.
+[Check out the demo](http://demo.openautomation.center) to see it in action on your mobile.
 
 
 ### Installation
