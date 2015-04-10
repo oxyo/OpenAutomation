@@ -1,7 +1,8 @@
 # Open Automation
 
 Full featured home automation system with wireless control functionality based on Open source hardware. Can be installed on any computer, but specially designed for Intel Edison. Pure JavaScript implimentation based on Node.js.   
-[Documentation and demo](http://openautomation.center).
+[Project Home](http://openautomation.center).
+
 
 ### Features 
 * Monitoring solution without wires 
@@ -14,6 +15,10 @@ Full featured home automation system with wireless control functionality based o
 * Runs without any database backend - sensors data stored in easilly readable text files
 * Strong security - implemented HOTP RFC4226 token authentication
 * Ciseco LLAP protocol compatible
+
+### DEMO
+
+[Check out the demo](http://demo.opeanautomation.center) to see it in action on your mobile.
 
 
 ### Installation
